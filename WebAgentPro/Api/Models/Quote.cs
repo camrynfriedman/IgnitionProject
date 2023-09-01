@@ -41,8 +41,10 @@ namespace WebAgentPro.Api.Models
         public bool ClaimInLast5Years { get; set; }
         [Required]
         public bool ForceMultiCarDiscount { get; set; }
+        //one to many relationship with drivers
         [Required]
         public List<Driver> Drivers { get; set; }
+        //one to many relationship with Vehicles
         [Required]
         public List<Vehicle> Vehicles { get; set; }
         [Required]
