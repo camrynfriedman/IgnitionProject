@@ -10,7 +10,7 @@ namespace WebAgentPro.Api.Models
     {
         [Key]
         [Required]
-        public Guid Id { get; set; }
+        public int DriverId { get; set; }
         [Required]
         public string FirstName { get; set; }
         [Required]
@@ -20,6 +20,8 @@ namespace WebAgentPro.Api.Models
         [Required]
         public string DriverLicenseNumber { get; set; }
         [Required]
+        [MinLength(2)]
+        [MaxLength(2)]
         public string DriverLicenseState { get; set; }
         [Required]
         public DateTime DateOfBirth { get; set; }

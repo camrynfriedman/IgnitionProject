@@ -12,62 +12,85 @@ namespace WebAgentPro.Api.Models
     {
         [Key]
         [Required]
-        public Guid Id { get; set; }
+        public int QuoteId { get; set; }
+
         [Required]
-        public DateTime QuoteDateTime { get; set; }
+        public int AgentId { get; set; }
+
         [Required]
+        public bool IsSubmitted { get; set; }
+
+        //expected "Mobile" or "Laptop"
+        [Required]
+        public string DeviceType { get; set; }
+
+        [Required]
+        public DateTime? CreationDate { get; set; }
+
+        //is this required?
+        [Required]
+        public DateTime? SubmissionDate { get; set; }
+
+        [Required]
+        [MaxLength(50)]
         public string FirstName { get; set; }
+
         [Required]
+        [MaxLength(50)]
         public string LastName { get; set; }
+
         [Required]
-        public string Address { get; set; }
+        public string AddressLine1 { get; set; }
+        
+        // figure out how to make this optional
+        public string? AddressLine2 { get; set; }
+
         [Required]
         public string City { get; set; }
+        
         [Required]
         public string State { get; set; }
+        
         [Required]
-        public string Zip { get; set; }
+        public string PostalCode { get; set; }
+        
         [Required]
+        [MaxLength(9)]
+        [MinLength(9)]
         public string Ssn { get; set; }
+
         [Required]
-        public string DateOfBirth { get; set; }
+        public DateTime DateOfBirth { get; set; }
+
         [Required]
         public bool LessThan3YearsDriving { get; set; }
+
         [Required]
         public string PreviousCarrier { get; set; }
+
         [Required]
-        public bool MovingVioliationInLast5Years { get; set; }
+        public bool MovingViolationInLast5Years { get; set; }
+
         [Required]
         public bool ClaimInLast5Years { get; set; }
+
         [Required]
         public bool ForceMultiCarDiscount { get; set; }
+
         //one to many relationship with drivers
+        //implicity foreign keys to driverIDs
         [Required]
         public List<Driver> Drivers { get; set; }
+
         //one to many relationship with Vehicles
+        //implicity foreign keys via VehicleIDs
         [Required]
         public List<Vehicle> Vehicles { get; set; }
-        [Required]
-        public decimal QuoteMultiplier { get; set; }
+
         [Required]
         public decimal QuotePrice { get; set; }
 
-
-        public Quote()
-        {
-            Id = Guid.NewGuid();
-            FirstName = "";
-            LastName = "";
-            Address = "";
-            City = "";
-            State = "";
-            Zip = "";
-            Ssn = "";
-            PreviousCarrier = "";
-            QuoteDateTime = DateTime.Now;
-            Drivers = new List<Driver>();
-            Vehicles = new List<Vehicle>();
-        }
+        
 
     }
 }

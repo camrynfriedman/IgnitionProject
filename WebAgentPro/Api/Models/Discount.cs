@@ -17,6 +17,7 @@ namespace WebAgentPro.Api.Models
         public decimal DaytimeRunningLights { get; set; }
         [Required]
         public decimal AntilockBrakes { get; set; }
+
         [Required]
         public decimal LowAnnualMileage { get; set; }
         [Required]
@@ -33,6 +34,8 @@ namespace WebAgentPro.Api.Models
         public decimal GarageAddressDifferent { get; set; }
         [Required]
         public decimal LowDrivingExperience { get; set; }
+
+        // figure out what the two below are for. change to bool
         [Required]
         public decimal PreviousCarrierLizard { get; set; }
         [Required]

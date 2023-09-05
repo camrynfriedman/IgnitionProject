@@ -11,7 +11,7 @@ namespace WebAgentPro.Api.Models
     {
         [Key]
         [Required]
-        public Guid Id { get; set; }
+        public int VehicleId { get; set; }
         [Required]
         public string Vin { get; set; }
         [Required]
@@ -23,7 +23,7 @@ namespace WebAgentPro.Api.Models
         [Required]
         public decimal CurrentValue { get; set; }
         [Required]
-        public Guid? PrimaryDirver { get; set; }
+        public Guid? PrimaryDriver { get; set; }
         [Required]
         public int AnnualMileage { get; set; }
         [Required]
@@ -48,7 +48,7 @@ namespace WebAgentPro.Api.Models
 
         public Vehicle()
         {
-            Id = Guid.NewGuid();
+            VehicleId = Guid.NewGuid();
             Vin = "";
             Make = "";
             Model = "";
