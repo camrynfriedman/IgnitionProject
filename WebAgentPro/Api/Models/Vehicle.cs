@@ -23,8 +23,6 @@ namespace WebAgentPro.Api.Models
         [Required]
         public decimal CurrentValue { get; set; }
         [Required]
-        public Guid? PrimaryDriver { get; set; }
-        [Required]
         public int AnnualMileage { get; set; }
         [Required]
         public bool DaytimeRunningLights { get; set; }
@@ -45,13 +43,17 @@ namespace WebAgentPro.Api.Models
         [Required]
         public decimal QuoteMultiplier { get; set; }
         
+        // Add relationships
+        [Required]
+        public int PrimaryDriverId { get; set; }
 
+        [Required]
+        public List<Driver> Drivers { get; set; }
+
+        // add constructor
         public Vehicle()
         {
-            VehicleId = Guid.NewGuid();
-            Vin = "";
-            Make = "";
-            Model = "";
+            
         }
 
     }

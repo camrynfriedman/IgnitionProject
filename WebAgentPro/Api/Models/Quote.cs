@@ -25,19 +25,19 @@ namespace WebAgentPro.Api.Models
         public string DeviceType { get; set; }
 
         [Required]
-        public DateTime? CreationDate { get; set; }
+        public DateTime CreationDate { get; set; }
 
-        //is this required?
+        //can be null if IsSubmitted = false
         [Required]
         public DateTime? SubmissionDate { get; set; }
 
         [Required]
         [MaxLength(50)]
-        public string FirstName { get; set; }
+        public string PolicyHolderFName { get; set; }
 
         [Required]
         [MaxLength(50)]
-        public string LastName { get; set; }
+        public string PolicyHolderLName { get; set; }
 
         [Required]
         public string AddressLine1 { get; set; }
@@ -47,8 +47,10 @@ namespace WebAgentPro.Api.Models
 
         [Required]
         public string City { get; set; }
-        
+
         [Required]
+        [MinLength(2)]
+        [MaxLength(2)]
         public string State { get; set; }
         
         [Required]
@@ -57,15 +59,18 @@ namespace WebAgentPro.Api.Models
         [Required]
         [MaxLength(9)]
         [MinLength(9)]
-        public string Ssn { get; set; }
+        public string PolicyHolderSsn { get; set; }
 
         [Required]
-        public DateTime DateOfBirth { get; set; }
+        public DateTime PolicyHolderDOB { get; set; }
 
         [Required]
         public bool LessThan3YearsDriving { get; set; }
 
+        // Expected "Lizard" or "Pervasive"
         [Required]
+        [MinLength(6)]
+        [MaxLength(9)]
         public string PreviousCarrier { get; set; }
 
         [Required]
@@ -77,6 +82,12 @@ namespace WebAgentPro.Api.Models
         [Required]
         public bool ForceMultiCarDiscount { get; set; }
 
+        [Required]
+        public decimal QuotePrice { get; set; }
+        
+        
+        // Add relationships
+
         //one to many relationship with drivers
         //implicity foreign keys to driverIDs
         [Required]
@@ -87,10 +98,6 @@ namespace WebAgentPro.Api.Models
         [Required]
         public List<Vehicle> Vehicles { get; set; }
 
-        [Required]
-        public decimal QuotePrice { get; set; }
-
-        
 
     }
 }
