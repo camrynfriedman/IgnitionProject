@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -41,7 +42,9 @@ namespace WebAgentPro.Api.Models
 
         // Add relationships
         // required foreign key
+        // this is assuming each Driver is only associated with one Quote
         [Required]
+        [ForeignKey("Quote")]
         public int QuoteId { get; set; }
 
         [Required]
