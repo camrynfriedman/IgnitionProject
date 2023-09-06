@@ -10,8 +10,8 @@ using WebAgentPro.Data;
 namespace WebAgentPro.Migrations
 {
     [DbContext(typeof(WapDbContext))]
-    [Migration("20230831230339_SecondInitial")]
-    partial class SecondInitial
+    [Migration("20230906160047_AddedEntities")]
+    partial class AddedEntities
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -20,6 +20,21 @@ namespace WebAgentPro.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("ProductVersion", "5.0.17")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+            modelBuilder.Entity("DriverVehicle", b =>
+                {
+                    b.Property<int>("DriversDriverId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("VehiclesVehicleId")
+                        .HasColumnType("int");
+
+                    b.HasKey("DriversDriverId", "VehiclesVehicleId");
+
+                    b.HasIndex("VehiclesVehicleId");
+
+                    b.ToTable("DriverVehicle");
+                });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
@@ -216,12 +231,21 @@ namespace WebAgentPro.Migrations
 
             modelBuilder.Entity("WebAgentPro.Api.Models.Driver", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("DriverId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<DateTime>("DateOfBirth")
+                    b.Property<DateTime>("DriverDOB")
                         .HasColumnType("datetime2");
+
+                    b.Property<string>("DriverFName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("DriverLName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("DriverLicenseNumber")
                         .IsRequired()
@@ -229,30 +253,24 @@ namespace WebAgentPro.Migrations
 
                     b.Property<string>("DriverLicenseState")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(2)
+                        .HasColumnType("nvarchar(2)");
 
-                    b.Property<string>("FirstName")
+                    b.Property<string>("DriverSSN")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(9)
+                        .HasColumnType("nvarchar(9)");
 
-                    b.Property<string>("LastName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<Guid?>("QuoteId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<int>("QuoteId")
+                        .HasColumnType("int");
 
                     b.Property<decimal>("QuoteMultiplier")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<string>("SSN")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<bool>("SafeDrivingSchool")
                         .HasColumnType("bit");
 
-                    b.HasKey("Id");
+                    b.HasKey("DriverId");
 
                     b.HasIndex("QuoteId");
 
@@ -261,13 +279,20 @@ namespace WebAgentPro.Migrations
 
             modelBuilder.Entity("WebAgentPro.Api.Models.Quote", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("QuoteId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Address")
+                    b.Property<string>("AddressLine1")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("AddressLine2")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("AgentId")
+                        .HasColumnType("int");
 
                     b.Property<string>("City")
                         .IsRequired()
@@ -276,62 +301,75 @@ namespace WebAgentPro.Migrations
                     b.Property<bool>("ClaimInLast5Years")
                         .HasColumnType("bit");
 
-                    b.Property<string>("DateOfBirth")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<DateTime>("CreationDate")
+                        .HasColumnType("datetime2");
 
-                    b.Property<string>("FirstName")
+                    b.Property<string>("DeviceType")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("ForceMultiCarDiscount")
                         .HasColumnType("bit");
 
-                    b.Property<string>("LastName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<bool>("IsSubmitted")
+                        .HasColumnType("bit");
 
                     b.Property<bool>("LessThan3YearsDriving")
                         .HasColumnType("bit");
 
-                    b.Property<bool>("MovingVioliationInLast5Years")
+                    b.Property<bool>("MovingViolationInLast5Years")
                         .HasColumnType("bit");
 
-                    b.Property<string>("PreviousCarrier")
+                    b.Property<DateTime>("PolicyHolderDOB")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("PolicyHolderFName")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("PolicyHolderLName")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("PolicyHolderSsn")
+                        .IsRequired()
+                        .HasMaxLength(9)
+                        .HasColumnType("nvarchar(9)");
+
+                    b.Property<string>("PostalCode")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("QuoteDateTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<decimal>("QuoteMultiplier")
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<string>("PreviousCarrier")
+                        .IsRequired()
+                        .HasMaxLength(9)
+                        .HasColumnType("nvarchar(9)");
 
                     b.Property<decimal>("QuotePrice")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<string>("Ssn")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("State")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(2)
+                        .HasColumnType("nvarchar(2)");
 
-                    b.Property<string>("Zip")
+                    b.Property<DateTime?>("SubmissionDate")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("datetime2");
 
-                    b.HasKey("Id");
+                    b.HasKey("QuoteId");
 
                     b.ToTable("Quotes");
                 });
 
             modelBuilder.Entity("WebAgentPro.Api.Models.Vehicle", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("VehicleId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<int>("AnnualMileage")
                         .HasColumnType("int");
@@ -368,12 +406,11 @@ namespace WebAgentPro.Migrations
                     b.Property<bool>("PassiveRestraints")
                         .HasColumnType("bit");
 
-                    b.Property<Guid?>("PrimaryDirver")
-                        .IsRequired()
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<int>("PrimaryDriverId")
+                        .HasColumnType("int");
 
-                    b.Property<Guid?>("QuoteId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<int?>("QuoteId")
+                        .HasColumnType("int");
 
                     b.Property<decimal>("QuoteMultiplier")
                         .HasColumnType("decimal(18,2)");
@@ -383,12 +420,14 @@ namespace WebAgentPro.Migrations
 
                     b.Property<string>("Vin")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(17)
+                        .HasColumnType("nvarchar(17)");
 
                     b.Property<int>("Year")
+                        .HasMaxLength(4)
                         .HasColumnType("int");
 
-                    b.HasKey("Id");
+                    b.HasKey("VehicleId");
 
                     b.HasIndex("QuoteId");
 
@@ -475,6 +514,21 @@ namespace WebAgentPro.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
+            modelBuilder.Entity("DriverVehicle", b =>
+                {
+                    b.HasOne("WebAgentPro.Api.Models.Driver", null)
+                        .WithMany()
+                        .HasForeignKey("DriversDriverId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("WebAgentPro.Api.Models.Vehicle", null)
+                        .WithMany()
+                        .HasForeignKey("VehiclesVehicleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -530,7 +584,9 @@ namespace WebAgentPro.Migrations
                 {
                     b.HasOne("WebAgentPro.Api.Models.Quote", null)
                         .WithMany("Drivers")
-                        .HasForeignKey("QuoteId");
+                        .HasForeignKey("QuoteId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("WebAgentPro.Api.Models.Vehicle", b =>

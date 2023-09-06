@@ -1,6 +1,8 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -10,34 +12,45 @@ namespace WebAgentPro.Api.Models
     {
         [Key]
         [Required]
-        public Guid Id { get; set; }
+        public int DriverId { get; set; }
+
         [Required]
-        public string FirstName { get; set; }
+        public string DriverFName { get; set; }
+
         [Required]
-        public string LastName { get; set; }
+        public string DriverLName { get; set; }
+
+        [MinLength(9)]
+        [MaxLength(9)]
         [Required]
-        public string SSN { get; set; }
+        public string DriverSSN { get; set; }
+
         [Required]
         public string DriverLicenseNumber { get; set; }
+
         [Required]
+        [MinLength(2)]
+        [MaxLength(2)]
         public string DriverLicenseState { get; set; }
+
         [Required]
-        public DateTime DateOfBirth { get; set; }
+        public DateTime DriverDOB { get; set; }
+
         [Required]
         public bool SafeDrivingSchool { get; set; }
+
         [Required]
         public decimal QuoteMultiplier { get; set; }
 
+        // Add relationships
+        // required foreign key
+        // this is assuming each Driver is only associated with one Quote
+        [Required]
+        [ForeignKey("Quote")]
+        public int QuoteId { get; set; }
 
-        //Not sure if the below code is necessary
-        public Driver()
-        {
-            Id = Guid.NewGuid();
-            FirstName = "";
-            LastName = "";
-            SSN = "";
-            DriverLicenseNumber = "";
-            DriverLicenseState = "";
-        }
+        [Required]
+        public List<Vehicle> Vehicles { get; set; }
+        
     }
 }
