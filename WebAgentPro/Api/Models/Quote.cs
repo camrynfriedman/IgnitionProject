@@ -15,7 +15,8 @@ namespace WebAgentPro.Api.Models
         public int QuoteId { get; set; }
 
         [Required]
-        public int AgentId { get; set; }
+        [EmailAddress]
+        public string AgentId { get; set; }
 
         [Required]
         public bool IsSubmitted { get; set; }
@@ -36,7 +37,7 @@ namespace WebAgentPro.Api.Models
         public string PolicyHolderFName { get; set; }
 
         [Required]
-        [MaxLength(50)]
+        [MaxLength(100)]
         public string PolicyHolderLName { get; set; }
 
         [Required]
