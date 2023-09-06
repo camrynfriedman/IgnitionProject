@@ -13,9 +13,7 @@ namespace WebAgentPro.Api.Repositories
     }
     public class DiscountRepository : IDiscountRepository
     {
-        public static WapDbContext _context;
-
-        
+        private readonly WapDbContext _context;
 
         public DbSet<Discount> GetAllDiscounts() {
             //This is where the database store of Discounts will be placed

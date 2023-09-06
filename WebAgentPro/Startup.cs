@@ -15,6 +15,7 @@ using System;
 using System.IO;
 using System.Reflection;
 using System.Text;
+using WebAgentPro.Api.Services;
 using WebAgentPro.Data;
 using WebAgentPro.Models;
 
@@ -75,14 +76,20 @@ namespace WebAgentPro
             #endregion
 
             #region DATABASE               Register and seed your database
-            /*var connectionString = Configuration.GetConnectionString("WebAgentPro");
-            services.AddDbContext<WapDbContext>(config => config.UseSqlServer(connectionString));*/
+/*            var connectionString = Configuration.GetConnectionString("WebAgentPro");
+*/            var connectionString = Configuration.GetConnectionString("WebAgentLocal");
+            services.AddDbContext<WapDbContext>(config => config.UseSqlServer(connectionString));
 
-            //register to Tabor database
+            /*//register to Tabor database
             services.AddDbContext<WapDbContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("LocalDatabaseTabor")));
+                options.UseSqlServer(Configuration.GetConnectionString("LocalDatabaseTabor")));*/
 
             services.AddTransient<WapDbSeeder>();
+            #endregion
+
+            #region Services                Collection of Services
+            services.AddTransient<IDiscountService, DiscountService>();
+
             #endregion
 
             #region IDENTITY                Configure ASP.NET Identity to use your DbContext and ApplicationUser

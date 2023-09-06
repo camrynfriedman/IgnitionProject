@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.ObjectPool;
 using WebAgentPro.Api.Models;
+using WebAgentPro.Api.Services;
 using WebAgentPro.Data;
 
 namespace WebAgentPro.Api.Controllers
@@ -15,25 +16,34 @@ namespace WebAgentPro.Api.Controllers
     [ApiController]
     public class DiscountsController : ControllerBase
     {
-        private readonly WapDbContext _context;
+        private readonly IDiscountService _discountService;
+
+        public DiscountsController(IDiscountService discountService)
+        {
+            _discountService = discountService;
+        }
+
+        /*private readonly WapDbContext _context;
 
         public DiscountsController(WapDbContext context)
         {
             _context = context;
         }
-
+*/
         // GET: api/Discounts
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Discount>>> GetDiscount()
         {
-            return await _context.Discounts.ToListAsync();
+            /*            return await _context.Discounts.ToListAsync();
+            */
+            return await _discountService.GetDiscounts().ToListAsync();
         }
 
         // GET: api/Discounts/5
-        [HttpGet("{id}")]
+        /*[HttpGet("{id}")]
         public async Task<ActionResult<Discount>> GetDiscount(string id)
         {
-            var discount = await _context.Discounts.FindAsync(id);
+            var discount = await _discountService.GetDiscounts().FindAsync(id);
 
             if (discount == null)
             {
@@ -41,12 +51,12 @@ namespace WebAgentPro.Api.Controllers
             }
 
             return discount;
-        }
+        }*/
 
         // PUT: api/Discounts/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
-        [HttpPut("{id}")]
+        /*[HttpPut("{id}")]
         public async Task<IActionResult> PutDiscount(string id, Discount discount)
         {
             if (id != discount.State)
@@ -140,6 +150,6 @@ namespace WebAgentPro.Api.Controllers
         private bool DiscountExists(string id)
         {
             return _context.Discounts.Any(e => e.State == id);
-        }
+        }*/
     }
 }

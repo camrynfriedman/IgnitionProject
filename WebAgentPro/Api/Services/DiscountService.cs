@@ -21,7 +21,7 @@ namespace WebAgentPro.Api.Services
 
         public DbSet<Discount> GetDiscounts()
         {
-            throw new NotImplementedException();
+            return _discountRepo.GetAllDiscounts();
         }
     }
 }
