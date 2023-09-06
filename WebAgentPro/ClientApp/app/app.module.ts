@@ -15,6 +15,8 @@ import { RegisterComponent } from './registerlogin/register/register.component';
 import { DiscountsComponent } from './discountmanagement/discounts/discounts.component';
 import { DiscountEditComponent } from './discountmanagement/discount-edit/discount-edit.component';
 import { RoutenotfoundComponent } from './_security/routenotfound/routenotfound.component';
+import { HeaderComponent } from './components/header/header.component';
+import { FooterComponent } from './components/footer/footer.component';
   
 @NgModule({
     imports: [
@@ -32,7 +34,9 @@ import { RoutenotfoundComponent } from './_security/routenotfound/routenotfound.
         RegisterComponent,
         DiscountsComponent,
         DiscountEditComponent,
-        RoutenotfoundComponent
+        RoutenotfoundComponent,
+        HeaderComponent,
+        FooterComponent
     ],
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

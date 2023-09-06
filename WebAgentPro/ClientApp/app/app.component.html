@@ -1,20 +1,5 @@
-<!-- nav --> 
-<nav class="navbar navbar-expand navbar-dark bg-dark" *ngIf="currentUser">
-    <span class="navbar-nav">
-        <a class="nav-item nav-link" routerLink="/discounts" *ngIf="isManager">Discounts</a>
-        <a class="nav-item nav-link" routerLink="/users" *ngIf="isManager">Users</a>
-        <a class="nav-item nav-link" (click)="logout()">Logout</a>
-    </span>
-    <span class="w-100 text-right text-white-50">{{this.currentUser.userName}}</span>
-</nav>
-
-<!-- main app container -->
+<app-header></app-header>
 <div class="container-fluid">
     <router-outlet></router-outlet>
 </div>
-
- 
-<!-- footer -->
-<div class="text-center">
-  <p>Web Agent Pro (c)AIA 2020</p>
-</div>
+<app-footer></app-footer>
