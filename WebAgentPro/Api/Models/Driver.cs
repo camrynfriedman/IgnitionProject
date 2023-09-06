@@ -15,9 +15,11 @@ namespace WebAgentPro.Api.Models
         public int DriverId { get; set; }
 
         [Required]
+        [MaxLength(50)]
         public string DriverFName { get; set; }
 
         [Required]
+        [MaxLength(100)]
         public string DriverLName { get; set; }
 
         [MinLength(9)]
