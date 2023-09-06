@@ -49,6 +49,11 @@ namespace WebAgentPro
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
             #endregion
 
+            //hookup to Tabor database
+            /*services.AddDbContext<WapDbContext>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("LocalDatabaseTabor")));*/
+
+
             #region CORS                    Allow access from other domains
             services.AddCors();
             #endregion

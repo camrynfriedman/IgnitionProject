@@ -1,39 +1,40 @@
 <h1>Users</h1>
 <p>This page can only be accessed by managers.</p>
+<!-- This is a comment for testing DevOps -->
 <div>
-  All users from secure (managers only) api end point:
-  <select value='{{userFilter}}'   (change)="userFilterChanged($event.target.value)">
-    <option>All Users</option>
-    <option>Inactive</option>
-    <option>Registered</option>
-    <option>Agent</option>
-    <option>Manager</option>
-  </select>
-  <br/>
-  <table class="table table-striped">
-    <thead class="thead-dark">
-        <tr>
-      <th>First</th>
-      <th>Last</th>
-      <th>UserName</th>
-      <th>Status/Role</th>
-      </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let user of users | paginate: { itemsPerPage: 3, currentPage: p }">
-            <td>{{user.firstName}}</td>
-            <td>{{user.lastName}}</td>
-            <td>{{user.userName}}</td>
-            <td>
-                <select value='{{getRoleStatus(user)}}' (change)="roleStatusChanged(user, $event.target.value)">
-                    <option>Inactive</option>
-                    <option>Registered</option>
-                    <option>Agent</option>
-                    <option>Manager</option>
-                </select>
-            </td>
-        </tr>
-    </tbody>
-  </table>
+    All users from secure (managers only) api end point:
+    <select value='{{userFilter}}' (change)="userFilterChanged($event.target.value)">
+        <option>All Users</option>
+        <option>Inactive</option>
+        <option>Registered</option>
+        <option>Agent</option>
+        <option>Manager</option>
+    </select>
+    <br />
+    <table class="table table-striped">
+        <thead class="thead-dark">
+            <tr>
+                <th>First</th>
+                <th>Last</th>
+                <th>UserName</th>
+                <th>Status/Role</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let user of users | paginate: { itemsPerPage: 3, currentPage: p }">
+                <td>{{user.firstName}}</td>
+                <td>{{user.lastName}}</td>
+                <td>{{user.userName}}</td>
+                <td>
+                    <select value='{{getRoleStatus(user)}}' (change)="roleStatusChanged(user, $event.target.value)">
+                        <option>Inactive</option>
+                        <option>Registered</option>
+                        <option>Agent</option>
+                        <option>Manager</option>
+                    </select>
+                </td>
+            </tr>
+        </tbody>
+    </table>
 </div>
 <pagination-controls (pageChange)="p = $event"></pagination-controls>
