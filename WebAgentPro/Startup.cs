@@ -76,8 +76,7 @@ namespace WebAgentPro
             #endregion
 
             #region DATABASE               Register and seed your database
-/*            var connectionString = Configuration.GetConnectionString("WebAgentPro");
-*/            var connectionString = Configuration.GetConnectionString("WebAgentLocal");
+            var connectionString = Configuration.GetConnectionString("WebAgentLocal");
             services.AddDbContext<WapDbContext>(config => config.UseSqlServer(connectionString));
 
             /*//register to Tabor database
