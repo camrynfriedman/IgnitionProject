@@ -13,9 +13,5 @@ namespace WebAgentPro.Data
         }
 
         public DbSet<Discount> Discounts { get; set; }
-        public DbSet<Quote> Quotes { get; set; }
-        public DbSet<Driver> Drivers { get; set; }
-        public DbSet<Vehicle> Vehicles { get; set; }
-        //
     }
 }
