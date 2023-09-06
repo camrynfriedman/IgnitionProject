@@ -97,7 +97,5 @@ namespace WebAgentPro.Api.Models
         //implicity foreign keys via VehicleIDs
         [Required]
         public List<Vehicle> Vehicles { get; set; }
-
-
     }
 }

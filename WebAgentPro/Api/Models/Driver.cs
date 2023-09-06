@@ -20,6 +20,8 @@ namespace WebAgentPro.Api.Models
         [Required]
         public string DriverLName { get; set; }
 
+        [MinLength(9)]
+        [MaxLength(9)]
         [Required]
         public string DriverSSN { get; set; }
 
