@@ -11,7 +11,7 @@ namespace WebAgentPro.Api.Repositories
     //Repository interface specifying functions in Discount Repository
     public interface IDiscountRepository {
         Task<List<Discount>> GetAllDiscountsAsync();
-        Discount GetDiscount(string state);
+        Task<Discount> GetDiscount(string state);
         Task AddDiscount(Discount d);
         Task EditDiscount(Discount d);
         Task RemoveDiscount(string state);
@@ -20,7 +20,7 @@ namespace WebAgentPro.Api.Repositories
     public class DiscountRepository : IDiscountRepository
     {
         //connection to database context
-        protected readonly WapDbContext _context;
+        private readonly WapDbContext _context;
         
 
         public DiscountRepository(WapDbContext context)
@@ -28,7 +28,7 @@ namespace WebAgentPro.Api.Repositories
             _context = context;
         }
 
-        //repostiory function to get all the discounts
+        //repository function to get all the discounts
         //C# has lazy loading, pull list from DbSet
         public async Task<List<Discount>> GetAllDiscountsAsync() {
             //This is the database store of Discounts
@@ -37,8 +37,8 @@ namespace WebAgentPro.Api.Repositories
             return discounts;
         }
 
-        public Discount GetDiscount(string state) {
-            Discount discount = _context.Discounts.Where(d => d.State == state).FirstOrDefault();
+        public async Task<Discount> GetDiscount(string state) {
+            Discount discount = await _context.Discounts.Where(d => d.State == state).FirstOrDefaultAsync(); 
 
             return discount;
         }
@@ -48,6 +48,7 @@ namespace WebAgentPro.Api.Repositories
             await _context.SaveChangesAsync();
         }
 
+        //void 
         public async Task AddDiscount(Discount discount) {
             _context.Discounts.Add(discount);
             await _context.SaveChangesAsync();
