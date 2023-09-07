@@ -49,10 +49,6 @@ namespace WebAgentPro
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
             #endregion
 
-            //hookup to Tabor database
-            /*services.AddDbContext<WapDbContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("LocalDatabaseTabor")));*/
-
 
             #region CORS                    Allow access from other domains
             services.AddCors();
@@ -79,7 +75,10 @@ namespace WebAgentPro
             #endregion
 
             #region DATABASE               Register and seed your database
-            var connectionString = Configuration.GetConnectionString("WebAgentPro");
+            // Connection string for production DB
+            // var connectionString = Configuration.GetConnectionString("WebAgentPro");
+            // Connection string local DB
+            var connectionString = Configuration.GetConnectionString("WebAgentLocal");
             services.AddDbContext<WapDbContext>(config => config.UseSqlServer(connectionString));
 
             services.AddTransient<WapDbSeeder>();
