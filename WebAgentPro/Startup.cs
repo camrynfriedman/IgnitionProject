@@ -80,10 +80,6 @@ namespace WebAgentPro
             var connectionString = Configuration.GetConnectionString("WebAgentLocal");
             services.AddDbContext<WapDbContext>(config => config.UseSqlServer(connectionString));
 
-            /*//register to Tabor database
-            services.AddDbContext<WapDbContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("LocalDatabaseTabor")));*/
-
             services.AddTransient<WapDbSeeder>();
             #endregion
 

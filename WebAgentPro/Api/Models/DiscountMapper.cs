@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace WebAgentPro.Api.Models
 {
-    public class Mapper
+    public class DiscountMapper
     {
         public DiscountDto DiscountToDto(Discount d) {
 
@@ -13,7 +13,6 @@ namespace WebAgentPro.Api.Models
             {
                 State = d.State,
                 DaytimeRunningLights = d.DaytimeRunningLights,
-                AntilockBrakes = d.AntilockBrakes,
                 LowAnnualMileage = d.LowAnnualMileage,
                 PassiveRestraints = d.PassiveRestraints,
                 AntitheftInstalled = d.AntitheftInstalled,
@@ -32,5 +31,31 @@ namespace WebAgentPro.Api.Models
             };
             return returnedDiscountDTO;
         }
+
+        public Discount DtoToDiscount(DiscountDto d)
+        {
+            Discount returnedDiscountDTO = new Discount()
+            {
+                State = d.State,
+                DaytimeRunningLights = d.DaytimeRunningLights,
+                LowAnnualMileage = d.LowAnnualMileage,
+                PassiveRestraints = d.PassiveRestraints,
+                AntitheftInstalled = d.AntitheftInstalled,
+                HighDaysDrivenPerWeek = d.HighDaysDrivenPerWeek,
+                LowMilesDrivenToWork = d.LowMilesDrivenToWork,
+                ReduceUse = d.ReduceUse,
+                GarageAddressDifferent = d.GarageAddressDifferent,
+                LowDrivingExperience = d.LowDrivingExperience,
+                PreviousCarrierLizard = d.PreviousCarrierLizard,
+                PreviousCarrierPervasive = d.PreviousCarrierPervasive,
+                RecentMovingViolations = d.RecentMovingViolations,
+                RecentClaims = d.RecentClaims,
+                MultiCar = d.MultiCar,
+                YoungDriver = d.YoungDriver,
+                SafeDrivingSchool = d.SafeDrivingSchool
+            };
+            return returnedDiscountDTO;
+        }
+
     }
 }
