@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.ObjectPool;
 using WebAgentPro.Api.Models;
 using WebAgentPro.Api.Services;
-using WebAgentPro.Data;
 
 namespace WebAgentPro.Api.Controllers
 {
@@ -16,34 +12,32 @@ namespace WebAgentPro.Api.Controllers
     [ApiController]
     public class DiscountsController : ControllerBase
     {
+        //instance of service class
         private readonly IDiscountService _discountService;
+        private Mapper map;
 
         public DiscountsController(IDiscountService discountService)
         {
             _discountService = discountService;
+            map = new Mapper();
         }
 
-        /*private readonly WapDbContext _context;
-
-        public DiscountsController(WapDbContext context)
-        {
-            _context = context;
-        }
-*/
         // GET: api/Discounts
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Discount>>> GetDiscount()
+        public async Task<ActionResult<IEnumerable<DiscountDto>>> GetDiscount()
         {
-            /*            return await _context.Discounts.ToListAsync();
-            */
-            return await _discountService.GetDiscounts().ToListAsync();
+            var returnedDiscounts = await _discountService.GetDiscounts()
+                .Select(d => map.DiscountToDto(d)).ToListAsync();
+
+            return returnedDiscounts;
         }
 
         // GET: api/Discounts/5
-        /*[HttpGet("{id}")]
-        public async Task<ActionResult<Discount>> GetDiscount(string id)
+        [HttpGet("{id}")]
+        public async Task<ActionResult<DiscountDto>> GetDiscount(string id)
         {
-            var discount = await _discountService.GetDiscounts().FindAsync(id);
+            var discount = await _discountService.GetDiscounts().Where(d => d.State == id)
+                .Select(d => map.DiscountToDto(d)).SingleAsync();
 
             if (discount == null)
             {
@@ -51,7 +45,7 @@ namespace WebAgentPro.Api.Controllers
             }
 
             return discount;
-        }*/
+        }
 
         // PUT: api/Discounts/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
@@ -83,9 +77,9 @@ namespace WebAgentPro.Api.Controllers
             }
 
             return NoContent();
-        }
+        }*/
 
-        // POST: api/Discounts
+        /*// POST: api/Discounts
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
@@ -133,8 +127,8 @@ namespace WebAgentPro.Api.Controllers
             var allStates = new string[] {
                 "AL", "AK", "AS", "AZ", "AR", "CA", "CO", "CT", "DE", "FL", "GA",
                 "HI", "ID", "IL", "IN", "IA", "KS", "KY", "LA", "ME", "MD", "MA",
-                "MI", "MN", "MS", "MO", "MT", "NE", "NV", "NH", "NJ", "NM", "NY", 
-                "NC", "ND", "OH", "OK", "OR", "PA", "RI", "SC", "SD", "TN", "TX", 
+                "MI", "MN", "MS", "MO", "MT", "NE", "NV", "NH", "NJ", "NM", "NY",
+                "NC", "ND", "OH", "OK", "OR", "PA", "RI", "SC", "SD", "TN", "TX",
                 "UT", "VT", "VA", "WA", "WV", "WI", "WY" };
 
             var existingStates = await _context.Discounts

@@ -8,15 +8,22 @@ using WebAgentPro.Data;
 
 namespace WebAgentPro.Api.Repositories
 {
+    //Repository interface specifying functions in Discount Repository
     public interface IDiscountRepository {
         DbSet<Discount> GetAllDiscounts();
     }
     public class DiscountRepository : IDiscountRepository
     {
-        private readonly WapDbContext _context;
+        //connection to database context
+        protected readonly WapDbContext _context;
+        public DiscountRepository(WapDbContext context)
+        {
+            _context = context;
+        }
 
+        //repostiory function to get all the discounts
         public DbSet<Discount> GetAllDiscounts() {
-            //This is where the database store of Discounts will be placed
+            //This is the database store of Discounts
             DbSet<Discount> discounts = _context.Discounts;
 
             return discounts;

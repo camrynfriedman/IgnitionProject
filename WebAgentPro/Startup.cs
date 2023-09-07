@@ -15,6 +15,7 @@ using System;
 using System.IO;
 using System.Reflection;
 using System.Text;
+using WebAgentPro.Api.Repositories;
 using WebAgentPro.Api.Services;
 using WebAgentPro.Data;
 using WebAgentPro.Models;
@@ -84,6 +85,11 @@ namespace WebAgentPro
                 options.UseSqlServer(Configuration.GetConnectionString("LocalDatabaseTabor")));*/
 
             services.AddTransient<WapDbSeeder>();
+            #endregion
+
+            #region Repositories                Collection of Repositories
+            services.AddTransient<IDiscountRepository, DiscountRepository>();
+
             #endregion
 
             #region Services                Collection of Services
