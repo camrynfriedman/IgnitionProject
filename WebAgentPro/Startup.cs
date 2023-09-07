@@ -15,6 +15,8 @@ using System;
 using System.IO;
 using System.Reflection;
 using System.Text;
+using WebAgentPro.Api.Repositories;
+using WebAgentPro.Api.Services;
 using WebAgentPro.Data;
 using WebAgentPro.Models;
 
@@ -49,10 +51,6 @@ namespace WebAgentPro
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
             #endregion
 
-            //hookup to Tabor database
-            /*services.AddDbContext<WapDbContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("LocalDatabaseTabor")));*/
-
 
             #region CORS                    Allow access from other domains
             services.AddCors();
@@ -83,6 +81,16 @@ namespace WebAgentPro
             services.AddDbContext<WapDbContext>(config => config.UseSqlServer(connectionString));
 
             services.AddTransient<WapDbSeeder>();
+            #endregion
+
+            #region Repositories                Collection of Repositories
+            services.AddTransient<IDiscountRepository, DiscountRepository>();
+
+            #endregion
+
+            #region Services                Collection of Services
+            services.AddTransient<IDiscountService, DiscountService>();
+
             #endregion
 
             #region IDENTITY                Configure ASP.NET Identity to use your DbContext and ApplicationUser

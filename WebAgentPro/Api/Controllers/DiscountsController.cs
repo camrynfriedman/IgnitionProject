@@ -2,12 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.ObjectPool;
 using WebAgentPro.Api.Models;
-using WebAgentPro.Data;
+using WebAgentPro.Api.Services;
 
 namespace WebAgentPro.Api.Controllers
 {
@@ -15,104 +13,83 @@ namespace WebAgentPro.Api.Controllers
     [ApiController]
     public class DiscountsController : ControllerBase
     {
-        private readonly WapDbContext _context;
+        //instance of service class
+        private readonly IDiscountService _discountService;
+        private DiscountMapper map;
 
-        public DiscountsController(WapDbContext context)
+        public DiscountsController(IDiscountService discountService)
         {
-            _context = context;
+            _discountService = discountService;
+            map = new DiscountMapper();
         }
 
         // GET: api/Discounts
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Discount>>> GetDiscount()
+        public async Task<ActionResult<IEnumerable<DiscountDto>>> GetDiscount()
         {
-            return await _context.Discounts.ToListAsync();
+            /*var returnedDiscounts = await _discountService.GetDiscountsAsync()
+                .Select(d => map.DiscountToDto(d)).ToListAsync();*/
+            return (await _discountService.GetDiscountsAsync()).ToList();
         }
 
         // GET: api/Discounts/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Discount>> GetDiscount(string id)
+        public async Task<ActionResult<DiscountDto>> GetDiscount(string id)
         {
-            var discount = await _context.Discounts.FindAsync(id);
-
-            if (discount == null)
+            try
             {
-                return NotFound();
+                var discount = await _discountService.GetDiscountAsync(id);
+                return discount;
             }
-
-            return discount;
+            catch (NullReferenceException e) {
+                //State not in Discount database will return a NotFound error
+                return NotFound(e.Message);
+            }
         }
 
         // PUT: api/Discounts/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutDiscount(string id, Discount discount)
+        public async Task<IActionResult> PutDiscount(string id, DiscountDto discount)
         {
-            if (id != discount.State)
-            {
-                return BadRequest();
-            }
-
-            _context.Entry(discount).State = EntityState.Modified;
 
             try
             {
-                await _context.SaveChangesAsync();
+                await _discountService.EditDiscount(id, discount);
             }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!DiscountExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
+            catch (Exception e){
+                return BadRequest(e.Message);
             }
 
             return NoContent();
+     
         }
 
         // POST: api/Discounts
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
-        public async Task<ActionResult<Discount>> PostDiscount(Discount discount)
+        public async Task<ActionResult<Discount>> PostDiscount(DiscountDto discountDto)
         {
-            _context.Discounts.Add(discount);
             try
             {
-                await _context.SaveChangesAsync();
+                await _discountService.AddDiscount(discountDto);
             }
-            catch (DbUpdateException)
+            catch (Exception e)
             {
-                if (DiscountExists(discount.State))
-                {
-                    return Conflict();
-                }
-                else
-                {
-                    throw;
-                }
+                return BadRequest(e.Message);
             }
 
-            return CreatedAtAction("GetDiscount", new { id = discount.State }, discount);
+            return CreatedAtAction("GetDiscount", new { id = discountDto.State }, discountDto);
         }
 
         // DELETE: api/Discounts/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<Discount>> DeleteDiscount(string id)
+        public async Task<ActionResult<DiscountDto>> DeleteDiscount(string id)
         {
-            var discount = await _context.Discounts.FindAsync(id);
-            if (discount == null)
-            {
-                return NotFound();
-            }
-
-            _context.Discounts.Remove(discount);
-            await _context.SaveChangesAsync();
+            DiscountDto discount = await _discountService.GetDiscountAsync(id);
+            await _discountService.RemoveDiscount(id);
 
             return discount;
         }
@@ -120,26 +97,7 @@ namespace WebAgentPro.Api.Controllers
         [HttpGet("InactiveStates")]
         public async Task<ActionResult<IEnumerable<string>>> InactiveStates()
         {
-            var allStates = new string[] {
-                "AL", "AK", "AS", "AZ", "AR", "CA", "CO", "CT", "DE", "FL", "GA",
-                "HI", "ID", "IL", "IN", "IA", "KS", "KY", "LA", "ME", "MD", "MA",
-                "MI", "MN", "MS", "MO", "MT", "NE", "NV", "NH", "NJ", "NM", "NY", 
-                "NC", "ND", "OH", "OK", "OR", "PA", "RI", "SC", "SD", "TN", "TX", 
-                "UT", "VT", "VA", "WA", "WV", "WI", "WY" };
-
-            var existingStates = await _context.Discounts
-                .OrderBy(s => s.State)
-                .Select(d => d.State)
-                .ToArrayAsync();
-
-            var inactiveStates = allStates.Except(existingStates);
-
-            return inactiveStates.ToList();
-        }
-
-        private bool DiscountExists(string id)
-        {
-            return _context.Discounts.Any(e => e.State == id);
+            return await _discountService.GetInactiveStates();
         }
     }
 }
