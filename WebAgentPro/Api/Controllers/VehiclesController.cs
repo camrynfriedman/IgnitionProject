@@ -16,10 +16,12 @@ namespace WebAgentPro.Api.Controllers
     public class VehiclesController : ControllerBase
     {
         private readonly IVehicleService _vehicleService;
+        private readonly WapDbContext _context;
 
-        public VehiclesController(IVehicleService vehicleService)
+        public VehiclesController(IVehicleService vehicleService, WapDbContext context)
         {
             _vehicleService = vehicleService;
+            _context = context;
         }
 
         // GET: api/Vehicles
@@ -72,7 +74,7 @@ namespace WebAgentPro.Api.Controllers
             }
 
             return NoContent();
-        }
+        }*/
 
         // POST: api/Vehicles
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
@@ -81,11 +83,19 @@ namespace WebAgentPro.Api.Controllers
         {
             _context.Vehicles.Add(vehicle);
             await _context.SaveChangesAsync();
+            /*try
+            {
+                await _vehicleService.AddVehicle(vehicle);
+            }
+            catch (Exception e){
+                return BadRequest(e.Message);
+            }*/
+            
 
             return CreatedAtAction("GetVehicle", new { id = vehicle.VehicleId }, vehicle);
         }
 
-        // DELETE: api/Vehicles/5
+        /*// DELETE: api/Vehicles/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteVehicle(int id)
         {

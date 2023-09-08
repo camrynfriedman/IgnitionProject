@@ -9,7 +9,8 @@ using WebAgentPro.Data;
 namespace WebAgentPro.Api.Repositories
 {
     public interface IVehicleRepository {
-        Task<List<Vehicle>> GetAllVehicles();
+        Task<List<Vehicle>> GetAllVehiclesAsync();
+        Task AddVehicleAsync(Vehicle v);
     }
     public class VehicleRepository: IVehicleRepository
     {
@@ -19,9 +20,14 @@ namespace WebAgentPro.Api.Repositories
             _context = context;
         }
 
-        public Task<List<Vehicle>> GetAllVehicles()
+        public Task<List<Vehicle>> GetAllVehiclesAsync()
         {
             return _context.Vehicles.ToListAsync();
+        }
+
+        public async Task AddVehicleAsync(Vehicle v) {
+            _context.Vehicles.Add(v);
+            await _context.SaveChangesAsync();
         }
     }
 }
