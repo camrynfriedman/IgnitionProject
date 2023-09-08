@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using WebAgentPro.Api.Models;
+using WebAgentPro.Api.Services;
 using WebAgentPro.Data;
 
 namespace WebAgentPro.Api.Controllers
@@ -14,25 +15,34 @@ namespace WebAgentPro.Api.Controllers
     [ApiController]
     public class QuotesController : ControllerBase
     {
-        private readonly WapDbContext _context;
+        private readonly IQuoteService _quoteService;
+        private QuoteMapper map;
 
-        public QuotesController(WapDbContext context)
+        public QuotesController(IQuoteService quoteService)
         {
-            _context = context;
+            _quoteService = quoteService;
+            map = new QuoteMapper();
         }
 
         // GET: api/Quotes
+        // get a list of all quotes
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Quote>>> GetQuotes()
+        public async Task<ActionResult<List<QuoteDto>>> GetQuotes()
         {
-            return await _context.Quotes.ToListAsync();
+            var quotes = await _quoteService.GetAllQuotesAsync();
+            if (quotes == null || !quotes.Any())
+            {
+                return NotFound();
+            }
+            return quotes;
         }
 
         // GET: api/Quotes/5
+        // get an individual quote by id
         [HttpGet("{id}")]
-        public async Task<ActionResult<Quote>> GetQuote(int id)
+        public async Task<ActionResult<QuoteDto>> GetQuote(int id)
         {
-            var quote = await _context.Quotes.FindAsync(id);
+            var quote = await _quoteService.GetQuote(id);
 
             if (quote == null)
             {
@@ -41,7 +51,7 @@ namespace WebAgentPro.Api.Controllers
 
             return quote;
         }
-
+/*
         // PUT: api/Quotes/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
@@ -104,5 +114,6 @@ namespace WebAgentPro.Api.Controllers
         {
             return _context.Quotes.Any(e => e.QuoteId == id);
         }
-    }
+*/    }
+
 }

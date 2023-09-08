@@ -53,7 +53,7 @@ namespace WebAgentPro.Api.Services
                 throw new DiscountException("State Discount Not Found");
             }
 
-            DiscountDto returnedDiscount = map.DiscountToDto(_discountRepo.GetDiscount(state));
+            DiscountDto returnedDiscount = map.DiscountToDto(await _discountRepo.GetDiscount(state));
 
             return returnedDiscount;
         }
