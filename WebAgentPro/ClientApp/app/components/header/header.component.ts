@@ -18,6 +18,7 @@ export class HeaderComponent {
     }
 
     get isManager() {
+       
         return this.currentUser && this.currentUser.roles.includes(Roles.Manager);
     }
 
