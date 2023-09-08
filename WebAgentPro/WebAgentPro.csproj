@@ -29,6 +29,7 @@
 
   <ItemGroup>
     <Folder Include="ClientApp\app\components\" />
+    <Folder Include="ClientApp\app\QuoteManagement\" />
     <Folder Include="Connected Services\" />
     <Folder Include="wwwroot\" />
   </ItemGroup>

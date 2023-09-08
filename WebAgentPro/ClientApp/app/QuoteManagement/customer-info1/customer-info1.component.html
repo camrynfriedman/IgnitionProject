@@ -1,0 +1,73 @@
+<!-- Consider changing this to a nav if necessary -->
+<h3>Customer Information</h3>
+
+<h5>General</h5>
+<form [formGroup]="customerInfo1" (ngSubmit)="onSubmit()">
+    <div class="row">
+        <div class="form-group">
+            <label for="firstName">First Name</label>
+            <input id="firstName"
+                   formControlName="firstName"
+                   type="text"
+                   class="form-control" required />
+        </div>
+        <div class="form-group">
+            <label for="lastName">Last Name</label>
+            <input id="lastName"
+                   formControlName="lastName"
+                   type="text"
+                   class="form-control" required />
+        </div>
+        <div class="form-group">
+            <label for="dob">Date of Birth</label>
+            <input id="dob"
+                   formControlName="dob"
+                   type="date"
+                   class="form-control" required />
+        </div>
+        <div class="form-group">
+            <label for="country">Country</label>
+            <input id="country"
+                   formControlName="country"
+                   type="text"
+                   class="form-control" required />
+        </div>
+        <div class="form-group">
+            <label for="streetAddress">Street Address</label>
+            <input id="streetAddress"
+                   formControlName="streetAddress"
+                   type="text"
+                   class="form-control" required />
+        </div>
+        <div class="form-group">
+            <label for="aptOrSuite">Apt or Suite #</label>
+            <input id="aptOrSuite"
+                   formControlName="aptOrSuite"
+                   type="text"
+                   class="form-control" required />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="form-group">
+                <label for="state">State</label>
+                <input id="state"
+                       formControlName="state"
+                       type="text"
+                       class="form-control" required />
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label for="zipCode">5 Digit Zip Code</label>
+                <input id="zipCode"
+                       formControlName="zipCode"
+                       type="text"
+                       class="form-control" required />
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <!-- Insert button component here -->
+    </div>
+</form>
