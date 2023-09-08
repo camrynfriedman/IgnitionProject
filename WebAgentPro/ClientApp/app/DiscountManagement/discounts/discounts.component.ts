@@ -21,7 +21,7 @@ export class DiscountsComponent implements OnInit {
     }
 
     stateChanged(state: string) {
-        this.router.navigate(['discount','add',state])
+        this.router.navigate(['discount','add', state])
     }
 
     // #region API Calls
