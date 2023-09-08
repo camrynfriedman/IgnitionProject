@@ -8,7 +8,7 @@ using WebAgentPro.Api.Repositories;
 
 namespace WebAgentPro.Api.Services
 {
-    //service interface specyfying Discount Service Functions
+    //service interface specifying Discount Service Functions
     public interface IDiscountService {
         Task<IEnumerable<DiscountDto>> GetDiscountsAsync();
         Task<DiscountDto> GetDiscountAsync(string state);
