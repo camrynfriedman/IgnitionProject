@@ -34,7 +34,7 @@ namespace WebAgentPro.Api.Models
 
         public Discount DtoToDiscount(DiscountDto d)
         {
-            Discount returnedDiscountDTO = new Discount()
+            Discount returnedDiscount = new Discount()
             {
                 State = d.State,
                 DaytimeRunningLights = d.DaytimeRunningLights,
@@ -54,7 +54,7 @@ namespace WebAgentPro.Api.Models
                 YoungDriver = d.YoungDriver,
                 SafeDrivingSchool = d.SafeDrivingSchool
             };
-            return returnedDiscountDTO;
+            return returnedDiscount;
         }
 
     }
