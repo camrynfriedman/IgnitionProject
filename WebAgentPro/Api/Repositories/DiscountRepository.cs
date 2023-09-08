@@ -11,7 +11,7 @@ namespace WebAgentPro.Api.Repositories
     //Repository interface specifying functions in Discount Repository
     public interface IDiscountRepository {
         Task<List<Discount>> GetAllDiscountsAsync();
-        Discount GetDiscount(string state);
+        Task<Discount> GetDiscount(string state);
         Task AddDiscount(Discount d);
         Task EditDiscount(Discount d);
         Task RemoveDiscount(string state);
@@ -37,8 +37,9 @@ namespace WebAgentPro.Api.Repositories
             return discounts;
         }
 
-        public Discount GetDiscount(string state) {
+        public async Task<Discount> GetDiscount(string state) {
             Discount discount = _context.Discounts.Where(d => d.State == state).FirstOrDefault();
+            await _context.SaveChangesAsync();
 
             return discount;
         }
