@@ -17,7 +17,7 @@ import { DiscountEditComponent } from './discountmanagement/discount-edit/discou
 import { RoutenotfoundComponent } from './_security/routenotfound/routenotfound.component';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
-import { CustomerInfo1Component } from './QuoteManagement/customer-info1/customer-info1.component';
+import { CustomerInfo1Component } from './quotemanagement/customer-info1/customer-info1.component';
   
 @NgModule({
     imports: [

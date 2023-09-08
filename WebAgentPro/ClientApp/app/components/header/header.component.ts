@@ -18,7 +18,12 @@ export class HeaderComponent {
     }
 
     get isManager() {
-        return this.currentUser && this.currentUser.roles.includes(Roles.Manager);
+/*        console.log(this.currentUser);
+*/        return this.currentUser && this.currentUser.roles.includes(Roles.Manager);
+    }
+
+    displayQuoteNav(): boolean {
+        return this.router.url.endsWith('/quotes');
     }
 
     logout() {

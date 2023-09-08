@@ -5,7 +5,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { environment } from '@environments/environment';
 
-//import { Quote } from '@app/_models/driver';
+import { Quote } from '@app/_models/quote';
+import { Driver } from '@app/_models/driver';
 
 @Component({
     templateUrl: './customer-info1.component.html',
@@ -17,13 +18,12 @@ export class CustomerInfo1Component implements OnInit {
 
     //driver: Driver;
 
-    customerInfo1: FormGroup
+    form: FormGroup
 
     constructor(private route: ActivatedRoute, private http: HttpClient, private router: Router) { }
 
     ngOnInit(): void {
-
-        this.customerInfo1 = new FormGroup({
+        this.form = new FormGroup({
             firstName:
                 new FormControl('', Validators.required),
             lastName:
@@ -43,10 +43,16 @@ export class CustomerInfo1Component implements OnInit {
         })
     }
 
+    onSubmit() {
+        if (this.form.valid) {
+            // Do stuff, idk yet
+        }
+    }
+
     // Need to move to service class when time allows
     // #region API calls
 
-/*    postQuote(newQuote: Quote) {
+    postQuote(newQuote: Quote) {
         var httpRequest = this.http.post<number>(`${this.apiUrl}/discounts`, newQuote)
 
         httpRequest.subscribe(
@@ -55,6 +61,6 @@ export class CustomerInfo1Component implements OnInit {
                 // this.router.navigateByUrl("/discounts")
             })
     }
-*/
+
     // #endRegion
 }
