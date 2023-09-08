@@ -25,7 +25,7 @@ namespace WebAgentPro.Api.Controllers
 
         // GET: api/Discounts
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<DiscountDto>>> GetDiscount()
+        public async Task<ActionResult<List<DiscountDto>>> GetDiscount()
         {
             /*var returnedDiscounts = await _discountService.GetDiscountsAsync()
                 .Select(d => map.DiscountToDto(d)).ToListAsync();*/
@@ -88,10 +88,17 @@ namespace WebAgentPro.Api.Controllers
         [HttpDelete("{id}")]
         public async Task<ActionResult<DiscountDto>> DeleteDiscount(string id)
         {
-            DiscountDto discount = await _discountService.GetDiscountAsync(id);
-            await _discountService.RemoveDiscount(id);
-
-            return discount;
+            try
+            {
+                DiscountDto discount = await _discountService.GetDiscountAsync(id);
+                await _discountService.RemoveDiscount(id);
+                return discount;
+            }
+            catch (Exception e) {
+                return NotFound(e.Message);
+            }
+            
+         
         }
 
         [HttpGet("InactiveStates")]

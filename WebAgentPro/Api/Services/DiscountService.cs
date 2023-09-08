@@ -10,7 +10,7 @@ namespace WebAgentPro.Api.Services
 {
     //service interface specyfying Discount Service Functions
     public interface IDiscountService {
-        Task<IEnumerable<DiscountDto>> GetDiscountsAsync();
+        Task<List<DiscountDto>> GetDiscountsAsync();
         Task<DiscountDto> GetDiscountAsync(string state);
         Task EditDiscount(string state, DiscountDto d);
         Task AddDiscount(DiscountDto d);
@@ -39,10 +39,10 @@ namespace WebAgentPro.Api.Services
         }
 
         //service function calls the repository function and applies DTO
-        public async Task<IEnumerable<DiscountDto>> GetDiscountsAsync()
+        public async Task<List<DiscountDto>> GetDiscountsAsync()
         {
             var discounts = (await _discountRepo.GetAllDiscountsAsync())
-                .Select(d => map.DiscountToDto(d));
+                .Select(d => map.DiscountToDto(d)).ToList();
 
             return discounts;
         }

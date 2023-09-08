@@ -44,13 +44,14 @@ namespace WebAgentPro.Api.Repositories
             return discount;
         }
 
-        public async Task EditDiscount(Discount d) {
-            _context.Entry(d).State = EntityState.Modified;
+        public async Task AddDiscount(Discount discount) {
+            _context.Discounts.Add(discount);
             await _context.SaveChangesAsync();
         }
 
-        public async Task AddDiscount(Discount discount) {
-            _context.Discounts.Add(discount);
+        public async Task EditDiscount(Discount d)
+        {
+            _context.Entry(d).State = EntityState.Modified;
             await _context.SaveChangesAsync();
         }
 

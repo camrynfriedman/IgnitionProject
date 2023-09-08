@@ -21,32 +21,58 @@ namespace WebAgentPro.Api.Controllers
         public VehiclesController(IVehicleService vehicleService, WapDbContext context)
         {
             _vehicleService = vehicleService;
-            _context = context;
         }
 
         // GET: api/Vehicles
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Vehicle>>> GetVehicles()
+        public async Task<ActionResult<IEnumerable<VehicleDto>>> GetVehicles()
         {
-            return await _vehicleService.GetVehicles();
+            try
+            {
+                var vehicle = await _vehicleService.GetAllVehicles();
+                return Ok(vehicle);
+            }
+            catch (Exception e) {
+                return BadRequest(e.Message);
+            }
         }
 
-        /*// GET: api/Vehicles/5
+        // GET: api/Vehicles/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Vehicle>> GetVehicle(int id)
         {
-            var vehicle = await _context.Vehicles.FindAsync(id);
-
-            if (vehicle == null)
+            try
             {
-                return NotFound();
+                var vehicle = await _vehicleService.GetVehicle(id);
+                return Ok(vehicle);
             }
-
-            return vehicle;
+            catch (VehicleNotFoundException e)
+            {
+                return BadRequest(e.Message);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
         }
 
         // PUT: api/Vehicles/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        /*[HttpPut("{id}")]
+        public async Task<IActionResult> PutVehicle(int id, VehicleDto vehicle)
+        {
+            try
+            {
+                await _vehicleService.EditVehicle(id, vehicle);
+
+            }
+            catch (Exception e) {
+                return BadRequest(e.Message);
+            }
+
+            return NoContent();
+        }*/
+
         [HttpPut("{id}")]
         public async Task<IActionResult> PutVehicle(int id, Vehicle vehicle)
         {
@@ -74,46 +100,45 @@ namespace WebAgentPro.Api.Controllers
             }
 
             return NoContent();
-        }*/
+        }
+        private bool VehicleExists(int id)
+        {
+            return _context.Vehicles.Any(e => e.VehicleId == id);
+        }
 
         // POST: api/Vehicles
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Vehicle>> PostVehicle(Vehicle vehicle)
+        public async Task<ActionResult<Vehicle>> PostVehicle(VehicleDto vehicleDto)
         {
-            _context.Vehicles.Add(vehicle);
-            await _context.SaveChangesAsync();
-            /*try
+            try
             {
-                await _vehicleService.AddVehicle(vehicle);
+                await _vehicleService.AddVehicle(vehicleDto);
             }
-            catch (Exception e){
+            catch (Exception e)
+            {
                 return BadRequest(e.Message);
-            }*/
-            
-
-            return CreatedAtAction("GetVehicle", new { id = vehicle.VehicleId }, vehicle);
-        }
-
-        /*// DELETE: api/Vehicles/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteVehicle(int id)
-        {
-            var vehicle = await _context.Vehicles.FindAsync(id);
-            if (vehicle == null)
-            {
-                return NotFound();
             }
 
-            _context.Vehicles.Remove(vehicle);
-            await _context.SaveChangesAsync();
 
-            return NoContent();
+            return CreatedAtAction("GetVehicle", new { id = vehicleDto.VehicleId }, vehicleDto);
         }
 
-        private bool VehicleExists(int id)
+        // DELETE: api/Vehicles/5
+        [HttpDelete("{id}")]
+        public async Task<ActionResult<VehicleDto>> DeleteVehicle(int id)
         {
-            return _context.Vehicles.Any(e => e.VehicleId == id);
-        }*/
+            try
+            {
+                VehicleDto vehicle = await _vehicleService.GetVehicle(id);
+                await _vehicleService.RemoveVehicle(id);
+                return Ok(vehicle);
+            }
+            catch (Exception e) {
+                return BadRequest(e.Message);
+            }
+
+        }
+
     }
 }

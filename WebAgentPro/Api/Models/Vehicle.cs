@@ -26,8 +26,7 @@ namespace WebAgentPro.Api.Models
         public string Model { get; set; }
 
         [Required]
-        [MinLength(4)]
-        [MaxLength(4)]
+        [Range(1000, 9999)]
         public int Year { get; set; }
 
         [Required]
