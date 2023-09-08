@@ -1,96 +1,176 @@
 <h3>Discount Management</h3>
 
 <h5 *ngIf="action == 'edit'" class="card-title">Edit State Discounts</h5>
-<h5 *ngIf="action == 'add'"  class="card-title">Add State Discounts</h5>
+<h5 *ngIf="action == 'add'" class="card-title">Add State Discounts</h5>
 
-<form *ngIf="discount" #discountForm="ngForm" (ngSubmit)="submitForm()">
+<form [formGroup]="form" *ngIf="discount" (ngSubmit)="onSubmit()">
     <div class="row">
         <div class="col-md-4">
             <strong>Quotes</strong>
             <div class="form-group">
-                <label>State</label>
-                <input type="text" readonly name="state" [(ngModel)]="discount.state" class="form-control" required />
+                <label for="state">State</label>
+                <input readonly name="state"
+                       type="text"  
+                       [(ngModel)]="discount.state" 
+                       class="form-control" required />
             </div>
             <div class="form-group">
-                <label>Low Driving Experience</label>
-                <input type="number" step=".01" name="lowDrivingExperience" [(ngModel)]="discount.lowDrivingExperience" class="form-control" required />
+                <label for="lowDrivingExperience">Low Driving Experience</label>
+                <input id="lowDrivingExperience"
+                       formControlName="lowDrivingExperience"
+                       type="number"
+                       [attr.step]="stepValue"
+                       class="form-control" required />
             </div>
             <div class="form-group">
-                <label>Previous Carrier Lizard</label>
-                <input type="number" step=".01" name="previousCarrierLizard" #previousCarrierLizard="ngModel" [(ngModel)]="discount.previousCarrierLizard" class="form-control" required />
+                <label for="previousCarrierLizard">Previous Carrier Lizard</label>
+                <input id="previousCarrierLizard"
+                       formControlName="previousCarrierLizard"
+                       type="number"
+                       [attr.step]="stepValue"
+                       class="form-control" required />
             </div>
             <div class="form-group">
-                <label>Previous Carrier Pervasive</label>
-                <input type="number" step=".01" name="previousCarrierPervasive" #previousCarrierPervasive="ngModel" [(ngModel)]="discount.previousCarrierPervasive" class="form-control" required />
+                <label for="previousCarrierPervasive">Previous Carrier Pervasive</label>
+                <input id="previousCarrierPervasive"
+                       formControlName="previousCarrierPervasive"
+                       type="number"
+                       [attr.step]="stepValue"
+                       class="form-control" required />
             </div>
             <div class="form-group">
-                <label>Recent Moving Violations</label>
-                <input type="number" step=".01" name="recentMovingViolations" #recentMovingViolations="ngModel" [(ngModel)]="discount.recentMovingViolations" class="form-control" required />
+                <label for="recentMovingViolations">Recent Moving Violations</label>
+                <input id="recentMovingViolations"
+                       formControlName="recentMovingViolations"
+                       type="number"
+                       [attr.step]="stepValue"
+                       class="form-control" required />
             </div>
             <div class="form-group">
-                <label>Recent Claims</label>
-                <input type="number" step=".01" name="recentClaims" #recentClaims="ngModel" [(ngModel)]="discount.recentClaims" class="form-control" required />
+                <label for="recentClaims">Recent Claims</label>
+                <input id="recentClaims"
+                       formControlName="recentClaims"
+                       type="number"
+                       [attr.step]="stepValue"
+                       class="form-control" required />
             </div>
             <div class="form-group">
-                <label>Multi-car</label>
-                <input type="number" step=".01" name="multiCar" #multiCar="ngModel" [(ngModel)]="discount.multiCar" class="form-control" required />
+                <label for="multiCar">Multi-car</label>
+                <input id="multiCar"
+                       formControlName="multiCar"
+                       type="number"
+                       [attr.step]="stepValue"
+                       class="form-control" required />
             </div>
         </div>
         <div class="col-md-4">
             <strong>Vehicles</strong>
             <div class="form-group">
-                <label>Daytime Running Lights</label>
-                <input type="number" step=".01" name="daytimeRunningLights" #daytimeRunningLights="ngModel" [(ngModel)]="discount.daytimeRunningLights" class="form-control" required />
-                <div [hidden]="daytimeRunningLights.valid || daytimeRunningLights.pristine" class="alert alert-danger">Daytime Running Lights is required.</div>
+                <label for="daytimeRunningLights">Daytime Running Lights</label>
+                <input id="daytimeRunningLights"
+                       formControlName="daytimeRunningLights"
+                       type="number"
+                       [attr.step]="stepValue"
+                       class="form-control" required />
+                <div *ngIf="!form.get('daytimeRunningLights').valid && !form.get('daytimeRunningLights').pristine" class="alert alert-danger">
+                    Daytime Running Lights is required.
+                </div>
             </div>
             <div class="form-group">
-                <label>Anti-lock Brakes</label>
-                <input type="number" step=".01" name="antilockBrakes" #antilockBrakes="ngModel" [(ngModel)]="discount.antilockBrakes" class="form-control" required />
+                <label for="antilockBrakes">Anti-lock Brakes</label>
+                <input id="antilockBrakes"
+                       formControlName="antilockBrakes"
+                       type="number"
+                       [attr.step]="stepValue"
+                       class="form-control" required />
             </div>
             <div class="form-group">
-                <label>Low Mileage</label>
-                <input type="number" step=".01" name="lowAnnualMileage" #lowAnnualMileage="ngModel" [(ngModel)]="discount.lowAnnualMileage" class="form-control" required />
+                <label for="lowAnnualMileage">Low Mileage</label>
+                <input id="lowAnnualMileage"
+                       formControlName="lowAnnualMileage"
+                       type="number"
+                       [attr.step]="stepValue"
+                       class="form-control" required />
             </div>
             <div class="form-group">
-                <label>Passive Restraints</label>
-                <input type="number" step=".01" name="passiveRestraints" #passiveRestraints="ngModel" [(ngModel)]="discount.passiveRestraints" class="form-control" required />
+                <label for="passiveRestraints">Passive Restraints</label>
+                <input id="passiveRestraints"
+                       formControlName="passiveRestraints"
+                       type="number"
+                       [attr.step]="stepValue"
+                       class="form-control" required />
             </div>
             <div class="form-group">
-                <label>Anti-theft Installed</label>
-                <input type="number" step=".01" name="antitheftInstalled" #antitheftInstalled="ngModel" [(ngModel)]="discount.antitheftInstalled" class="form-control" required />
+                <label for="antitheftInstalled">Anti-theft Installed</label>
+                <input id="antitheftInstalled"
+                       formControlName="antitheftInstalled"
+                       type="number"
+                       [attr.step]="stepValue"
+                       class="form-control" required />
             </div>
             <div class="form-group">
-                <label>High Days Driven Per Week</label>
-                <input type="number" step=".01" name="highDaysDrivenPerWeek" #highDaysDrivenPerWeek="ngModel" [(ngModel)]="discount.highDaysDrivenPerWeek" class="form-control" required />
+                <label for="highDaysDrivenPerWeek">High Days Driven Per Week</label>
+                <input id="highDaysDrivenPerWeek"
+                       formControlName="highDaysDrivenPerWeek"
+                       type="number"
+                       [attr.step]="stepValue"
+                       class="form-control" required />
             </div>
             <div class="form-group">
-                <label>Low Miles Driven To Work</label>
-                <input type="number" step=".01" name="lowMilesDrivenToWork" #lowMilesDrivenToWork="ngModel" [(ngModel)]="discount.lowMilesDrivenToWork" class="form-control" required />
+                <label for="lowMilesDrivenToWork">Low Miles Driven To Work</label>
+                <input id="lowMilesDrivenToWork"
+                       formControlName="lowMilesDrivenToWork"
+                       type="number"
+                       [attr.step]="stepValue"
+                       class="form-control" required />
             </div>
             <div class="form-group">
-                <label>Reduced Use</label>
-                <input type="number" step=".01" name="reduceUse" #reduceUse="ngModel" [(ngModel)]="discount.reduceUse" class="form-control" required />
+                <label for="reduceUse">Reduced Use</label>
+                <input id="reduceUse"
+                       formControlName="reduceUse"
+                       type="number"
+                       [attr.step]="stepValue"
+                       class="form-control" required />
             </div>
             <div class="form-group">
-                <label>Garage Address Different</label>
-                <input type="number" step=".01" name="garageAddressDifferent" #garageAddressDifferent="ngModel" [(ngModel)]="discount.garageAddressDifferent" class="form-control" required />
+                <label for="garageAddressDifferent">Garage Address Different</label>
+                <input id="garageAddressDifferent"
+                       formControlName="garageAddressDifferent"
+                       type="number"
+                       [attr.step]="stepValue"
+                       class="form-control" required />
             </div>
         </div>
         <div class="col-md-4">
             <strong>Drivers</strong>
             <div class="form-group">
-                <label>Young Driver</label>
-                <input type="number" step=".01" name="youngDriver" #youngDriver="ngModel" [(ngModel)]="discount.youngDriver" class="form-control" required />
+                <label for="youngDriver">Young Driver</label>
+                <input id="youngDriver"
+                       formControlName="youngDriver"
+                       type="number"
+                       [attr.step]="stepValue"
+                       class="form-control" required />
             </div>
             <div class="form-group">
-                <label>Safe Driving School</label>
-                <input type="number" step=".01" name="safeDrivingSchool" #safeDrivingSchool="ngModel" [(ngModel)]="discount.safeDrivingSchool" class="form-control" required />
+                <label for="safeDrivingSchool">Safe Driving School</label>
+                <input id="safeDrivingSchool"
+                       formControlName="safeDrivingSchool"
+                       type="number"
+                       [attr.step]="stepValue"
+                       class="form-control" required />
             </div>
         </div>
     </div>
-
-    <div class="form-group">
-        <button type="submit" [disabled]="!discountForm.form.valid" class="btn btn-success">Save</button> &nbsp; 
-        <button type="button" routerLink="/discounts" class="btn btn-warning">Cancel</button>
-    </div>
+<div class="form-group">
+    <button type="submit"
+            [disabled]="!form?.valid"
+            class="btn btn-success">
+        Save
+    </button> &nbsp;
+    <button type="button"
+            routerLink="/discounts"
+            class="btn btn-warning">
+        Cancel
+    </button>
+</div>
 </form>
