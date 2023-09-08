@@ -7,6 +7,19 @@ import { LoginComponent } from './registerlogin/login/login.component';
 import { UsersComponent } from './usermanagement/users/users.component';
 import { DiscountsComponent } from './discountmanagement/discounts/discounts.component';
 import { DiscountEditComponent } from './discountmanagement/discount-edit/discount-edit.component';
+
+/* Related to routing for the following tasks:
+ * 9199
+import { CustomerInfo1Component } from './quotemanagement/customer-info1/customer-info1.component';
+ * 9272
+import { CustomerInfo2Component } from './quotemanagement/customer-info2/customer-info2.component';
+ * 9273
+import { DriverInfoComponent } from './quotemanagement/driver-info/driver-info.component';
+ * 9274
+import { VehicleInfo1Component } from './quotemanagement/vehicle-info1/vehicle-info1.component';
+ * 9275
+import { VehicleInfo2Component } from './quotemanagement/vehicle-info2/vehicle-info2.component';
+*/
 import { RoutenotfoundComponent } from './_security/routenotfound/routenotfound.component';
 
 const appRoutes: Routes = [
