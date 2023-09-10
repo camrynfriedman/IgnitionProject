@@ -51,7 +51,7 @@ namespace WebAgentPro.Api.Controllers
 
             return quote;
         }
-/*
+
         // PUT: api/Quotes/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
@@ -62,11 +62,11 @@ namespace WebAgentPro.Api.Controllers
                 return BadRequest();
             }
 
-            _context.Entry(quote).State = EntityState.Modified;
+            _quoteService. = EntityState.Modified;
 
             try
             {
-                await _context.SaveChangesAsync();
+                await _quoteService.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -93,7 +93,7 @@ namespace WebAgentPro.Api.Controllers
 
             return CreatedAtAction("GetQuote", new { id = quote.QuoteId }, quote);
         }
-
+        /*
         // DELETE: api/Quotes/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteQuote(int id)

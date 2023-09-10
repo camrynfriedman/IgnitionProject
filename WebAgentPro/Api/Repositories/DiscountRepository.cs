@@ -48,7 +48,6 @@ namespace WebAgentPro.Api.Repositories
             await _context.SaveChangesAsync();
         }
 
-        //void 
         public async Task AddDiscount(Discount discount) {
             _context.Discounts.Add(discount);
             await _context.SaveChangesAsync();

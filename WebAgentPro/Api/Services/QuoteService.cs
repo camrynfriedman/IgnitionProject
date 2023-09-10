@@ -7,6 +7,10 @@ using WebAgentPro.Api.Repositories;
 
 namespace WebAgentPro.Api.Services
 {
+    /*
+     * The service uses the QuoteDTO rather than Quote
+     * */
+
     public interface IQuoteService
     {
         Task<List<QuoteDto>> GetAllQuotesAsync();
@@ -46,7 +50,7 @@ namespace WebAgentPro.Api.Services
 
         public async Task<QuoteDto> GetQuote(int quoteID)
         {
-            if (_quoteRepo.GetQuote(quoteID) == null)
+            if (await _quoteRepo.GetQuote(quoteID) == null)
             {
                 return null;
             }
@@ -54,6 +58,15 @@ namespace WebAgentPro.Api.Services
             QuoteDto returnedQuoteDto = map.QuoteToDto(await _quoteRepo.GetQuote(quoteID));
 
             return returnedQuoteDto;
+        }
+
+        public async Task EditQuote(int quoteID, Quote q)
+        {
+            if (quoteID != )
+        }
+        public async Task AddQuote(QuoteDto q)
+        {
+            if (await _quoteRepo.)
         }
     }
 }

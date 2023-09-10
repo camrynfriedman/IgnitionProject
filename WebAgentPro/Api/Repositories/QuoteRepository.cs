@@ -19,13 +19,16 @@ public interface IQuoteRepository
         // get by ID
         Task<Quote> GetQuote(int quoteID);
 
-        // insert
+        // edit quote
+        Task EditQuote(Quote q);
 
-        // update
+        // insert
+        Task AddQuote(Quote q);
 
         // delete
+        Task RemoveQuote(int quoteID);
 
-        //
+  
 
     }
     public class QuoteRepository : IQuoteRepository
@@ -54,6 +57,24 @@ public interface IQuoteRepository
             return quote;
         }
 
+        public async Task EditQuote(Quote q)
+        {
+            _context.Entry(q).State = EntityState.Modified;
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task AddQuote(Quote q)
+        {
+            _context.Quotes.Add(q);
+            await _context.SaveChangesAsync();
+        }
+
+        //removes quote by quoteID
+        public async Task RemoveQuote(int quoteID)
+        {
+            _context.Quotes.Remove(_context.Quotes.Where(q=> q.QuoteId == quoteID).FirstOrDefault());
+            await _context.SaveChangesAsync();
+        }
     }
     
 }
