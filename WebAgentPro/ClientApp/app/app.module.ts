@@ -18,6 +18,7 @@ import { RoutenotfoundComponent } from './_security/routenotfound/routenotfound.
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { CustomerInfo1Component } from './quotemanagement/customer-info1/customer-info1.component';
+import { CustomerInfo2Component } from './QuoteManagement/customer-info2/customer-info2.component';
   
 @NgModule({
     imports: [
@@ -38,7 +39,8 @@ import { CustomerInfo1Component } from './quotemanagement/customer-info1/custome
         RoutenotfoundComponent,
         HeaderComponent,
         FooterComponent,
-        CustomerInfo1Component
+        CustomerInfo1Component,
+        CustomerInfo2Component
     ],
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
