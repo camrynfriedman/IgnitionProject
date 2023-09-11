@@ -70,13 +70,13 @@
                                class="form-control checkbox" />
                     </div>
                 </div>
-                <p>Buttons don't do anything yet</p>
             <div class="row">
                 <div class="col">
-                    <button class="btn btn-primary">Back to General</button>
+                    <app-return-btn text="Back to General">
+                    </app-return-btn>
                 </div>
                 <div class="col">
-                    <button class="btn btn-primary">Continue</button>
+                    <app-continue-btn [form]="form"></app-continue-btn>
                 </div>
             </div>
     </div>
