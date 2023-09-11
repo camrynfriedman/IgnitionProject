@@ -17,6 +17,10 @@ import { DiscountEditComponent } from './discountmanagement/discount-edit/discou
 import { RoutenotfoundComponent } from './_security/routenotfound/routenotfound.component';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
+import { CustomerInfo1Component } from './quotemanagement/customer-info1/customer-info1.component';
+import { CustomerInfo2Component } from './QuoteManagement/customer-info2/customer-info2.component';
+import { DriverInfoComponent } from './quotemanagement/driver-info/driver-info.component';
+import { VehicleInfo1Component } from './quotemanagement/vehicle-info1/vehicle-info1.component';
   
 @NgModule({
     imports: [
@@ -36,7 +40,11 @@ import { FooterComponent } from './components/footer/footer.component';
         DiscountEditComponent,
         RoutenotfoundComponent,
         HeaderComponent,
-        FooterComponent
+        FooterComponent,
+        CustomerInfo1Component,
+        CustomerInfo2Component,
+        DriverInfoComponent,
+        VehicleInfo1Component
     ],
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

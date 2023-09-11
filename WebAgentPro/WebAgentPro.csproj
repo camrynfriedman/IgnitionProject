@@ -24,11 +24,14 @@
 
   <ItemGroup>
     <None Remove="ClientApp\app\_models\discount.ts" />
+    <None Remove="ClientApp\app\_models\driver.ts" />
+    <None Remove="ClientApp\app\_models\vehicle.ts" />
     <None Remove="ClientApp\app\_models\widgedemo.ts" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="ClientApp\app\components\" />
+    <Folder Include="ClientApp\app\QuoteManagement\" />
     <Folder Include="Connected Services\" />
     <Folder Include="wwwroot\" />
   </ItemGroup>
@@ -56,6 +59,10 @@
 
   <ItemGroup>
     <TypeScriptCompile Include="ClientApp\app\_models\discount.ts" />
+    <TypeScriptCompile Include="ClientApp\app\_models\driver.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
+    <TypeScriptCompile Include="ClientApp\app\_models\vehicle.ts" />
   </ItemGroup>
 
   <ItemGroup>

@@ -1,13 +1,95 @@
 /* You can add global styles to this file, and also import other style files */
+
+/* Company Colors 
+Primary Color: #022179
+Secondary Color: #ED1C24
+AIA Grey: #414555
+Text-Color 1: #1913D
+Input field: #6D758F
+White: #F7F7F7
+Info: #00A5E6
+Success: #4DCA20
+Caution: #FDC613
+Danger: #EE083B
+*/
+
 a {
-    cursor: pointer
+    cursor: pointer;
+}
+
+/* This style is applied to every screen*/
+.globalStyle {
+    font-family: Montserrat;
+    min-width:298px;
+}
+
+/*Centers content*/
+.center{
+    margin:auto;
+    max-width:100%;
+    padding:1px;
+}
+
+/* Logo stlying on LogIn page*/
+#AIALogoName {
+    margin:auto;
+    max-width:270px;
+    max-height:auto;
+}
+
+/* styling for email and password form */
+.form-group{
+    min-width: 320px;
+    min-height: 50px;
+    margin: auto;
+    max-width: 380px;
+    max-height: 400px;
+    padding: 1px;
+}
+
+/* Affects input text boxes (email/password) */
+.form-control {
+    color: #414555;
+}
+
+/* Sign In button Styling*/
+.loginbtn {
+    background-color: #022179;
+    color: #F7F7F7;
+    border-radius: 6px;
+    border-color: #022179;
+    min-width: 320px;
+    min-height: 50px;
+    margin-top: 60px;
+}
+
+/* Register link Button styling */
+a.btn.btn-link {
+    color: #022179;
+}
+.btn-group-vertical > .btn-group:not(:first-child), .btn-group-vertical > .btn:not(:first-child) {
+    margin-inline:auto;
+    width:max-content;
+    margin-top:25px;
 }
 
 .ng-valid[required], .ng-valid.required {
-    border-left: 5px solid #42A948; /* green */
+  /*  border-left: 5px solid #42A948; /* green */
 }
 
+/* Make email/password boxes 'danger' red when empty */
 .ng-invalid:not(form) {
-    border-left: 5px solid #a94442; /* red */
+    border: 1.5px solid #EE083B; 
 }
 
+/* alert message "email/password invalid" */
+.alert{
+    padding:0;
+    position:relative;
+}
+
+.alert-danger {
+    color: #EE083B;
+    background-color:transparent;
+    border-color:transparent;
+}

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { first } from 'rxjs/operators';
 import { environment } from '@environments/environment';
-import {User, Roles} from '@app/_security';
+import { User, Roles} from '@app/_security';
 import { HttpClient } from '@angular/common/http';
 
 @Component({ templateUrl: 'users.component.html' })
