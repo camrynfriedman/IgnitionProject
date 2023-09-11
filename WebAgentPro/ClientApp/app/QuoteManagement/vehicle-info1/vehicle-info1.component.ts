@@ -23,7 +23,10 @@ export class VehicleInfo1Component implements OnInit {
     form: FormGroup
     stepValue: number = 1;
 
-    constructor(private route: ActivatedRoute, private http: HttpClient, private router: Router) { }
+    constructor(
+        private route: ActivatedRoute,
+        private http: HttpClient,
+        private router: Router) { }
 
     ngOnInit(): void {
         this.form = new FormGroup({

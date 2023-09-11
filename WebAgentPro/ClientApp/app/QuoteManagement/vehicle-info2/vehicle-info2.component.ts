@@ -8,10 +8,10 @@ import { environment } from '@environments/environment';
 import { Quote } from '@app/_models/quote';
 
 @Component({
-  templateUrl: './customer-info2.component.html',
-  styleUrls: ['./customer-info2.component.css']
+  templateUrl: './vehicle-info2.component.html',
+  styleUrls: ['./vehicle-info2.component.css']
 })
-export class CustomerInfo2Component implements OnInit {
+export class VehicleInfo2Component implements OnInit {
 
     apiUrl: string = environment.apiUrl
 
@@ -27,17 +27,17 @@ export class CustomerInfo2Component implements OnInit {
 
     ngOnInit(): void {
         this.form = new FormGroup({
-            previousCarrierL:
+            antiLockBrakes:
                 new FormControl('', Validators.required),
-            previousCarrierP:
+            passiveRestraints:
                 new FormControl('', Validators.required),
-            recentMovingViolations:
+            antiTheftInstalled:
                 new FormControl('', Validators.required),
-            recentClaims:
+            reducedUsedDiscount:
                 new FormControl('', Validators.required),
-            multipleCars:
+            daytimeRunningLights:
                 new FormControl('', Validators.required),
-            lowDrivingExperience:
+            garageAddressDifferent:
                 new FormControl('', Validators.required),
         })
     }

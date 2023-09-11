@@ -20,7 +20,10 @@ export class DriverInfoComponent implements OnInit {
 
     form: FormGroup
 
-    constructor(private route: ActivatedRoute, private http: HttpClient, private router: Router) { }
+    constructor(
+        private route: ActivatedRoute,
+        private http: HttpClient,
+        private router: Router) { }
 
     ngOnInit(): void {
         this.form = new FormGroup({

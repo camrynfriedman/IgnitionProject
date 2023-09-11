@@ -21,6 +21,7 @@ import { CustomerInfo1Component } from './quotemanagement/customer-info1/custome
 import { CustomerInfo2Component } from './QuoteManagement/customer-info2/customer-info2.component';
 import { DriverInfoComponent } from './quotemanagement/driver-info/driver-info.component';
 import { VehicleInfo1Component } from './quotemanagement/vehicle-info1/vehicle-info1.component';
+import { VehicleInfo2Component } from './quotemanagement/vehicle-info2/vehicle-info2.component';
   
 @NgModule({
     imports: [
@@ -44,7 +45,8 @@ import { VehicleInfo1Component } from './quotemanagement/vehicle-info1/vehicle-i
         CustomerInfo1Component,
         CustomerInfo2Component,
         DriverInfoComponent,
-        VehicleInfo1Component
+        VehicleInfo1Component,
+        VehicleInfo2Component
     ],
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
