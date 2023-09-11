@@ -1,0 +1,96 @@
+<!-- Will want to add conditional styling to navbar -->
+<h3>Drivers</h3>
+
+<!-- Insert component for listing recently saved drivers -->
+
+<h5>Driver Details</h5>
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col">
+                <div class="form-group">
+                    <label for="firstName">First Name</label>
+                    <input id="firstName"
+                           formControlName="firstName"
+                           type="text"
+                           class="form-control" required />
+                </div>
+                <div class="form-group">
+                    <label for="lastName">Last Name</label>
+                    <input id="lastName"
+                           formControlName="lastName"
+                           type="text"
+                           class="form-control" required />
+                </div>
+                <div class="form-group">
+                    <label for="dob">Date of Birth</label>
+                    <input id="dob"
+                           formControlName="dob"
+                           type="date"
+                           class="form-control" required />
+                </div>
+                <div class="form-group">
+                    <label for="ssn">SSN</label>
+                    <input id="ssn"
+                           formControlName="ssn"
+                           type="password"
+                           class="form-control" required />
+                </div>
+                <div class="form-group">
+                    <label for="driverLicenseNumber">Driver License Number</label>
+                    <input id="driverLicenseNumber"
+                           formControlName="driverLicenseNumber"
+                           type="text"
+                           class="form-control" required />
+                </div>
+                <div class="form-group">
+                    <label for="driverLicenseState">Driver License State</label>
+                    <!-- Will want to add AJAX call for available states -->
+                    <select id="driverLicenseState"
+                           formControlName="driverLicenseState"
+                           class="form-control">
+                        <option>Washington</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col">
+                            <label for="youngDriver">Is this a young driver?</label>
+                        </div>
+                        <div class="col">
+                            <input id="youngDriver"
+                                   formControlName="youngDriver"
+                                   type="checkbox"
+                                   class="form-control" required />
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col">
+                            <label for="safeDrivingSchool">Safe Driving School?</label>
+                        </div>
+                        <div class="col">
+                            <input id="safeDrivingSchool"
+                                   formControlName="safeDrivingSchool"
+                                   type="checkbox"
+                                   class="form-control" required />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+        <div class="form-group">
+            <div class="row">
+                <div class="col">
+                    <app-return-btn text="Customer Details">
+                    </app-return-btn>
+                </div>
+                <div class="col">
+                    <app-continue-btn [form]="form"></app-continue-btn>
+                </div>
+            </div>
+        </div>
+</form>
+<!-- Insert progress bubble thing -->

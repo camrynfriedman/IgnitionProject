@@ -1,0 +1,83 @@
+<!-- Will want to add conditional styling to navbar -->
+<h3>Customer Information</h3>
+
+<h5>Customer Details</h5>
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="container-fluid">
+                <div class="row">
+                    <div class="col">
+                        <label for="previousCarrierL">Previous Carrier Lizard</label>
+                    </div>
+                    <div class="col">
+                        <input id="previousCarrierL"
+                               formControlName="previousCarrierL"
+                               type="checkbox"
+                               class="form-control checkbox" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <label for="previousCarrierP">Previous Carrier Pervasive</label>
+                    </div>
+                    <div class="col">
+                        <input id="previousCarrierP"
+                               formControlName="previousCarrierP"
+                               type="checkbox"
+                               class="form-control checkbox" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <label for="recentMovingViolations">Recent Moving Violations</label>
+                    </div>
+                    <div class="col">
+                        <input id="recentMovingViolations"
+                               formControlName="recentMovingViolations"
+                               type="checkbox"
+                               class="form-control checkbox" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <label for="recentClaims">Recent Claims</label>
+                    </div>
+                    <div class="col">
+                        <input id="recentClaims"
+                               formControlName="recentClaims"
+                               type="checkbox"
+                               class="form-control checkbox" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <label for="multipleCars">Multiple Cars</label>
+                    </div>
+                    <div class="col">
+                        <input id="multipleCars"
+                               formControlName="multipleCars"
+                               type="checkbox"
+                               class="form-control checkbox" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <label for="lowDrivingExperience">Low Driving Experience</label>
+                    </div>
+                    <div class="col">
+                        <input id="lowDrivingExperience"
+                               formControlName="lowDrivingExperience"
+                               type="checkbox"
+                               class="form-control checkbox" />
+                    </div>
+                </div>
+            <div class="row">
+                <div class="col">
+                    <app-return-btn text="Back to General">
+                    </app-return-btn>
+                </div>
+                <div class="col">
+                    <app-continue-btn [form]="form"></app-continue-btn>
+                </div>
+            </div>
+    </div>
+</form>

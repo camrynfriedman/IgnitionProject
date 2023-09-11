@@ -6,18 +6,16 @@ import { Subscription } from 'rxjs';
 import { environment } from '@environments/environment';
 
 import { Quote } from '@app/_models/quote';
-import { Driver } from '@app/_models/driver';
 
 @Component({
-    templateUrl: './customer-info1.component.html',
-    styleUrls: ['./customer-info1.component.css']
+  templateUrl: './driver-info.component.html',
+  styleUrls: ['./driver-info.component.css']
 })
-export class CustomerInfo1Component implements OnInit {
+export class DriverInfoComponent implements OnInit {
 
     apiUrl: string = environment.apiUrl
 
-    // This object will need to be passed to the next page
-    // (probably the quote ID, then call getQuote)
+    // This will need to be a quote object passed from previous screen
     quote: Quote;
 
     form: FormGroup
@@ -35,15 +33,15 @@ export class CustomerInfo1Component implements OnInit {
                 new FormControl('', Validators.required),
             dob:
                 new FormControl('', Validators.required),
-            country:
+            ssn:
                 new FormControl('', Validators.required),
-            streetAddress:
+            driverLicenseNumber:
                 new FormControl('', Validators.required),
-            aptOrSuite:
+            driverLicenseState:
                 new FormControl('', Validators.required),
-            state:
+            youngDriver:
                 new FormControl('', Validators.required),
-            zipCode:
+            safeDrivingSchool:
                 new FormControl('', Validators.required),
         })
     }
@@ -57,15 +55,7 @@ export class CustomerInfo1Component implements OnInit {
     // Need to move to service class when time allows
     // #region API calls
 
-    postQuote(newQuote: Quote) {
-        var httpRequest = this.http.post<number>(`${this.apiUrl}/discounts`, newQuote)
-
-        httpRequest.subscribe(
-            success => {
-                // Change "/discounts" to the correct URL of following page
-                // this.router.navigateByUrl("/discounts")
-            })
-    }
+    // Will need to be a put request for the quote started in previous screen
 
     // #endRegion
 }

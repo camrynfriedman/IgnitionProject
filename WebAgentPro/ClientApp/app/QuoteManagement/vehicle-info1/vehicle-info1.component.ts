@@ -9,10 +9,10 @@ import { Quote } from '@app/_models/quote';
 import { Driver } from '@app/_models/driver';
 
 @Component({
-    templateUrl: './customer-info1.component.html',
-    styleUrls: ['./customer-info1.component.css']
+  templateUrl: './vehicle-info1.component.html',
+  styleUrls: ['./vehicle-info1.component.css']
 })
-export class CustomerInfo1Component implements OnInit {
+export class VehicleInfo1Component implements OnInit {
 
     apiUrl: string = environment.apiUrl
 
@@ -21,6 +21,7 @@ export class CustomerInfo1Component implements OnInit {
     quote: Quote;
 
     form: FormGroup
+    stepValue: number = 1;
 
     constructor(
         private route: ActivatedRoute,
@@ -29,21 +30,21 @@ export class CustomerInfo1Component implements OnInit {
 
     ngOnInit(): void {
         this.form = new FormGroup({
-            firstName:
+            primaryDriver:
                 new FormControl('', Validators.required),
-            lastName:
+            make:
                 new FormControl('', Validators.required),
-            dob:
+            model:
                 new FormControl('', Validators.required),
-            country:
+            year:
                 new FormControl('', Validators.required),
-            streetAddress:
+            vinNumber:
                 new FormControl('', Validators.required),
-            aptOrSuite:
+            currentValue:
                 new FormControl('', Validators.required),
-            state:
+            annualMileage:
                 new FormControl('', Validators.required),
-            zipCode:
+            daysPerWeek:
                 new FormControl('', Validators.required),
         })
     }
@@ -54,18 +55,10 @@ export class CustomerInfo1Component implements OnInit {
         }
     }
 
-    // Need to move to service class when time allows
+        // Need to move to service class when time allows
     // #region API calls
 
-    postQuote(newQuote: Quote) {
-        var httpRequest = this.http.post<number>(`${this.apiUrl}/discounts`, newQuote)
-
-        httpRequest.subscribe(
-            success => {
-                // Change "/discounts" to the correct URL of following page
-                // this.router.navigateByUrl("/discounts")
-            })
-    }
+    // Will need to be a put request for the quote started in previous screen
 
     // #endRegion
 }

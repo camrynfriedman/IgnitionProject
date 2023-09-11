@@ -6,18 +6,16 @@ import { Subscription } from 'rxjs';
 import { environment } from '@environments/environment';
 
 import { Quote } from '@app/_models/quote';
-import { Driver } from '@app/_models/driver';
 
 @Component({
-    templateUrl: './customer-info1.component.html',
-    styleUrls: ['./customer-info1.component.css']
+  templateUrl: './vehicle-info2.component.html',
+  styleUrls: ['./vehicle-info2.component.css']
 })
-export class CustomerInfo1Component implements OnInit {
+export class VehicleInfo2Component implements OnInit {
 
     apiUrl: string = environment.apiUrl
 
-    // This object will need to be passed to the next page
-    // (probably the quote ID, then call getQuote)
+    // This will need to be a quote object passed from previous screen
     quote: Quote;
 
     form: FormGroup
@@ -29,21 +27,17 @@ export class CustomerInfo1Component implements OnInit {
 
     ngOnInit(): void {
         this.form = new FormGroup({
-            firstName:
+            antiLockBrakes:
                 new FormControl('', Validators.required),
-            lastName:
+            passiveRestraints:
                 new FormControl('', Validators.required),
-            dob:
+            antiTheftInstalled:
                 new FormControl('', Validators.required),
-            country:
+            reducedUsedDiscount:
                 new FormControl('', Validators.required),
-            streetAddress:
+            daytimeRunningLights:
                 new FormControl('', Validators.required),
-            aptOrSuite:
-                new FormControl('', Validators.required),
-            state:
-                new FormControl('', Validators.required),
-            zipCode:
+            garageAddressDifferent:
                 new FormControl('', Validators.required),
         })
     }
@@ -57,15 +51,7 @@ export class CustomerInfo1Component implements OnInit {
     // Need to move to service class when time allows
     // #region API calls
 
-    postQuote(newQuote: Quote) {
-        var httpRequest = this.http.post<number>(`${this.apiUrl}/discounts`, newQuote)
-
-        httpRequest.subscribe(
-            success => {
-                // Change "/discounts" to the correct URL of following page
-                // this.router.navigateByUrl("/discounts")
-            })
-    }
+    // Will need to be a put request for the quote started in previous screen
 
     // #endRegion
 }

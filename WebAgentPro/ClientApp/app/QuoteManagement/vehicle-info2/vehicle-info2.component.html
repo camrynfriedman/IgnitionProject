@@ -1,0 +1,84 @@
+<!-- Will want to add conditional styling to navbar -->
+<h3>Vehicles</h3>
+
+<h5>Vehicle Details</h5>
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col">
+                <label for="antiLockBrakes">Anti Lock Brakes</label>
+            </div>
+            <div class="col">
+                <input id="antiLockBrakes"
+                       formControlName="antiLockBrakes"
+                       type="checkbox"
+                       class="form-control checkbox" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <label for="passiveRestraints">Passive Restraints</label>
+            </div>
+            <div class="col">
+                <input id="passiveRestraints"
+                       formControlName="passiveRestraints"
+                       type="checkbox"
+                       class="form-control checkbox" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <label for="antiTheftInstalled">Anti Theft installed</label>
+            </div>
+            <div class="col">
+                <input id="antiTheftInstalled"
+                       formControlName="antiTheftInstalled"
+                       type="checkbox"
+                       class="form-control checkbox" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <label for="reducedUsedDiscount">Reduced Used Discount</label>
+            </div>
+            <div class="col">
+                <input id="reducedUsedDiscount"
+                       formControlName="reducedUsedDiscount"
+                       type="checkbox"
+                       class="form-control checkbox" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <label for="daytimeRunningLights">Daytime Running Lights</label>
+            </div>
+            <div class="col">
+                <input id="daytimeRunningLights"
+                       formControlName="daytimeRunningLights"
+                       type="checkbox"
+                       class="form-control checkbox" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <label for="garageAddressDifferent">Garage Address Different</label>
+            </div>
+            <div class="col">
+                <input id="garageAddressDifferent"
+                       formControlName="garageAddressDifferent"
+                       type="checkbox"
+                       class="form-control checkbox" />
+            </div>
+        </div>
+        <p>Buttons don't do anything yet</p>
+        <div class="row">
+            <div class="col">
+                <app-return-btn text="Vehicle General">
+                </app-return-btn>
+            </div>
+            <div class="col">
+                <app-continue-btn [form]="form"></app-continue-btn>
+            </div>
+        </div>
+    </div>
+</form>

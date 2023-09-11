@@ -38,18 +38,20 @@ namespace WebAgentPro.Api.Repositories
         }
 
         public async Task<Discount> GetDiscount(string state) {
-            Discount discount = await _context.Discounts.Where(d => d.State == state).FirstOrDefaultAsync(); 
+            Discount discount = _context.Discounts.Where(d => d.State == state).FirstOrDefault();
+            await _context.SaveChangesAsync();
 
             return discount;
         }
 
-        public async Task EditDiscount(Discount d) {
-            _context.Entry(d).State = EntityState.Modified;
+        public async Task AddDiscount(Discount discount) {
+            _context.Discounts.Add(discount);
             await _context.SaveChangesAsync();
         }
 
-        public async Task AddDiscount(Discount discount) {
-            _context.Discounts.Add(discount);
+        public async Task EditDiscount(Discount d)
+        {
+            _context.Entry(d).State = EntityState.Modified;
             await _context.SaveChangesAsync();
         }
 
