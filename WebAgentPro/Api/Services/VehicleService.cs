@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using WebAgentPro.Api.DTOs;
 using WebAgentPro.Api.Mappers;
 using WebAgentPro.Api.Models;
 using WebAgentPro.Api.Repositories;
@@ -9,10 +10,10 @@ using WebAgentPro.Api.Repositories;
 namespace WebAgentPro.Api.Services
 {
     public interface IVehicleService {
-        Task<List<VehicleDto>> GetAllVehicles();
-        Task<VehicleDto> GetVehicle(int id);
-        Task AddVehicle(VehicleDto v);
-        Task EditVehicle(int id, VehicleDto v);
+        Task<List<VehicleDTO>> GetAllVehicles();
+        Task<VehicleDTO> GetVehicle(int id);
+        Task AddVehicle(VehicleDTO v);
+        Task EditVehicle(int id, VehicleDTO v);
         Task RemoveVehicle(int id);
 
     }
@@ -26,28 +27,28 @@ namespace WebAgentPro.Api.Services
         
         }
 
-        public async Task<List<VehicleDto>> GetAllVehicles()
+        public async Task<List<VehicleDTO>> GetAllVehicles()
         {
             return (await _vehicleRepo.GetAllVehiclesAsync())
-                .Select(v => map.VehichleToDto(v)).ToList();
+                .Select(v => map.VehicleToDto(v)).ToList();
         }
 
-        public async Task<VehicleDto> GetVehicle(int id) {
+        public async Task<VehicleDTO> GetVehicle(int id) {
 
             if (_vehicleRepo.GetVehicleAsync(id) == null) {
                 throw new VehicleNotFoundException("Vehicle not found with specified ID");
             }
 
-            return map.VehichleToDto(await _vehicleRepo.GetVehicleAsync(id));
+            return map.VehicleToDto(await _vehicleRepo.GetVehicleAsync(id));
             
         }
 
-        public async Task AddVehicle(VehicleDto v) {
+        public async Task AddVehicle(VehicleDTO v) {
             //implement get vehicle by id checking
             await _vehicleRepo.AddVehicleAsync(map.DtoToVehicle(v));
         }
 
-        public async Task EditVehicle(int id, VehicleDto v) {
+        public async Task EditVehicle(int id, VehicleDTO v) {
             if (await _vehicleRepo.GetVehicleAsync(id) == null) {
                 throw new VehicleNotFoundException("Vehicle not found with specified id");
             }

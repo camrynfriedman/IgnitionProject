@@ -3,6 +3,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using WebAgentPro.Api.DTOs;
+using WebAgentPro.Api.Mappers;
 using WebAgentPro.Api.Models;
 using WebAgentPro.Api.Repositories;
 
@@ -10,10 +12,10 @@ namespace WebAgentPro.Api.Services
 {
     //service interface specyfying Discount Service Functions
     public interface IDiscountService {
-        Task<List<DiscountDto>> GetDiscountsAsync();
-        Task<DiscountDto> GetDiscountAsync(string state);
-        Task EditDiscount(string state, DiscountDto d);
-        Task AddDiscount(DiscountDto d);
+        Task<List<DiscountDTO>> GetDiscountsAsync();
+        Task<DiscountDTO> GetDiscountAsync(string state);
+        Task EditDiscount(string state, DiscountDTO d);
+        Task AddDiscount(DiscountDTO d);
         Task RemoveDiscount(string state);
         Task<List<String>> GetInactiveStates();
 
@@ -39,7 +41,7 @@ namespace WebAgentPro.Api.Services
         }
 
         //service function calls the repository function and applies DTO
-        public async Task<List<DiscountDto>> GetDiscountsAsync()
+        public async Task<List<DiscountDTO>> GetDiscountsAsync()
         {
             var discounts = (await _discountRepo.GetAllDiscountsAsync())
                 .Select(d => map.DiscountToDto(d)).ToList();
@@ -47,25 +49,25 @@ namespace WebAgentPro.Api.Services
             return discounts;
         }
 
-        public async Task<DiscountDto> GetDiscountAsync(string state)
+        public async Task<DiscountDTO> GetDiscountAsync(string state)
         {
             if (_discountRepo.GetDiscount(state) == null) {
                 throw new DiscountException("State Discount Not Found");
             }
 
-            DiscountDto returnedDiscount = map.DiscountToDto(await _discountRepo.GetDiscount(state));
+            DiscountDTO returnedDiscount = map.DiscountToDto(await _discountRepo.GetDiscount(state));
 
             return returnedDiscount;
         }
 
-        public async Task EditDiscount(string state, DiscountDto d) {
+        public async Task EditDiscount(string state, DiscountDTO d) {
             if (state != d.State) { 
                 throw new DiscountException("State Discount Not Found");
             }
             await _discountRepo.EditDiscount(map.DtoToDiscount(d));
         }
 
-        public async Task AddDiscount(DiscountDto d) {
+        public async Task AddDiscount(DiscountDTO d) {
             if (_discountRepo.GetDiscount(d.State) != null) {
                 throw new DiscountException("State Discount Already Implemented");
             }

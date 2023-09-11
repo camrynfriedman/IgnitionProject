@@ -4,6 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using WebAgentPro.Api.DTOs;
+using WebAgentPro.Api.Mappers;
 using WebAgentPro.Api.Models;
 using WebAgentPro.Api.Services;
 
@@ -25,7 +27,7 @@ namespace WebAgentPro.Api.Controllers
 
         // GET: api/Discounts
         [HttpGet]
-        public async Task<ActionResult<List<DiscountDto>>> GetDiscount()
+        public async Task<ActionResult<List<DiscountDTO>>> GetDiscount()
         {
             /*var returnedDiscounts = await _discountService.GetDiscountsAsync()
                 .Select(d => map.DiscountToDto(d)).ToListAsync();*/
@@ -34,7 +36,7 @@ namespace WebAgentPro.Api.Controllers
 
         // GET: api/Discounts/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<DiscountDto>> GetDiscount(string id)
+        public async Task<ActionResult<DiscountDTO>> GetDiscount(string id)
         {
             try
             {
@@ -51,7 +53,7 @@ namespace WebAgentPro.Api.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutDiscount(string id, DiscountDto discount)
+        public async Task<IActionResult> PutDiscount(string id, DiscountDTO discount)
         {
 
             try
@@ -70,27 +72,27 @@ namespace WebAgentPro.Api.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
-        public async Task<ActionResult<DiscountDto>> PostDiscount(DiscountDto discountDto)
+        public async Task<ActionResult<DiscountDTO>> PostDiscount(DiscountDTO DiscountDTO)
         {
             try
             {
-                await _discountService.AddDiscount(discountDto);
+                await _discountService.AddDiscount(DiscountDTO);
             }
             catch (Exception e)
             {
                 return BadRequest(e.Message);
             }
 
-            return CreatedAtAction("GetDiscount", new { id = discountDto.State }, discountDto);
+            return CreatedAtAction("GetDiscount", new { id = DiscountDTO.State }, DiscountDTO);
         }
 
         // DELETE: api/Discounts/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<DiscountDto>> DeleteDiscount(string id)
+        public async Task<ActionResult<DiscountDTO>> DeleteDiscount(string id)
         {
             try
             {
-                DiscountDto discount = await _discountService.GetDiscountAsync(id);
+                DiscountDTO discount = await _discountService.GetDiscountAsync(id);
                 await _discountService.RemoveDiscount(id);
                 return discount;
             }

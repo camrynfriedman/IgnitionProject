@@ -2,14 +2,16 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using WebAgentPro.Api.DTOs;
+using WebAgentPro.Api.Models;
 
-namespace WebAgentPro.Api.Models
+namespace WebAgentPro.Api.Mappers
 {
     public class DiscountMapper
     {
-        public DiscountDto DiscountToDto(Discount d) {
+        public DiscountDTO DiscountToDto(Discount d) {
 
-            DiscountDto returnedDiscountDTO = new DiscountDto()
+            DiscountDTO returnedDiscountDTO = new DiscountDTO()
             {
                 State = d.State,
                 DaytimeRunningLights = d.DaytimeRunningLights,
@@ -32,7 +34,7 @@ namespace WebAgentPro.Api.Models
             return returnedDiscountDTO;
         }
 
-        public Discount DtoToDiscount(DiscountDto d)
+        public Discount DtoToDiscount(DiscountDTO d)
         {
             Discount returnedDiscount = new Discount()
             {

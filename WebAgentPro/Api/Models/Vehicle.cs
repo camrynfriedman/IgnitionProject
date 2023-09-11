@@ -67,7 +67,7 @@ namespace WebAgentPro.Api.Models
         [ForeignKey("Driver")]
         public int PrimaryDriverId { get; set; }
 
-        [Required]
-        public List<Driver> Drivers { get; set; }
+/*        [Required]
+        public List<Driver> Drivers { get; set; }*/
     }
 }
