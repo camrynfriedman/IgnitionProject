@@ -73,10 +73,11 @@
         <p>Buttons don't do anything yet</p>
         <div class="row">
             <div class="col">
-                <button class="btn btn-primary">Vehicle General</button>
+                <app-return-btn text="Vehicle General">
+                </app-return-btn>
             </div>
             <div class="col">
-                <button class="btn btn-primary">Next</button>
+                <app-continue-btn [form]="form"></app-continue-btn>
             </div>
         </div>
     </div>
