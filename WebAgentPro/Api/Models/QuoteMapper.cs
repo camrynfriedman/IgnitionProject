@@ -36,7 +36,7 @@ namespace WebAgentPro.Api.Models
                 ForceMultiCarDiscount = q.ForceMultiCarDiscount,
                 QuotePrice = q.QuotePrice,
                 Drivers = q.Drivers,
-                Vehicles = q.Vehicles,
+                Vehicles = q.Vehicles
             };
             return returnedQuoteDto;
         }
@@ -69,7 +69,7 @@ namespace WebAgentPro.Api.Models
                 ForceMultiCarDiscount = q.ForceMultiCarDiscount,
                 QuotePrice = q.QuotePrice,
                 Drivers = q.Drivers,
-                Vehicles = q.Vehicles,
+                Vehicles = q.Vehicles
             };
             return returnedQuote;
         }
