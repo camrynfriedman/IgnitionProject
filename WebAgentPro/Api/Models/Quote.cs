@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -102,6 +103,7 @@ namespace WebAgentPro.Api.Models
         //one to many relationship with drivers
         //implicity foreign keys to driverIDs
         [Required]
+        [ForeignKey("Driver")]
         public List<Driver> Drivers { get; set; }
 
         //one to many relationship with Vehicles

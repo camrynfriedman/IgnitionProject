@@ -52,7 +52,6 @@ namespace WebAgentPro.Api.Models
         [Required]
         public string AddressLine1 { get; set; }
 
-        // figure out how to make this optional
         public string? AddressLine2 { get; set; }
 
         [Required]

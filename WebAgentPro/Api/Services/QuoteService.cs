@@ -10,6 +10,13 @@ namespace WebAgentPro.Api.Services
     /*
      * The service uses the QuoteDTO rather than Quote 
      * and calls methods from the repository.
+     * 
+     * 
+     * needs to use vehicle repo and driver repo to create those objects before creating final quote
+     * 
+     * loop over each driver, create drivers
+     * loop over each vehicles, create vehicles
+     * construct quote object using those IDs generated
      * */
 
     public interface IQuoteService
@@ -25,6 +32,8 @@ namespace WebAgentPro.Api.Services
     {
         //use QuoteRepository
         private readonly IQuoteRepository _quoteRepo;
+
+        //add Vehicle and Driver repos
 
         //use mapper
         private QuoteMapper map;

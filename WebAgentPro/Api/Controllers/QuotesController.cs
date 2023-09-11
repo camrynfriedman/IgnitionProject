@@ -59,9 +59,9 @@ namespace WebAgentPro.Api.Controllers
         // Corresponds to EditQuote
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<ActionResult<QuoteDto>> PutQuote(int quoteID, QuoteDto quote)
+        public async Task<ActionResult<QuoteDto>> PutQuote(int id, QuoteDto quote)
         {
-            if (quoteID != quote.QuoteId || quote is null)
+            if (id != quote.QuoteId || quote is null)
             {
                 return BadRequest();
             }
@@ -82,14 +82,14 @@ namespace WebAgentPro.Api.Controllers
 
         // DELETE: api/Quotes/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<QuoteDto>> DeleteQuote(int quoteID)
+        public async Task<ActionResult<QuoteDto>> DeleteQuote(int id)
         {
-            var quote = await _quoteService.GetQuote(quoteID);
+            var quote = await _quoteService.GetQuote(id);
             if (quote == null)
             {
                 return NotFound();
             }
-           await _quoteService.RemoveQuote(quoteID);
+           await _quoteService.RemoveQuote(id);
 
             return Ok();
         }

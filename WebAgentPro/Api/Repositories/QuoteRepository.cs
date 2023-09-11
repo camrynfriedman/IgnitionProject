@@ -46,7 +46,7 @@ public interface IQuoteRepository
         //Implement methods
         public async Task<List<Quote>> GetAllQuotes()
         {
-            var quotes = await _context.Quotes.ToListAsync();
+            var quotes = await _context.Quotes.Include(x=>x.Vehicles).Include(x=>x.Drivers).ToListAsync();
 
             return quotes;
         }
