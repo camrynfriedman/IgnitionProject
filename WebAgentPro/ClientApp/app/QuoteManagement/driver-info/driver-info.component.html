@@ -84,12 +84,11 @@
         <div class="form-group">
             <div class="row">
                 <div class="col">
-                    <button class="btn btn-primary">Customer Details</button>
+                    <app-return-btn text="Customer Details">
+                    </app-return-btn>
                 </div>
                 <div class="col">
-                    <button type="submit"
-                            [disabled]="!form?.valid"
-                            class="btn btn-primary">Next</button>
+                    <app-continue-btn [form]="form"></app-continue-btn>
                 </div>
             </div>
         </div>
