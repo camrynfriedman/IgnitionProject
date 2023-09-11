@@ -5,8 +5,6 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using WebAgentPro.Api.DTOs;
-using WebAgentPro.Api.Mappers;
 using WebAgentPro.Api.Models;
 using WebAgentPro.Data;
 
@@ -14,49 +12,47 @@ namespace WebAgentPro.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class QuotesController : ControllerBase
+    public class DriversController : ControllerBase
     {
         private readonly WapDbContext _context;
-        private QuoteMapper qmap = new QuoteMapper();
 
-        public QuotesController(WapDbContext context)
+        public DriversController(WapDbContext context)
         {
             _context = context;
         }
 
-        // GET: api/Quotes
+        // GET: api/Drivers
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Quote>>> GetQuotes()
+        public async Task<ActionResult<IEnumerable<Driver>>> GetDrivers()
         {
-
-            return await _context.Quotes.Include(x => x.Vehicles).Include(x => x.Drivers).ToListAsync();
+            return await _context.Drivers.ToListAsync();
         }
 
-        // GET: api/Quotes/5
+        // GET: api/Drivers/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Quote>> GetQuote(int id)
+        public async Task<ActionResult<Driver>> GetDriver(int id)
         {
-            var quote = await _context.Quotes.FindAsync(id);
+            var driver = await _context.Drivers.FindAsync(id);
 
-            if (quote == null)
+            if (driver == null)
             {
                 return NotFound();
             }
 
-            return quote;
+            return driver;
         }
 
-        // PUT: api/Quotes/5
+        // PUT: api/Drivers/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutQuote(int id, Quote quote)
+        public async Task<IActionResult> PutDriver(int id, Driver driver)
         {
-            if (id != quote.QuoteId)
+            if (id != driver.DriverId)
             {
                 return BadRequest();
             }
 
-            _context.Entry(quote).State = EntityState.Modified;
+            _context.Entry(driver).State = EntityState.Modified;
 
             try
             {
@@ -64,7 +60,7 @@ namespace WebAgentPro.Api.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!QuoteExists(id))
+                if (!DriverExists(id))
                 {
                     return NotFound();
                 }
@@ -77,36 +73,36 @@ namespace WebAgentPro.Api.Controllers
             return NoContent();
         }
 
-        // POST: api/Quotes
+        // POST: api/Drivers
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<QuoteDTO>> PostQuote(QuoteDTO quote)
+        public async Task<ActionResult<Driver>> PostDriver(Driver driver)
         {
-            _context.Quotes.Add(qmap.DTOToQuote(quote));
+            _context.Drivers.Add(driver);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetQuote", new { id = quote.QuoteId }, quote);
+            return CreatedAtAction("GetDriver", new { id = driver.DriverId }, driver);
         }
 
-        // DELETE: api/Quotes/5
+        // DELETE: api/Drivers/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteQuote(int id)
+        public async Task<IActionResult> DeleteDriver(int id)
         {
-            var quote = await _context.Quotes.FindAsync(id);
-            if (quote == null)
+            var driver = await _context.Drivers.FindAsync(id);
+            if (driver == null)
             {
                 return NotFound();
             }
 
-            _context.Quotes.Remove(quote);
+            _context.Drivers.Remove(driver);
             await _context.SaveChangesAsync();
 
             return NoContent();
         }
 
-        private bool QuoteExists(int id)
+        private bool DriverExists(int id)
         {
-            return _context.Quotes.Any(e => e.QuoteId == id);
+            return _context.Drivers.Any(e => e.DriverId == id);
         }
     }
 }

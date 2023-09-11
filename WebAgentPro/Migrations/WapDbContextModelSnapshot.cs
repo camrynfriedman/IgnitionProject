@@ -19,21 +19,6 @@ namespace WebAgentPro.Migrations
                 .HasAnnotation("ProductVersion", "5.0.17")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("DriverVehicle", b =>
-                {
-                    b.Property<int>("DriversDriverId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("VehiclesVehicleId")
-                        .HasColumnType("int");
-
-                    b.HasKey("DriversDriverId", "VehiclesVehicleId");
-
-                    b.HasIndex("VehiclesVehicleId");
-
-                    b.ToTable("DriverVehicle");
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
                     b.Property<string>("Id")
@@ -324,6 +309,11 @@ namespace WebAgentPro.Migrations
                     b.Property<DateTime>("PolicyHolderDOB")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("PolicyHolderEmailAddress")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
                     b.Property<string>("PolicyHolderFName")
                         .IsRequired()
                         .HasMaxLength(50)
@@ -333,6 +323,11 @@ namespace WebAgentPro.Migrations
                         .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("PolicyHolderPhoneNumber")
+                        .IsRequired()
+                        .HasMaxLength(10)
+                        .HasColumnType("nvarchar(10)");
 
                     b.Property<string>("PolicyHolderSsn")
                         .IsRequired()
@@ -390,6 +385,9 @@ namespace WebAgentPro.Migrations
                     b.Property<bool>("DaytimeRunningLights")
                         .HasColumnType("bit");
 
+                    b.Property<int?>("DriverId")
+                        .HasColumnType("int");
+
                     b.Property<bool>("GarageAddressDifferentFromResidence")
                         .HasColumnType("bit");
 
@@ -425,10 +423,11 @@ namespace WebAgentPro.Migrations
                         .HasColumnType("nvarchar(17)");
 
                     b.Property<int>("Year")
-                        .HasMaxLength(4)
                         .HasColumnType("int");
 
                     b.HasKey("VehicleId");
+
+                    b.HasIndex("DriverId");
 
                     b.HasIndex("QuoteId");
 
@@ -515,21 +514,6 @@ namespace WebAgentPro.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
-            modelBuilder.Entity("DriverVehicle", b =>
-                {
-                    b.HasOne("WebAgentPro.Api.Models.Driver", null)
-                        .WithMany()
-                        .HasForeignKey("DriversDriverId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("WebAgentPro.Api.Models.Vehicle", null)
-                        .WithMany()
-                        .HasForeignKey("VehiclesVehicleId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -592,9 +576,18 @@ namespace WebAgentPro.Migrations
 
             modelBuilder.Entity("WebAgentPro.Api.Models.Vehicle", b =>
                 {
+                    b.HasOne("WebAgentPro.Api.Models.Driver", null)
+                        .WithMany("Vehicles")
+                        .HasForeignKey("DriverId");
+
                     b.HasOne("WebAgentPro.Api.Models.Quote", null)
                         .WithMany("Vehicles")
                         .HasForeignKey("QuoteId");
+                });
+
+            modelBuilder.Entity("WebAgentPro.Api.Models.Driver", b =>
+                {
+                    b.Navigation("Vehicles");
                 });
 
             modelBuilder.Entity("WebAgentPro.Api.Models.Quote", b =>

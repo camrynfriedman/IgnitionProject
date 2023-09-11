@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using WebAgentPro.Api.DTOs;
 using WebAgentPro.Api.Models;
 using WebAgentPro.Api.Services;
 using WebAgentPro.Data;
@@ -25,7 +26,7 @@ namespace WebAgentPro.Api.Controllers
 
         // GET: api/Vehicles
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<VehicleDto>>> GetVehicles()
+        public async Task<ActionResult<IEnumerable<VehicleDTO>>> GetVehicles()
         {
             try
             {
@@ -59,7 +60,7 @@ namespace WebAgentPro.Api.Controllers
         // PUT: api/Vehicles/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutVehicle(int id, VehicleDto vehicle)
+        public async Task<IActionResult> PutVehicle(int id, VehicleDTO vehicle)
         {
             try
             {
@@ -110,11 +111,11 @@ namespace WebAgentPro.Api.Controllers
         // POST: api/Vehicles
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Vehicle>> PostVehicle(VehicleDto vehicleDto)
+        public async Task<ActionResult<Vehicle>> PostVehicle(VehicleDTO VehicleDTO)
         {
             try
             {
-                await _vehicleService.AddVehicle(vehicleDto);
+                await _vehicleService.AddVehicle(VehicleDTO);
             }
             catch (Exception e)
             {
@@ -122,16 +123,16 @@ namespace WebAgentPro.Api.Controllers
             }
 
 
-            return CreatedAtAction("GetVehicle", new { id = vehicleDto.VehicleId }, vehicleDto);
+            return CreatedAtAction("GetVehicle", new { id = VehicleDTO.VehicleId }, VehicleDTO);
         }
 
         // DELETE: api/Vehicles/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<VehicleDto>> DeleteVehicle(int id)
+        public async Task<ActionResult<VehicleDTO>> DeleteVehicle(int id)
         {
             try
             {
-                VehicleDto vehicle = await _vehicleService.GetVehicle(id);
+                VehicleDTO vehicle = await _vehicleService.GetVehicle(id);
                 await _vehicleService.RemoveVehicle(id);
                 return Ok(vehicle);
             }

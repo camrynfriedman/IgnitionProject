@@ -2,15 +2,16 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using WebAgentPro.Api.DTOs;
 using WebAgentPro.Api.Models;
 
 namespace WebAgentPro.Api.Mappers
 {
     public class VehicleMapper
     {
-        public VehicleDto VehichleToDto(Vehicle v) {
+        public VehicleDTO VehicleToDto(Vehicle v) {
             
-            VehicleDto returnedVehicleDto = new VehicleDto()
+            VehicleDTO returnedVehicleDTO = new VehicleDTO()
             {
                 VehicleId = v.VehicleId,
                 Vin = v.Vin,
@@ -29,11 +30,12 @@ namespace WebAgentPro.Api.Mappers
                 GarageAddressDifferentFromResidence = v.GarageAddressDifferentFromResidence,
                 QuoteMultiplier = v.QuoteMultiplier,
                 PrimaryDriverId = v.PrimaryDriverId,
+                
             };
-            return returnedVehicleDto;
+            return returnedVehicleDTO;
         }
 
-        public Vehicle DtoToVehicle(VehicleDto v) {
+        public Vehicle DtoToVehicle(VehicleDTO v) {
 
             Vehicle returnedVehicle = new Vehicle()
             {
@@ -54,7 +56,8 @@ namespace WebAgentPro.Api.Mappers
                 GarageAddressDifferentFromResidence = v.GarageAddressDifferentFromResidence,
                 QuoteMultiplier = v.QuoteMultiplier,
                 PrimaryDriverId = v.PrimaryDriverId,
-            };
+/*                Drivers = null,
+*/            };
             return returnedVehicle;
     }
     }
