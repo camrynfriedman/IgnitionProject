@@ -58,7 +58,7 @@ namespace WebAgentPro.Api.Controllers
 
         // PUT: api/Vehicles/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        /*[HttpPut("{id}")]
+        [HttpPut("{id}")]
         public async Task<IActionResult> PutVehicle(int id, VehicleDto vehicle)
         {
             try
@@ -66,14 +66,15 @@ namespace WebAgentPro.Api.Controllers
                 await _vehicleService.EditVehicle(id, vehicle);
 
             }
-            catch (Exception e) {
+            catch (Exception e)
+            {
                 return BadRequest(e.Message);
             }
 
             return NoContent();
-        }*/
+        }
 
-        [HttpPut("{id}")]
+        /*[HttpPut("{id}")]
         public async Task<IActionResult> PutVehicle(int id, Vehicle vehicle)
         {
             if (id != vehicle.VehicleId)
@@ -100,7 +101,7 @@ namespace WebAgentPro.Api.Controllers
             }
 
             return NoContent();
-        }
+        }*/
         private bool VehicleExists(int id)
         {
             return _context.Vehicles.Any(e => e.VehicleId == id);

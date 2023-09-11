@@ -64,6 +64,7 @@ namespace WebAgentPro.Api.Models
 
         public int PrimaryDriverId { get; set; }
 
-        public List<int> DriversIDs { get; set; }
+        //Vehicles will no longer have multiple Drivers assigned to it
+/*        public List<int> DriversIDs { get; set; }*/
     }
 }

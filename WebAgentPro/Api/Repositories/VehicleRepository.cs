@@ -11,7 +11,7 @@ namespace WebAgentPro.Api.Repositories
     public interface IVehicleRepository {
         Task<List<Vehicle>> GetAllVehiclesAsync();
         Task<Vehicle> GetVehicleAsync(int vID);
-        Task AddVehicleAsync(Vehicle v, List<int> driverIDs);
+        Task AddVehicleAsync(Vehicle v);
         Task EditVehicleAsync(int vID, Vehicle v);
         Task RemoveVehicleAsync(int vID);
 
@@ -34,23 +34,17 @@ namespace WebAgentPro.Api.Repositories
             return await _context.Vehicles.FindAsync(vID);
         }
 
-        public async Task AddVehicleAsync(Vehicle v, List<int> driverIds) {
-            /*List<Driver> Drivers = new List<Driver>();
-
-            foreach (int id in driverIds)
-            {
-                Drivers.Add(await _context.Drivers.FindAsync(id));
-            }*/
-/*            v.Drivers = Drivers;*/
+        public async Task AddVehicleAsync(Vehicle v) {
             _context.Vehicles.Add(v);
             await _context.SaveChangesAsync();
         }
 
         public async Task EditVehicleAsync(int vID, Vehicle v) {
-            /*_context.Vehicles.Remove(await _context.Vehicles.FindAsync(vID));
-            _context.Vehicles.Add(v);*/
-            _context.Entry(v).State = EntityState.Modified;
-            await _context.SaveChangesAsync();
+            _context.Vehicles.Remove(await _context.Vehicles.FindAsync(vID));
+            v.VehicleId = vID;
+            _context.Vehicles.Add(v);
+/*            _context.Entry(v).State = EntityState.Modified;
+*/            await _context.SaveChangesAsync();
         }
 
         public async Task RemoveVehicleAsync(int vID) {

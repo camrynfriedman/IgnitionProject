@@ -9,15 +9,6 @@ namespace WebAgentPro.Api.Mappers
     public class VehicleMapper
     {
         public VehicleDto VehichleToDto(Vehicle v) {
-
-            List<int> driverIDs = new List<int>();
-            if (v.Drivers != null)
-            {
-                foreach (Driver d in v.Drivers)
-                {
-                    driverIDs.Add(d.DriverId);
-                }
-            }
             
             VehicleDto returnedVehicleDto = new VehicleDto()
             {
@@ -38,7 +29,6 @@ namespace WebAgentPro.Api.Mappers
                 GarageAddressDifferentFromResidence = v.GarageAddressDifferentFromResidence,
                 QuoteMultiplier = v.QuoteMultiplier,
                 PrimaryDriverId = v.PrimaryDriverId,
-                DriversIDs = driverIDs
             };
             return returnedVehicleDto;
         }
@@ -64,8 +54,6 @@ namespace WebAgentPro.Api.Mappers
                 GarageAddressDifferentFromResidence = v.GarageAddressDifferentFromResidence,
                 QuoteMultiplier = v.QuoteMultiplier,
                 PrimaryDriverId = v.PrimaryDriverId,
-                //keep Drivers as null until we have Driver data
-                Drivers = null
             };
             return returnedVehicle;
     }

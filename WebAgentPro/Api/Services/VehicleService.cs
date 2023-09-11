@@ -44,7 +44,7 @@ namespace WebAgentPro.Api.Services
 
         public async Task AddVehicle(VehicleDto v) {
             //implement get vehicle by id checking
-            await _vehicleRepo.AddVehicleAsync(map.DtoToVehicle(v), v.DriversIDs);
+            await _vehicleRepo.AddVehicleAsync(map.DtoToVehicle(v));
         }
 
         public async Task EditVehicle(int id, VehicleDto v) {
