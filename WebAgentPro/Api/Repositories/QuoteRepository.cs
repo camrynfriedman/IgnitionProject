@@ -14,7 +14,7 @@ namespace WebAgentPro.Api.Repositories
 public interface IQuoteRepository
     {
         // Get all quotes
-        Task<List<Quote>> GetAllQuotesAsync();
+        Task<List<Quote>> GetAllQuotes();
 
         // get by ID
         Task<Quote> GetQuote(int quoteID);
@@ -44,7 +44,7 @@ public interface IQuoteRepository
         }
 
         //Implement methods
-        public async Task<List<Quote>> GetAllQuotesAsync()
+        public async Task<List<Quote>> GetAllQuotes()
         {
             var quotes = await _context.Quotes.ToListAsync();
 

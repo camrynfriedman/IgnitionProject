@@ -8,20 +8,20 @@ using WebAgentPro.Api.Repositories;
 namespace WebAgentPro.Api.Services
 {
     /*
-     * The service uses the QuoteDTO rather than Quote
+     * The service uses the QuoteDTO rather than Quote 
+     * and calls methods from the repository.
      * */
 
     public interface IQuoteService
     {
-        Task<List<QuoteDto>> GetAllQuotesAsync();
+        Task<List<QuoteDto>> GetAllQuotes();
         Task<QuoteDto> GetQuote(int quoteID);
-
-        /*
-         * ADD METHODS FROM REPO
-         * */
+        Task EditQuote(QuoteDto q);
+        Task AddQuote(QuoteDto q);
+        Task RemoveQuote(int quoteID);
     }
 
-    public class QuoteService: IQuoteService
+    public class QuoteService : IQuoteService
     {
         //use QuoteRepository
         private readonly IQuoteRepository _quoteRepo;
@@ -36,11 +36,11 @@ namespace WebAgentPro.Api.Services
             _quoteRepo = quoteRepo;
             map = new QuoteMapper();
         }
-        public async Task<List<QuoteDto>> GetAllQuotesAsync()
+        public async Task<List<QuoteDto>> GetAllQuotes()
         {
 
-            var quotes = (await _quoteRepo.GetAllQuotesAsync());
-       
+            var quotes = (await _quoteRepo.GetAllQuotes());
+
             if (quotes == null)
             {
                 return null;
@@ -60,13 +60,28 @@ namespace WebAgentPro.Api.Services
             return returnedQuoteDto;
         }
 
-        public async Task EditQuote(int quoteID, Quote q)
+        public async Task EditQuote(QuoteDto q)
         {
-            if (quoteID != )
+            await _quoteRepo.EditQuote(map.DtoToQuote(q));
         }
+
         public async Task AddQuote(QuoteDto q)
         {
-            if (await _quoteRepo.)
+            if (_quoteRepo.GetQuote(q.QuoteId) != null)
+            {
+                throw new Exception("Quote already exists.");
+            }
+            await _quoteRepo.AddQuote(map.DtoToQuote(q));
+        }
+
+
+        public async Task RemoveQuote(int quoteID)
+        {
+            if (_quoteRepo.GetQuote(quoteID) == null)
+            {
+                throw new Exception("Quote does not exists.");
+            }
+            await _quoteRepo.RemoveQuote(quoteID);
         }
     }
 }
