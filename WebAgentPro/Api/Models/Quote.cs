@@ -39,6 +39,16 @@ namespace WebAgentPro.Api.Models
         [Required]
         [MaxLength(100)]
         public string PolicyHolderLName { get; set; }
+        
+        [Required]
+        [MaxLength(100)]
+        [EmailAddress]
+        public string PolicyHolderEmailAddress { get; set; }
+
+        [Required]
+        [MaxLength(10)]
+        [Phone]
+        public string PolicyHolderPhoneNumber { get; set; }
 
         [Required]
         public string AddressLine1 { get; set; }
@@ -72,7 +82,7 @@ namespace WebAgentPro.Api.Models
         [Required]
         [MinLength(6)]
         [MaxLength(9)]
-        public string PreviousCarrier { get; set; }
+        public string? PreviousCarrier { get; set; }
 
         [Required]
         public bool MovingViolationInLast5Years { get; set; }

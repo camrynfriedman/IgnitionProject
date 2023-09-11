@@ -40,6 +40,16 @@ namespace WebAgentPro.Api.Models
         public string PolicyHolderLName { get; set; }
 
         [Required]
+        [MaxLength(100)]
+        [EmailAddress]
+        public string PolicyHolderEmailAddress { get; set; }
+
+        [Required]
+        [MaxLength(10)]
+        [Phone]
+        public string PolicyHolderPhoneNumber { get; set; }
+
+        [Required]
         public string AddressLine1 { get; set; }
 
         // figure out how to make this optional
