@@ -19,6 +19,7 @@ import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { CustomerInfo1Component } from './quotemanagement/customer-info1/customer-info1.component';
 import { CustomerInfo2Component } from './QuoteManagement/customer-info2/customer-info2.component';
+import { DriverInfoComponent } from './quotemanagement/driver-info/driver-info.component';
   
 @NgModule({
     imports: [
@@ -40,7 +41,8 @@ import { CustomerInfo2Component } from './QuoteManagement/customer-info2/custome
         HeaderComponent,
         FooterComponent,
         CustomerInfo1Component,
-        CustomerInfo2Component
+        CustomerInfo2Component,
+        DriverInfoComponent
     ],
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
