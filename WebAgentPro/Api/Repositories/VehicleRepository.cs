@@ -10,11 +10,11 @@ using WebAgentPro.Data;
 namespace WebAgentPro.Api.Repositories
 {
     public interface IVehicleRepository {
-        Task<List<Vehicle>> GetAllVehiclesAsync();
-        Task<Vehicle> GetVehicleAsync(int vID);
-        Task<Vehicle> AddVehicleAsync(Vehicle v);
-        Task EditVehicleAsync(int vID, Vehicle v);
-        Task RemoveVehicleAsync(int vID);
+        Task<List<Vehicle>> GetAllVehicles();
+        Task<Vehicle> GetVehicle(int vID);
+        Task<Vehicle> AddVehicle(Vehicle v);
+        Task EditVehicle(int vID, Vehicle v);
+        Task RemoveVehicle(int vID);
 
 
     }
@@ -26,22 +26,22 @@ namespace WebAgentPro.Api.Repositories
             _context = context;
         }
 
-        public async Task<List<Vehicle>> GetAllVehiclesAsync()
+        public async Task<List<Vehicle>> GetAllVehicles()
         {
             return await _context.Vehicles.ToListAsync();
         }
 
-        public async Task<Vehicle> GetVehicleAsync(int vID) {
+        public async Task<Vehicle> GetVehicle(int vID) {
             return await _context.Vehicles.FindAsync(vID);
         }
 
-        public async Task<Vehicle> AddVehicleAsync(Vehicle v) {
+        public async Task<Vehicle> AddVehicle(Vehicle v) {
             EntityEntry<Vehicle> entity = _context.Vehicles.Add(v);
             await _context.SaveChangesAsync();
             return entity.Entity;
         }
 
-        public async Task EditVehicleAsync(int vID, Vehicle v) {
+        public async Task EditVehicle(int vID, Vehicle v) {
             _context.Vehicles.Remove(await _context.Vehicles.FindAsync(vID));
             v.VehicleId = vID;
             _context.Vehicles.Add(v);
@@ -49,7 +49,7 @@ namespace WebAgentPro.Api.Repositories
 */            await _context.SaveChangesAsync();
         }
 
-        public async Task RemoveVehicleAsync(int vID) {
+        public async Task RemoveVehicle(int vID) {
             _context.Vehicles.Remove(await _context.Vehicles.FindAsync(vID));
             await _context.SaveChangesAsync();
         }
