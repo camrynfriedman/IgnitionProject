@@ -43,7 +43,7 @@ namespace WebAgentPro.Api.Repositories
 
         public async Task EditVehicle(int vID, Vehicle v) {
             _context.Vehicles.Remove(await _context.Vehicles.FindAsync(vID));
-            v.VehicleId = vID;
+            v.VehicleID = vID;
             _context.Vehicles.Add(v);
 /*            _context.Entry(v).State = EntityState.Modified;
 */            await _context.SaveChangesAsync();

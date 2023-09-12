@@ -10,10 +10,10 @@ namespace WebAgentPro.Api.Mappers
     public class VehicleMapper
     {
         public VehicleDto VehicleToDto(Vehicle v) {
-            
+
             VehicleDto returnedVehicleDto = new VehicleDto()
             {
-                VehicleId = v.VehicleId,
+                VehicleID = v.VehicleID,
                 Vin = v.Vin,
                 Make = v.Make,
                 Model = v.Model,
@@ -29,7 +29,8 @@ namespace WebAgentPro.Api.Mappers
                 ReducedUsedDiscount = v.ReducedUsedDiscount,
                 GarageAddressDifferentFromResidence = v.GarageAddressDifferentFromResidence,
                 QuoteMultiplier = v.QuoteMultiplier,
-                PrimaryDriverId = v.PrimaryDriverId,
+                DriverID = v.DriverID,
+                QuoteID = v.QuoteID
                 
             };
             return returnedVehicleDto;
@@ -39,7 +40,7 @@ namespace WebAgentPro.Api.Mappers
 
             Vehicle returnedVehicle = new Vehicle()
             {
-                VehicleId = v.VehicleId,
+                VehicleID = v.VehicleID,
                 Vin = v.Vin,
                 Make = v.Make,
                 Model = v.Model,
@@ -55,7 +56,8 @@ namespace WebAgentPro.Api.Mappers
                 ReducedUsedDiscount = v.ReducedUsedDiscount,
                 GarageAddressDifferentFromResidence = v.GarageAddressDifferentFromResidence,
                 QuoteMultiplier = v.QuoteMultiplier,
-                PrimaryDriverId = v.PrimaryDriverId,
+                DriverID = v.DriverID,
+                QuoteID = v.QuoteID
 /*                Drivers = null,
 */            };
             return returnedVehicle;

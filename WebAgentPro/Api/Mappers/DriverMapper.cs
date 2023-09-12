@@ -13,7 +13,7 @@ namespace WebAgentPro.Api.Mappers
         {
             DriverDto returnedDriver = new DriverDto
             {
-                DriverId = d.DriverId,
+                DriverID = d.DriverID,
                 DriverFName = d.DriverFName,
                 DriverLName = d.DriverLName,
                 DriverSSN = d.DriverSSN,
@@ -22,7 +22,7 @@ namespace WebAgentPro.Api.Mappers
                 DriverDOB = d.DriverDOB,
                 SafeDrivingSchool = d.SafeDrivingSchool,
                 QuoteMultiplier = d.QuoteMultiplier,
-                QuoteId = d.QuoteId,
+                QuoteID = d.QuoteID,
                 //Vehicles = d.Vehicles
             };
             return returnedDriver;
@@ -32,7 +32,7 @@ namespace WebAgentPro.Api.Mappers
         {
             Driver returnedDriver = new Driver
             {
-                DriverId = d.DriverId,
+                DriverID = d.DriverID,
                 DriverFName = d.DriverFName,
                 DriverLName = d.DriverLName,
                 DriverSSN = d.DriverSSN,
@@ -41,7 +41,7 @@ namespace WebAgentPro.Api.Mappers
                 DriverDOB = d.DriverDOB,
                 SafeDrivingSchool = d.SafeDrivingSchool,
                 QuoteMultiplier = d.QuoteMultiplier,
-                QuoteId = d.QuoteId,
+                QuoteID = d.QuoteID,
                 //Vehicles = d.Vehicles
             };
             return returnedDriver;

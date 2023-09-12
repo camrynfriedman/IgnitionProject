@@ -47,7 +47,7 @@ namespace WebAgentPro.Api.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutDriver(int id, Driver driver)
         {
-            if (id != driver.DriverId)
+            if (id != driver.DriverID)
             {
                 return BadRequest();
             }
@@ -81,7 +81,7 @@ namespace WebAgentPro.Api.Controllers
             _context.Drivers.Add(driver);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetDriver", new { id = driver.DriverId }, driver);
+            return CreatedAtAction("GetDriver", new { id = driver.DriverID }, driver);
         }
 
         // DELETE: api/Drivers/5
@@ -102,7 +102,7 @@ namespace WebAgentPro.Api.Controllers
 
         private bool DriverExists(int id)
         {
-            return _context.Drivers.Any(e => e.DriverId == id);
+            return _context.Drivers.Any(e => e.DriverID == id);
         }
     }
 }

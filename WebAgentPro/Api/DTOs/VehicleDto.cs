@@ -12,7 +12,7 @@ namespace WebAgentPro.Api.DTOs
     {
 
         
-        public int VehicleId { get; set; }
+        public int VehicleID { get; set; }
 
         
         public string Vin { get; set; }
@@ -61,7 +61,9 @@ namespace WebAgentPro.Api.DTOs
         public decimal QuoteMultiplier { get; set; }
 
         
-        public int PrimaryDriverId { get; set; }
+        public int DriverID { get; set; }
+
+        public int QuoteID { get; set; }
 
         //Vehicles will no longer have multiple Drivers assigned to it
 /*        public List<int> DriversIDs { get; set; }*/

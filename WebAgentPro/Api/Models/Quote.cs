@@ -13,11 +13,11 @@ namespace WebAgentPro.Api.Models
     {
         [Key]
         [Required]
-        public int QuoteId { get; set; }
+        public int QuoteID { get; set; }
 
         [Required]
         [EmailAddress]
-        public string AgentId { get; set; }
+        public string AgentID { get; set; }
 
         [Required]
         public bool IsSubmitted { get; set; }
@@ -103,7 +103,6 @@ namespace WebAgentPro.Api.Models
         //one to many relationship with drivers
         //implicity foreign keys to driverIDs
         [Required]
-        [ForeignKey("Driver")]
         public List<Driver> Drivers { get; set; }
 
         //one to many relationship with Vehicles

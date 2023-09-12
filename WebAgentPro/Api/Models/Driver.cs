@@ -12,7 +12,7 @@ namespace WebAgentPro.Api.Models
     {
         [Key]
         [Required]
-        public int DriverId { get; set; }
+        public int DriverID { get; set; }
 
         [Required]
         [MaxLength(50)]
@@ -49,7 +49,7 @@ namespace WebAgentPro.Api.Models
         // this is assuming each Driver is only associated with one Quote
         [Required]
         [ForeignKey("Quote")]
-        public int QuoteId { get; set; }
+        public int QuoteID { get; set; }
 
         //[Required]
         //public List<Vehicle> Vehicles { get; set; }

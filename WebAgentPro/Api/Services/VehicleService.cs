@@ -29,37 +29,37 @@ namespace WebAgentPro.Api.Services
 
         public async Task<List<VehicleDto>> GetAllVehicles()
         {
-            return (await _vehicleRepo.GetAllVehiclesAsync())
+            return (await _vehicleRepo.GetAllVehicles())
                 .Select(v => map.VehicleToDto(v)).ToList();
         }
 
         public async Task<VehicleDto> GetVehicle(int id) {
 
-            if (_vehicleRepo.GetVehicleAsync(id) == null) {
+            if (_vehicleRepo.GetVehicle(id) == null) {
                 throw new VehicleNotFoundException("Vehicle not found with specified ID");
             }
 
-            return map.VehicleToDto(await _vehicleRepo.GetVehicleAsync(id));
+            return map.VehicleToDto(await _vehicleRepo.GetVehicle(id));
             
         }
 
         public async Task AddVehicle(VehicleDto v) {
             //implement get vehicle by id checking
-            await _vehicleRepo.AddVehicleAsync(map.DtoToVehicle(v));
+            await _vehicleRepo.AddVehicle(map.DtoToVehicle(v));
         }
 
         public async Task EditVehicle(int id, VehicleDto v) {
-            if (await _vehicleRepo.GetVehicleAsync(id) == null) {
+            if (await _vehicleRepo.GetVehicle(id) == null) {
                 throw new VehicleNotFoundException("Vehicle not found with specified id");
             }
-            await _vehicleRepo.EditVehicleAsync(id, map.DtoToVehicle(v));
+            await _vehicleRepo.EditVehicle(id, map.DtoToVehicle(v));
         }
 
         public async Task RemoveVehicle(int id)
         {
             try
             {
-                await _vehicleRepo.RemoveVehicleAsync(id);
+                await _vehicleRepo.RemoveVehicle(id);
             }
             catch {
                 throw new VehicleNotFoundException("Vehicle not found with requested id");

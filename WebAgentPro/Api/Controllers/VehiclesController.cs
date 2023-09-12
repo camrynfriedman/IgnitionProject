@@ -105,7 +105,7 @@ namespace WebAgentPro.Api.Controllers
         }*/
         private bool VehicleExists(int id)
         {
-            return _context.Vehicles.Any(e => e.VehicleId == id);
+            return _context.Vehicles.Any(e => e.VehicleID == id);
         }
 
         // POST: api/Vehicles
@@ -123,7 +123,7 @@ namespace WebAgentPro.Api.Controllers
             }
 
 
-            return CreatedAtAction("GetVehicle", new { id = VehicleDto.VehicleId }, VehicleDto);
+            return CreatedAtAction("GetVehicle", new { id = VehicleDto.VehicleID }, VehicleDto);
         }
 
         // DELETE: api/Vehicles/5

@@ -53,7 +53,7 @@ public interface IQuoteRepository
 
         public async Task<Quote> GetQuote(int quoteID)
         {
-            Quote quote = await _context.Quotes.Where(q => q.QuoteId == quoteID).FirstOrDefaultAsync();
+            Quote quote = await _context.Quotes.Where(q => q.QuoteID == quoteID).FirstOrDefaultAsync();
             return quote;
         }
 
@@ -72,7 +72,7 @@ public interface IQuoteRepository
         //removes quote by quoteID
         public async Task RemoveQuote(int quoteID)
         {
-            _context.Quotes.Remove(_context.Quotes.Where(q=> q.QuoteId == quoteID).FirstOrDefault());
+            _context.Quotes.Remove(_context.Quotes.Where(q=> q.QuoteID == quoteID).FirstOrDefault());
             await _context.SaveChangesAsync();
         }
     }

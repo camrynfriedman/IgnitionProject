@@ -63,7 +63,7 @@ namespace WebAgentPro.Api.Controllers
         [HttpPut("{id}")]
         public async Task<ActionResult<QuoteDto>> PutQuote(int id, QuoteDto quote)
         {
-            if (id != quote.QuoteId || quote is null)
+            if (id != quote.QuoteID || quote is null)
             {
                 return BadRequest();
             }
@@ -79,7 +79,7 @@ namespace WebAgentPro.Api.Controllers
         {
             await _quoteService.AddQuote(quote);
 
-            return CreatedAtAction("GetQuote", new { id = quote.QuoteId }, quote);
+            return CreatedAtAction("GetQuote", new { id = quote.QuoteID }, quote);
         }
 
         // DELETE: api/Quotes/5

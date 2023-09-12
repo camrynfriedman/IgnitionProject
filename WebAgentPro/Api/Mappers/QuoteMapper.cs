@@ -27,8 +27,8 @@ namespace WebAgentPro.Api.Mappers
 
             QuoteDto returnedQuoteDto = new QuoteDto
             {
-                QuoteId = quote.QuoteId,
-                AgentId = quote.AgentId,
+                QuoteID = quote.QuoteID,
+                AgentID = quote.AgentID,
                 IsSubmitted = quote.IsSubmitted,
                 DeviceType = quote.DeviceType,
                 CreationDate = quote.CreationDate,
@@ -73,8 +73,8 @@ namespace WebAgentPro.Api.Mappers
 
             Quote returnedQuoteDto = new Quote
             {
-                QuoteId = quote.QuoteId,
-                AgentId = quote.AgentId,
+                QuoteID = quote.QuoteID,
+                AgentID = quote.AgentID,
                 IsSubmitted = quote.IsSubmitted,
                 DeviceType = quote.DeviceType,
                 CreationDate = quote.CreationDate,

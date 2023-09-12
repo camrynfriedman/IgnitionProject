@@ -214,13 +214,10 @@ namespace WebAgentPro.Migrations
 
             modelBuilder.Entity("WebAgentPro.Api.Models.Driver", b =>
                 {
-                    b.Property<int>("DriverId")
+                    b.Property<int>("DriverID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int?>("Driver")
-                        .HasColumnType("int");
 
                     b.Property<DateTime>("DriverDOB")
                         .HasColumnType("datetime2");
@@ -249,7 +246,7 @@ namespace WebAgentPro.Migrations
                         .HasMaxLength(9)
                         .HasColumnType("nvarchar(9)");
 
-                    b.Property<int>("QuoteId")
+                    b.Property<int>("QuoteID")
                         .HasColumnType("int");
 
                     b.Property<decimal>("QuoteMultiplier")
@@ -258,16 +255,16 @@ namespace WebAgentPro.Migrations
                     b.Property<bool>("SafeDrivingSchool")
                         .HasColumnType("bit");
 
-                    b.HasKey("DriverId");
+                    b.HasKey("DriverID");
 
-                    b.HasIndex("Driver");
+                    b.HasIndex("QuoteID");
 
                     b.ToTable("Drivers");
                 });
 
             modelBuilder.Entity("WebAgentPro.Api.Models.Quote", b =>
                 {
-                    b.Property<int>("QuoteId")
+                    b.Property<int>("QuoteID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -279,7 +276,7 @@ namespace WebAgentPro.Migrations
                     b.Property<string>("AddressLine2")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("AgentId")
+                    b.Property<string>("AgentID")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -358,14 +355,14 @@ namespace WebAgentPro.Migrations
                         .IsRequired()
                         .HasColumnType("datetime2");
 
-                    b.HasKey("QuoteId");
+                    b.HasKey("QuoteID");
 
                     b.ToTable("Quotes");
                 });
 
             modelBuilder.Entity("WebAgentPro.Api.Models.Vehicle", b =>
                 {
-                    b.Property<int>("VehicleId")
+                    b.Property<int>("VehicleID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -388,7 +385,7 @@ namespace WebAgentPro.Migrations
                     b.Property<bool>("DaytimeRunningLights")
                         .HasColumnType("bit");
 
-                    b.Property<int?>("DriverId")
+                    b.Property<int>("DriverID")
                         .HasColumnType("int");
 
                     b.Property<bool>("GarageAddressDifferentFromResidence")
@@ -408,10 +405,7 @@ namespace WebAgentPro.Migrations
                     b.Property<bool>("PassiveRestraints")
                         .HasColumnType("bit");
 
-                    b.Property<int>("PrimaryDriverId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("QuoteId")
+                    b.Property<int>("QuoteID")
                         .HasColumnType("int");
 
                     b.Property<decimal>("QuoteMultiplier")
@@ -428,11 +422,9 @@ namespace WebAgentPro.Migrations
                     b.Property<int>("Year")
                         .HasColumnType("int");
 
-                    b.HasKey("VehicleId");
+                    b.HasKey("VehicleID");
 
-                    b.HasIndex("DriverId");
-
-                    b.HasIndex("QuoteId");
+                    b.HasIndex("QuoteID");
 
                     b.ToTable("Vehicles");
                 });
@@ -572,23 +564,18 @@ namespace WebAgentPro.Migrations
                 {
                     b.HasOne("WebAgentPro.Api.Models.Quote", null)
                         .WithMany("Drivers")
-                        .HasForeignKey("Driver");
+                        .HasForeignKey("QuoteID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("WebAgentPro.Api.Models.Vehicle", b =>
                 {
-                    b.HasOne("WebAgentPro.Api.Models.Driver", null)
-                        .WithMany("Vehicles")
-                        .HasForeignKey("DriverId");
-
                     b.HasOne("WebAgentPro.Api.Models.Quote", null)
                         .WithMany("Vehicles")
-                        .HasForeignKey("QuoteId");
-                });
-
-            modelBuilder.Entity("WebAgentPro.Api.Models.Driver", b =>
-                {
-                    b.Navigation("Vehicles");
+                        .HasForeignKey("QuoteID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("WebAgentPro.Api.Models.Quote", b =>

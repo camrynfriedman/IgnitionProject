@@ -12,7 +12,7 @@ namespace WebAgentPro.Api.Models
     {
         [Key]
         [Required]
-        public int VehicleId { get; set; }
+        public int VehicleID { get; set; }
 
         [Required]
         [MinLength(17)]
@@ -63,11 +63,19 @@ namespace WebAgentPro.Api.Models
         public decimal QuoteMultiplier { get; set; }
         
         // Add relationships
+        //represents primary driver
         [Required]
         [ForeignKey("Driver")]
-        public int PrimaryDriverId { get; set; }
+        public int DriverID { get; set; }
 
-/*        [Required]
-        public List<Driver> Drivers { get; set; }*/
+        // Add relationships
+        // required foreign key
+        // this is assuming each Driver is only associated with one Quote
+        [Required]
+        [ForeignKey("Quote")]
+        public int QuoteID { get; set; }
+
+        /*        [Required]
+                public List<Driver> Drivers { get; set; }*/
     }
 }

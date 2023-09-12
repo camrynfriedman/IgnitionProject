@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace WebAgentPro.Migrations
 {
-    public partial class NewMigration912 : Migration
+    public partial class NewMigration9122 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -83,9 +83,9 @@ namespace WebAgentPro.Migrations
                 name: "Quotes",
                 columns: table => new
                 {
-                    QuoteId = table.Column<int>(type: "int", nullable: false)
+                    QuoteID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    AgentId = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    AgentID = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     IsSubmitted = table.Column<bool>(type: "bit", nullable: false),
                     DeviceType = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CreationDate = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -110,7 +110,7 @@ namespace WebAgentPro.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Quotes", x => x.QuoteId);
+                    table.PrimaryKey("PK_Quotes", x => x.QuoteID);
                 });
 
             migrationBuilder.CreateTable(
@@ -223,7 +223,7 @@ namespace WebAgentPro.Migrations
                 name: "Drivers",
                 columns: table => new
                 {
-                    DriverId = table.Column<int>(type: "int", nullable: false)
+                    DriverID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     DriverFName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     DriverLName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
@@ -233,25 +233,24 @@ namespace WebAgentPro.Migrations
                     DriverDOB = table.Column<DateTime>(type: "datetime2", nullable: false),
                     SafeDrivingSchool = table.Column<bool>(type: "bit", nullable: false),
                     QuoteMultiplier = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    QuoteId = table.Column<int>(type: "int", nullable: false),
-                    Driver = table.Column<int>(type: "int", nullable: true)
+                    QuoteID = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Drivers", x => x.DriverId);
+                    table.PrimaryKey("PK_Drivers", x => x.DriverID);
                     table.ForeignKey(
-                        name: "FK_Drivers_Quotes_Driver",
-                        column: x => x.Driver,
+                        name: "FK_Drivers_Quotes_QuoteID",
+                        column: x => x.QuoteID,
                         principalTable: "Quotes",
-                        principalColumn: "QuoteId",
-                        onDelete: ReferentialAction.Restrict);
+                        principalColumn: "QuoteID",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
                 name: "Vehicles",
                 columns: table => new
                 {
-                    VehicleId = table.Column<int>(type: "int", nullable: false)
+                    VehicleID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Vin = table.Column<string>(type: "nvarchar(17)", maxLength: 17, nullable: false),
                     Make = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -268,25 +267,18 @@ namespace WebAgentPro.Migrations
                     ReducedUsedDiscount = table.Column<bool>(type: "bit", nullable: false),
                     GarageAddressDifferentFromResidence = table.Column<bool>(type: "bit", nullable: false),
                     QuoteMultiplier = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    PrimaryDriverId = table.Column<int>(type: "int", nullable: false),
-                    DriverId = table.Column<int>(type: "int", nullable: true),
-                    QuoteId = table.Column<int>(type: "int", nullable: true)
+                    DriverID = table.Column<int>(type: "int", nullable: false),
+                    QuoteID = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Vehicles", x => x.VehicleId);
+                    table.PrimaryKey("PK_Vehicles", x => x.VehicleID);
                     table.ForeignKey(
-                        name: "FK_Vehicles_Drivers_DriverId",
-                        column: x => x.DriverId,
-                        principalTable: "Drivers",
-                        principalColumn: "DriverId",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Vehicles_Quotes_QuoteId",
-                        column: x => x.QuoteId,
+                        name: "FK_Vehicles_Quotes_QuoteID",
+                        column: x => x.QuoteID,
                         principalTable: "Quotes",
-                        principalColumn: "QuoteId",
-                        onDelete: ReferentialAction.Restrict);
+                        principalColumn: "QuoteID",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
@@ -329,19 +321,14 @@ namespace WebAgentPro.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Drivers_Driver",
+                name: "IX_Drivers_QuoteID",
                 table: "Drivers",
-                column: "Driver");
+                column: "QuoteID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Vehicles_DriverId",
+                name: "IX_Vehicles_QuoteID",
                 table: "Vehicles",
-                column: "DriverId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Vehicles_QuoteId",
-                table: "Vehicles",
-                column: "QuoteId");
+                column: "QuoteID");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -365,6 +352,9 @@ namespace WebAgentPro.Migrations
                 name: "Discounts");
 
             migrationBuilder.DropTable(
+                name: "Drivers");
+
+            migrationBuilder.DropTable(
                 name: "Vehicles");
 
             migrationBuilder.DropTable(
@@ -372,9 +362,6 @@ namespace WebAgentPro.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
-
-            migrationBuilder.DropTable(
-                name: "Drivers");
 
             migrationBuilder.DropTable(
                 name: "Quotes");

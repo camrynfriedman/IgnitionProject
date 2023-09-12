@@ -21,7 +21,7 @@ public interface IDriverRepository
         Task<Driver> GetDriver(int driverID);
 
         // get by License Number
-        Task<Driver> GetDriverByLicense(string driversLicenseNum);
+        //Task<Driver> GetDriverByLicense(string driversLicenseNum);
 
         // edit driver
         Task EditDriver(Driver d);
@@ -57,7 +57,7 @@ public interface IDriverRepository
 
         public async Task<Driver> GetDriver(int driverID)
         {
-            Driver driver = await _context.Drivers.Where(d => d.DriverId == driverID).FirstOrDefaultAsync();
+            Driver driver = await _context.Drivers.Where(d => d.DriverID == driverID).FirstOrDefaultAsync();
             return driver;
         }
 
@@ -83,7 +83,7 @@ public interface IDriverRepository
         //removes driver by driverID
         public async Task RemoveDriver(int driverID)
         {
-            _context.Drivers.Remove(_context.Drivers.Where(d=> d.DriverId == driverID).FirstOrDefault());
+            _context.Drivers.Remove(_context.Drivers.Where(d=> d.DriverID == driverID).FirstOrDefault());
             await _context.SaveChangesAsync();
         }
     }

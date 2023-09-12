@@ -7,9 +7,9 @@ namespace WebAgentPro.Api.DTOs
 {
     public class QuoteDto
     {
-        public int QuoteId { get; set; }
+        public int QuoteID { get; set; }
 
-        public string AgentId { get; set; }
+        public string AgentID { get; set; }
 
         
         public bool IsSubmitted { get; set; }

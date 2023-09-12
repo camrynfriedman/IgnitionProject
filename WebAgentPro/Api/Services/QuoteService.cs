@@ -39,6 +39,7 @@ namespace WebAgentPro.Api.Services
         //use driverMapper
         private QuoteMapper quoteMap;
         private DriverMapper driverMap;
+        private VehicleMapper vehicleMap;
 
 
         //constructor
@@ -50,6 +51,7 @@ namespace WebAgentPro.Api.Services
 
             quoteMap = new QuoteMapper();
             driverMap = new DriverMapper();
+            vehicleMap = new VehicleMapper();
       
         }
         public async Task<List<QuoteDto>> GetAllQuotes()
@@ -81,39 +83,39 @@ namespace WebAgentPro.Api.Services
             await _quoteRepo.EditQuote(quoteMap.DtoToQuote(q));
         }
 
-        // needs to use vehicle repo and driver repo to create those objects before creating final quote
-        // use DTOs?
-     /*
-     * loop over each driver, create drivers
-     * loop over each vehicles, create vehicles
-     * construct quote object using those IDs generated*/
+
         public async Task AddQuote(QuoteDto q)
         {
-            List<DriverDto> driversList = new List<DriverDto>();
-            List<VehicleDto> vehiclesList = new List<VehicleDto>();
-            string driverLicenseNum;
-            DriverDto newDriverDto;
+            List<Driver> driversList = new List<Driver>();
+            List<Vehicle> vehiclesList = new List<Vehicle>();
+            //string driverLicenseNum;
+            Driver newDriver;
+            Vehicle newVehicle;
             
-
+            /*Populate Drivers List*/
             foreach (DriverDto d in q.Drivers){
+
                 //create driver
-                await _driverRepo.AddDriver(driverMap.DtoToDriver(d)); //create driver
-                driverLicenseNum = d.DriverLicenseNumber; //get driverID
-                newDriverDto = driverMap.DriverToDto(await _driverRepo.GetDriverByLicense(driverLicenseNum));
+                newDriver = await _driverRepo.AddDriver(driverMap.DtoToDriver(d)); //create driver
 
-                //add driverDto to list
-                driversList.Add(newDriverDto);
-
+                //add driver to list
+                driversList.Add(newDriver);
             }
-            q.Drivers = driversList;
-            await _quoteRepo.AddQuote(quoteMap.DtoToQuote(q));
 
-            //figure out how to know how many drivers and vehicles to add
-            //create a list of drivers and vehicles and populate using AddDriver and AddVehicle
-            //get the IDs of each driver and add to Quote
-            //get the IDs of each vehicle and add to Quote
+            /*Populate Vehicles List*/
+            foreach (VehicleDto v in q.Vehicles)
+            {
+                //create vehicle
+                newVehicle = await _vehicleRepo.AddVehicle(vehicleMap.DtoToVehicle(v)); 
 
-     
+                //add vehicle to list
+                vehiclesList.Add(newVehicle);
+            }
+
+            Quote quote = quoteMap.DtoToQuote(q);
+            quote.Drivers = driversList;
+            quote.Vehicles = vehiclesList;
+            await _quoteRepo.AddQuote(quote); 
         }
 
 
