@@ -6,7 +6,6 @@ import { Subscription } from 'rxjs';
 import { environment } from '@environments/environment';
 
 import { Quote } from '@app/_models/quote';
-import { Driver } from '@app/_models/driver';
 
 @Component({
     templateUrl: './customer-info1.component.html',
@@ -14,13 +13,15 @@ import { Driver } from '@app/_models/driver';
 })
 export class CustomerInfo1Component implements OnInit {
 
-    apiUrl: string = environment.apiUrl
+    apiUrl: string = environment.apiUrl;
+    allStates: string[];
 
     // This object will need to be passed to the next page
     // (probably the quote ID, then call getQuote)
+    action: string;
     quote: Quote;
 
-    form: FormGroup
+    form: FormGroup;
 
     constructor(
         private route: ActivatedRoute,
@@ -28,43 +29,76 @@ export class CustomerInfo1Component implements OnInit {
         private router: Router) { }
 
     ngOnInit(): void {
+        this.getAllStates()
+
         this.form = new FormGroup({
-            firstName:
+            policyHolderFName:
                 new FormControl('', Validators.required),
-            lastName:
+            policyHolderLName:
                 new FormControl('', Validators.required),
-            dob:
+            policyHolderDOB:
                 new FormControl('', Validators.required),
-            country:
+            addressLine1:
                 new FormControl('', Validators.required),
-            streetAddress:
-                new FormControl('', Validators.required),
-            aptOrSuite:
+            addressLine2:
+                new FormControl(),
+            city:
                 new FormControl('', Validators.required),
             state:
                 new FormControl('', Validators.required),
-            zipCode:
+            postalCode:
+                new FormControl('', Validators.compose([
+                    Validators.required,
+                    Validators.pattern(/^\d{5}$/)])),
+            policyHolderEmailAddress:
                 new FormControl('', Validators.required),
+            policyHolderPhoneNumber:
+                new FormControl('', Validators.required)
         })
     }
 
     onSubmit() {
+        console.log("onSubmit triggered")
         if (this.form.valid) {
-            // Do stuff, idk yet
+            this.bindQuote(this.form)
+            this.postQuote(this.quote)
+            /*
+            switch (this.action) {
+                case "add":
+                    this.postQuote(this.form.value)
+                    break;
+                case "edit":
+                    this.postQuote(this.form.value)
+                    break;
+            }
+             */
         }
+    }
+
+    bindQuote(form: FormGroup) {
+        this.quote = new Quote(form.value);
     }
 
     // Need to move to service class when time allows
     // #region API calls
 
+    getAllStates() {
+        var httpRequest = this.http.get<string[]>(`${this.apiUrl}/discounts/allstates`)
+
+        httpRequest.subscribe(returnedStates => {
+            this.allStates = returnedStates
+        })
+    }
+
     postQuote(newQuote: Quote) {
-        var httpRequest = this.http.post<number>(`${this.apiUrl}/discounts`, newQuote)
+        console.log("postQuote triggered")
+        var httpRequest = this.http.post<Quote>(`${this.apiUrl}/quotes`, newQuote);
 
         httpRequest.subscribe(
             success => {
-                // Change "/discounts" to the correct URL of following page
-                // this.router.navigateByUrl("/discounts")
-            })
+                this.router.navigate(['/quotes2'], { queryParams: { quoteId: success.quoteId } });
+            }
+        );
     }
 
     // #endRegion

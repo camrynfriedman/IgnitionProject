@@ -13,7 +13,9 @@ export class DiscountsComponent implements OnInit {
     discounts: Discount[]
     inactiveStates: string[]
 
-    constructor(private http: HttpClient, private router: Router) { }
+    constructor(
+        private http: HttpClient,
+        private router: Router) { }
 
     ngOnInit(): void {
         this.getInactiveStates()

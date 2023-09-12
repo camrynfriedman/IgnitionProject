@@ -2,51 +2,66 @@
 <h3>Customer Information</h3>
 
 <h5>General</h5>
-<form [formGroup]="form" (ngSubmit)="onSubmit()">
+<form [formGroup]="form">
     <div class="container-fluid">
         <div class="row">
             <div class="col">
                 <div class="form-group">
-                    <label for="firstName">First Name</label>
-                    <input id="firstName"
-                           formControlName="firstName"
+                    <label for="policyHolderFName">First Name</label>
+                    <input id="policyHolderFName"
+                           formControlName="policyHolderFName"
                            type="text"
-                           class="form-control" required />
+                           class="form-control" />
+                    <app-form-error-message [control]="form.get('policyHolderFName')"
+                                            errorType="pattern"
+                                            errorMessage="First Name is required"></app-form-error-message>
                 </div>
                 <div class="form-group">
-                    <label for="lastName">Last Name</label>
-                    <input id="lastName"
-                           formControlName="lastName"
+                    <label for="policyHolderLName">Last Name</label>
+                    <input id="policyHolderLName"
+                           formControlName="policyHolderLName"
                            type="text"
-                           class="form-control" required />
+                           class="form-control" />
+                    <app-form-error-message [control]="form.get('policyHolderLName')"
+                                            errorType="pattern"
+                                            errorMessage="Last Name is required"></app-form-error-message>
                 </div>
                 <div class="form-group">
-                    <label for="dob">Date of Birth</label>
-                    <input id="dob"
-                           formControlName="dob"
+                    <label for="policyHolderDOB">Date of Birth</label>
+                    <input id="policyHolderDOB"
+                           formControlName="policyHolderDOB"
                            type="date"
-                           class="form-control" required />
+                           class="form-control" />
+                    <app-form-error-message [control]="form.get('policyHolderDOB')"
+                                            errorType="pattern"
+                                            errorMessage="Date of Birth is required"></app-form-error-message>
                 </div>
                 <div class="form-group">
-                    <label for="country">Country</label>
-                    <input id="country"
-                           formControlName="country"
+                    <label for="addressLine1">Street Address</label>
+                    <input id="addressLine1"
+                           formControlName="addressLine1"
                            type="text"
-                           class="form-control" required />
+                           class="form-control" />
+                    <app-form-error-message [control]="form.get('addressLine1')"
+                                            errorType="pattern"
+                                            errorMessage="Address is required"></app-form-error-message>
                 </div>
                 <div class="form-group">
-                    <label for="streetAddress">Street Address</label>
-                    <input id="streetAddress"
-                           formControlName="streetAddress"
+                    <label for="addressLine2">Apt or Suite #</label>
+                    <input id="addressLine2"
+                           formControlName="addressLine2"
                            type="text"
-                           class="form-control" required />
+                           class="form-control" />
                 </div>
                 <div class="form-group">
-                    <label for="aptOrSuite">Apt or Suite #</label>
-                    <input id="aptOrSuite"
-                           formControlName="aptOrSuite"
+                    <label for="city">City</label>
+                    <input id="city"
+                           formControlName="city"
                            type="text"
-                           class="form-control" required />
+                           class="form-control" />
+                    <app-form-error-message [control]="form.get('city')"
+                                            errorType="pattern"
+                                            errorMessage="City is required"></app-form-error-message>
                 </div>
             </div>
         </div>
@@ -54,24 +69,58 @@
             <div class="col">
                 <div class="form-group">
                     <label for="state">State</label>
-                    <input id="state"
-                           formControlName="state"
-                           type="text"
-                           class="form-control" required />
+                    <select id="state"
+                            formControlName="state"
+                            type="text"
+                            class="custom-select">
+                        <option></option>
+                        <option *ngFor="let s of allStates" value="{{s}}">{{s}}</option>
+                    </select>
+                    <app-form-error-message [control]="form.get('state')"
+                                            errorType="pattern"
+                                            errorMessage="State is required"></app-form-error-message>
                 </div>
             </div>
             <div class="col">
                 <div class="form-group">
-                    <label for="zipCode">5 Digit Zip Code</label>
-                    <input id="zipCode"
-                           formControlName="zipCode"
+                    <label for="postalCode">5 Digit Zip Code</label>
+                    <input id="postalCode"
+                           formControlName="postalCode"
                            type="text"
-                           class="form-control" required />
+                           class="form-control" />
+                    <app-form-error-message [control]="form.get('postalCode')"
+                                            errorType="pattern"
+                                            errorMessage="Zip code must be a 5-digit numeric value."></app-form-error-message>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <div class="form-group">
+                    <label for="policyHolderEmailAddress">Email Address</label>
+                    <input id="policyHolderEmailAddress"
+                           formControlName="policyHolderEmailAddress"
+                           type="text"
+                           class="form-control" />
+                    <app-form-error-message [control]="form.get('policyHolderEmailAddress')"
+                                            errorType="pattern"
+                                            errorMessage="Email is required"></app-form-error-message>
+                </div>
+                <div class="form-group">
+                    <label for="policyHolderPhoneNumber">Phone Number</label>
+                    <input id="policyHolderPhoneNumber"
+                           formControlName="policyHolderPhoneNumber"
+                           type="text"
+                           class="form-control" />
+                    <app-form-error-message [control]="form.get('policyHolderPhoneNumber')"
+                                            errorType="pattern"
+                                            errorMessage="Phone number is required"></app-form-error-message>
                 </div>
             </div>
         </div>
         <div class="form-group">
-            <app-continue-btn [form]="form"></app-continue-btn>
-        </div>  
+            <app-continue-btn [form]="form"
+                              (btnClick)="onSubmit()"></app-continue-btn>
+        </div>
     </div>
 </form>

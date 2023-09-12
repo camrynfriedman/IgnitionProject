@@ -11,7 +11,8 @@ namespace WebAgentPro.Api.Mappers
     {
         VehicleMapper vmap = new VehicleMapper();
         DriverMapper dmap = new DriverMapper();
-        public QuoteDTO QuoteToDTO(Quote quote) {
+        public QuoteDTO QuoteToDTO(Quote quote)
+        {
             List<DriverDTO> driverList = new List<DriverDTO>();
             List<VehicleDTO> vehicleList = new List<VehicleDTO>();
 
