@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,7 +27,7 @@ public interface IDriverRepository
         Task EditDriver(Driver d);
 
         // insert
-        Task AddDriver(Driver d);
+        Task<Driver> AddDriver(Driver d);
 
         // delete
         Task RemoveDriver(int driverID);
@@ -60,21 +61,23 @@ public interface IDriverRepository
             return driver;
         }
 
-        public async Task<Driver> GetDriverByLicense(string driverLicenseNum)
-        {
-            Driver driver = await _context.Drivers.Where(d => d.DriverLicenseNumber == driverLicenseNum).FirstOrDefaultAsync();
-            return driver;
-        }
+        //public async Task<Driver> GetDriverByLicense(string driverLicenseNum)
+        //{
+        //    Driver driver = await _context.Drivers.Where(d => d.DriverLicenseNumber == driverLicenseNum).FirstOrDefaultAsync();
+        //    return driver;
+        //}
+
         public async Task EditDriver(Driver d)
         {
             _context.Entry(d).State = EntityState.Modified;
             await _context.SaveChangesAsync();
         }
 
-        public async Task AddDriver(Driver d)
+        public async Task<Driver> AddDriver(Driver d)
         {
-            _context.Drivers.Add(d);
+           EntityEntry<Driver> entity = _context.Drivers.Add(d);
             await _context.SaveChangesAsync();
+            return entity.Entity;
         }
 
         //removes driver by driverID

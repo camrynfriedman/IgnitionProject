@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +12,7 @@ namespace WebAgentPro.Api.Repositories
     public interface IVehicleRepository {
         Task<List<Vehicle>> GetAllVehiclesAsync();
         Task<Vehicle> GetVehicleAsync(int vID);
-        Task AddVehicleAsync(Vehicle v);
+        Task<Vehicle> AddVehicleAsync(Vehicle v);
         Task EditVehicleAsync(int vID, Vehicle v);
         Task RemoveVehicleAsync(int vID);
 
@@ -34,9 +35,10 @@ namespace WebAgentPro.Api.Repositories
             return await _context.Vehicles.FindAsync(vID);
         }
 
-        public async Task AddVehicleAsync(Vehicle v) {
-            _context.Vehicles.Add(v);
+        public async Task<Vehicle> AddVehicleAsync(Vehicle v) {
+            EntityEntry<Vehicle> entity = _context.Vehicles.Add(v);
             await _context.SaveChangesAsync();
+            return entity.Entity;
         }
 
         public async Task EditVehicleAsync(int vID, Vehicle v) {
