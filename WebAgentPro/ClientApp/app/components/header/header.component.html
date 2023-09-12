@@ -11,11 +11,7 @@
         <a class="nav-item nav-link" 
            routerLink="/users" 
            *ngIf="isManager && !displayQuoteNav()">Users</a>
-        <a class="nav-item nav-link"
-           routerLink="."
-           *ngIf="displayQuoteNav()">
-            BUTTON
-        </a>
+        <app-back-btn *ngIf="displayQuoteNav()"></app-back-btn>
         <a class="nav-item nav-link" 
            (click)="logout()">Logout</a>
     </span>

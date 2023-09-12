@@ -26,6 +26,7 @@ import { ContinueBtnComponent } from './components/buttons/continue-btn/continue
 import { ReturnBtnComponent } from './components/buttons/return-btn/return-btn.component';
 import { ProgressBarComponent } from './components/progress-bar/progress-bar.component';
 import { FormErrorMessageComponent } from './components/form-error-message/form-error-message.component';
+import { BackBtnComponent } from './components/buttons/back-btn/back-btn.component';
   
 @NgModule({
     imports: [
@@ -54,7 +55,8 @@ import { FormErrorMessageComponent } from './components/form-error-message/form-
         ContinueBtnComponent,
         ReturnBtnComponent,
         ProgressBarComponent,
-        FormErrorMessageComponent
+        FormErrorMessageComponent,
+        BackBtnComponent
     ],
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
