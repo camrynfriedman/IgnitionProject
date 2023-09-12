@@ -65,14 +65,14 @@ namespace WebAgentPro.Api.Models
         // Add relationships
         //represents primary driver
         [Required]
-        [ForeignKey("Driver")]
+        [ForeignKey("DriverID")]
         public int DriverID { get; set; }
 
         // Add relationships
         // required foreign key
         // this is assuming each Driver is only associated with one Quote
         [Required]
-        [ForeignKey("Quote")]
+        [ForeignKey("QuoteID")]
         public int QuoteID { get; set; }
 
         /*        [Required]

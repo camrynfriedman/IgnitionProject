@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace WebAgentPro.Migrations
 {
-    public partial class NewMigration9122 : Migration
+    public partial class classNameID : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

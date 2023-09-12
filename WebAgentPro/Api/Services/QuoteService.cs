@@ -22,7 +22,7 @@ namespace WebAgentPro.Api.Services
         Task<List<QuoteDto>> GetAllQuotes();
         Task<QuoteDto> GetQuote(int quoteID);
         Task EditQuote(QuoteDto q);
-        Task AddQuote(QuoteDto q);
+        Task<QuoteDto> AddQuote(QuoteDto q);
         Task RemoveQuote(int quoteID);
     }
 
@@ -84,38 +84,49 @@ namespace WebAgentPro.Api.Services
         }
 
 
-        public async Task AddQuote(QuoteDto q)
+        public async Task<QuoteDto> AddQuote(QuoteDto q)
         {
             List<Driver> driversList = new List<Driver>();
             List<Vehicle> vehiclesList = new List<Vehicle>();
             //string driverLicenseNum;
             Driver newDriver;
             Vehicle newVehicle;
-            
+
+            //calculation of the Quote Price
+            Quote quote = quoteMap.DtoToQuote(q);
+            //set quote price after calculation
+            quote.QuotePrice = 0;
+            quote.Drivers = null;
+            quote.Vehicles = null;
+            quote = await _quoteRepo.AddQuote(quote);
+
             /*Populate Drivers List*/
             foreach (DriverDto d in q.Drivers){
 
                 //create driver
-                newDriver = await _driverRepo.AddDriver(driverMap.DtoToDriver(d)); //create driver
+                Driver driver2 = driverMap.DtoToDriver(d);
+                driver2.QuoteID = quote.QuoteID;
+                newDriver = await _driverRepo.AddDriver(driver2); //create driver
 
                 //add driver to list
-                driversList.Add(newDriver);
+/*                driversList.Add(newDriver);*/
             }
 
             /*Populate Vehicles List*/
             foreach (VehicleDto v in q.Vehicles)
             {
                 //create vehicle
-                newVehicle = await _vehicleRepo.AddVehicle(vehicleMap.DtoToVehicle(v)); 
+                Vehicle vehicle2 = vehicleMap.DtoToVehicle(v);
+                vehicle2.QuoteID = quote.QuoteID;
+                newVehicle = await _vehicleRepo.AddVehicle(vehicle2); 
 
                 //add vehicle to list
-                vehiclesList.Add(newVehicle);
+/*                vehiclesList.Add(newVehicle);*/
             }
 
-            Quote quote = quoteMap.DtoToQuote(q);
-            quote.Drivers = driversList;
-            quote.Vehicles = vehiclesList;
-            await _quoteRepo.AddQuote(quote); 
+            //return QuoteDTO by id
+            return await GetQuote(quote.QuoteID);
+            
         }
 
 

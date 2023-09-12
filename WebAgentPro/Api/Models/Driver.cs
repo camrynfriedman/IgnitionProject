@@ -48,7 +48,7 @@ namespace WebAgentPro.Api.Models
         // required foreign key
         // this is assuming each Driver is only associated with one Quote
         [Required]
-        [ForeignKey("Quote")]
+        [ForeignKey("QuoteID")]
         public int QuoteID { get; set; }
 
         //[Required]

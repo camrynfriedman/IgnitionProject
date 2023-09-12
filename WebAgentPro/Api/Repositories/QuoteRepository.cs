@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,7 +24,7 @@ public interface IQuoteRepository
         Task EditQuote(Quote q);
 
         // insert
-        Task AddQuote(Quote q);
+        Task<Quote> AddQuote(Quote q);
 
         // delete
         Task RemoveQuote(int quoteID);
@@ -53,7 +54,7 @@ public interface IQuoteRepository
 
         public async Task<Quote> GetQuote(int quoteID)
         {
-            Quote quote = await _context.Quotes.Where(q => q.QuoteID == quoteID).FirstOrDefaultAsync();
+            Quote quote = await _context.Quotes.Include(x => x.Vehicles).Include(x => x.Drivers).Where(q => q.QuoteID == quoteID).FirstOrDefaultAsync();
             return quote;
         }
 
@@ -63,10 +64,11 @@ public interface IQuoteRepository
             await _context.SaveChangesAsync();
         }
 
-        public async Task AddQuote(Quote q)
+        public async Task<Quote> AddQuote(Quote q)
         {
-            _context.Quotes.Add(q);
+            EntityEntry<Quote> entity = _context.Quotes.Add(q);
             await _context.SaveChangesAsync();
+            return entity.Entity;
         }
 
         //removes quote by quoteID

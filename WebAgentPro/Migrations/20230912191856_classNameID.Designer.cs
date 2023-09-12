@@ -10,8 +10,8 @@ using WebAgentPro.Data;
 namespace WebAgentPro.Migrations
 {
     [DbContext(typeof(WapDbContext))]
-    [Migration("20230912185726_NewMigration9122")]
-    partial class NewMigration9122
+    [Migration("20230912191856_classNameID")]
+    partial class classNameID
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
