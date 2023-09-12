@@ -35,7 +35,8 @@ namespace WebAgentPro.Api.Controllers
         public async Task<ActionResult<List<QuoteDto>>> GetQuotes()
         {
             var quotes = await _quoteService.GetAllQuotes();
-            if (quotes == null || !quotes.Any())
+            //if there no quotes are created, return an empty list
+            if (quotes == null)
             {
                 return NotFound();
             }

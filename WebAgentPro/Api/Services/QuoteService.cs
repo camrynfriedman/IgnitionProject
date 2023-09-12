@@ -80,7 +80,74 @@ namespace WebAgentPro.Api.Services
 
         public async Task EditQuote(QuoteDto q)
         {
-            await _quoteRepo.EditQuote(quoteMap.DtoToQuote(q));
+
+
+            Quote quote = quoteMap.DtoToQuote(q);
+            quote.Drivers = null;
+            quote.Vehicles = null;
+            await _quoteRepo.EditQuote(quote);
+
+            //Removing drivers and vehicles from existing quote
+            //if the driver exists in the driverRepo
+            QuoteDto oldQuote = await GetQuote(q.QuoteID);
+            foreach (DriverDto d in oldQuote.Drivers)
+            {
+                bool flag = false;
+                foreach (DriverDto d2 in q.Drivers) {
+                    if (d.DriverID == d2.DriverID) {
+                        flag = true;
+                    }
+                }
+                if (flag == false) {
+                    await _driverRepo.RemoveDriver(d.DriverID);
+                }
+            }
+            foreach (VehicleDto v in oldQuote.Vehicles)
+            {
+                bool flag = false;
+                foreach (VehicleDto v2 in q.Vehicles)
+                {
+                    if (v.VehicleID == v2.VehicleID)
+                    {
+                        flag = true;
+                    }
+                }
+                if (flag == false)
+                {
+                    await _vehicleRepo.RemoveVehicle(v.VehicleID);
+                }
+            }
+
+            //adding drivers and vehicles to quote
+            //Check if the QuoteDTO -- vehicles or drivers are a add or update
+            foreach (DriverDto d in q.Drivers) {
+                if (d.DriverID == 0)
+                {
+                    Driver dTemp = driverMap.DtoToDriver(d);
+                    dTemp.QuoteID = q.QuoteID;
+                    await _driverRepo.AddDriver(dTemp);
+                }
+                else {
+                    Driver dTemp = driverMap.DtoToDriver(d);
+                    dTemp.QuoteID = q.QuoteID;
+                    await _driverRepo.EditDriver(dTemp.DriverID, dTemp);
+                }
+            }
+            foreach (VehicleDto d in q.Vehicles)
+            {
+                if (d.VehicleID == 0)
+                {
+                    Vehicle dTemp = vehicleMap.DtoToVehicle(d);
+                    dTemp.QuoteID = q.QuoteID;
+                    await _vehicleRepo.AddVehicle(dTemp);
+                }
+                else
+                {
+                    Vehicle dTemp = vehicleMap.DtoToVehicle(d);
+                    dTemp.QuoteID = q.QuoteID;
+                    await _vehicleRepo.EditVehicle(dTemp.VehicleID, dTemp);
+                }
+            }
         }
 
 
