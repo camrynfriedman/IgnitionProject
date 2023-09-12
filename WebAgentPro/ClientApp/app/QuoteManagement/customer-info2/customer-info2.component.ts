@@ -15,7 +15,6 @@ export class CustomerInfo2Component implements OnInit {
 
     apiUrl: string = environment.apiUrl
 
-    // This will need to be a quote object passed from previous screen
     quote: Quote;
 
     form: FormGroup
@@ -26,6 +25,15 @@ export class CustomerInfo2Component implements OnInit {
         private router: Router) { }
 
     ngOnInit(): void {
+        this.route.queryParams.subscribe(params => {
+            const quoteId = params['quoteId'];
+            console.log(quoteId);
+            if (quoteId) {
+                //this.getQuote(quoteId)
+                console.log(this.quote)
+            }
+        });
+
         this.form = new FormGroup({
             previousCarrierL:
                 new FormControl('', Validators.required),
@@ -51,6 +59,13 @@ export class CustomerInfo2Component implements OnInit {
     // Need to move to service class when time allows
     // #region API calls
 
+    getQuote(quoteId: string) {
+        var httpRequest = this.http.get<Quote>(`${this.apiUrl}/quotes/${quoteId}`)
+
+        httpRequest.subscribe(returnedQuote => {
+            this.quote = returnedQuote;
+        })
+    }
     // Will need to be a put request for the quote started in previous screen
 
     // #endRegion

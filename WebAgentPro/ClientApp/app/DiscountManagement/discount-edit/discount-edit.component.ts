@@ -21,7 +21,10 @@ export class DiscountEditComponent implements OnInit {
     form: FormGroup
     stepValue: number = 0.01;
 
-    constructor(private route: ActivatedRoute, private http: HttpClient, private router: Router) { }
+    constructor(
+        private route: ActivatedRoute,
+        private http: HttpClient,
+        private router: Router) { }
 
     ngOnInit(): void {
         this.stateParamSubscription = this.route.params.subscribe(

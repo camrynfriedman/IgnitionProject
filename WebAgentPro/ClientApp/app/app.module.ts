@@ -25,6 +25,7 @@ import { VehicleInfo2Component } from './quotemanagement/vehicle-info2/vehicle-i
 import { ContinueBtnComponent } from './components/buttons/continue-btn/continue-btn.component';
 import { ReturnBtnComponent } from './components/buttons/return-btn/return-btn.component';
 import { ProgressBarComponent } from './components/progress-bar/progress-bar.component';
+import { FormErrorMessageComponent } from './components/form-error-message/form-error-message.component';
   
 @NgModule({
     imports: [
@@ -52,7 +53,8 @@ import { ProgressBarComponent } from './components/progress-bar/progress-bar.com
         VehicleInfo2Component,
         ContinueBtnComponent,
         ReturnBtnComponent,
-        ProgressBarComponent
+        ProgressBarComponent,
+        FormErrorMessageComponent
     ],
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

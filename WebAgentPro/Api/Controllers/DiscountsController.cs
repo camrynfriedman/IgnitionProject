@@ -103,6 +103,12 @@ namespace WebAgentPro.Api.Controllers
          
         }
 
+        [HttpGet("AllStates")]
+        public async Task<ActionResult<IEnumerable<string>>> AllStates()
+        {
+            return await _discountService.GetAllStates();
+        }
+
         [HttpGet("InactiveStates")]
         public async Task<ActionResult<IEnumerable<string>>> InactiveStates()
         {

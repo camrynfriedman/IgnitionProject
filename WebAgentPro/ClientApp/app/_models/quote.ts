@@ -2,32 +2,63 @@
 import { Vehicle } from "./vehicle";
 
 export class Quote {
-    quoteId: number;
-    agentId: string;
-    isSubmitted: boolean;
-    deviceType: string;
-    creationDate: Date;
-    submissionDate: Date;
-    policyHolderFName: string;
-    policyHolderLName: string;
-    addressLine1: string;
-    addressLine2: string;
-    city: string;
-    state: string;
-    postalCode: string;
-    policyHolderSsn: string;
-    policyHolderDOB: Date;
-    lessThan3YearsDriving: boolean;
-    previousCarrier: boolean;
-    movingViolationInLast5Years: boolean;
-    claimInLast5Years: boolean;
-    forceMultiCarDiscount: boolean;
-    quotePrice: number;
-    drivers: Driver[];
-    vehicles: Vehicle[];
+    quoteId:
+        number = 0;
+    agentId:
+        string = '';
+    isSubmitted:
+        boolean = false;
+    deviceType:
+        string = '';
+    creationDate:
+        Date = new Date();
+    submissionDate:
+        Date = new Date();
+    policyHolderFName:
+        string = '';
+    policyHolderLName:
+        string = '';
+    addressLine1:
+        string = '';
+    addressLine2:
+        string = '';
+    city:
+        string = '';
+    state:
+        string = '';
+    postalCode:
+        string = '';
+    policyHolderSsn:
+        string = '';
+    policyHolderDOB:
+        Date = new Date();
+    lessThan3YearsDriving:
+        boolean = false;
+    previousCarrier:
+        string = '';
+    movingViolationInLast5Years:
+        boolean = false;
+    claimInLast5Years:
+        boolean = false;
+    forceMultiCarDiscount:
+        boolean = false;
+    quotePrice:
+        number = 0;
+    policyHolderEmailAddress:
+        string = '';
+    policyHolderPhoneNumber:
+        string = '';
+    drivers:
+        Driver[];
+    vehicles:
+        Vehicle[];
 
-    constructor() {
+    constructor(data?: Partial<Quote>) {
         this.drivers = [];
         this.vehicles = [];
+
+        if (data) {
+            Object.assign(this, data);
+        }
     }
 }
