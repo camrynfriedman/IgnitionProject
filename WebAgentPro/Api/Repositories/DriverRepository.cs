@@ -19,6 +19,9 @@ public interface IDriverRepository
         // get by ID
         Task<Driver> GetDriver(int driverID);
 
+        // get by License Number
+        Task<Driver> GetDriverByLicense(string driversLicenseNum);
+
         // edit driver
         Task EditDriver(Driver d);
 
@@ -57,6 +60,11 @@ public interface IDriverRepository
             return driver;
         }
 
+        public async Task<Driver> GetDriverByLicense(string driverLicenseNum)
+        {
+            Driver driver = await _context.Drivers.Where(d => d.DriverLicenseNumber == driverLicenseNum).FirstOrDefaultAsync();
+            return driver;
+        }
         public async Task EditDriver(Driver d)
         {
             _context.Entry(d).State = EntityState.Modified;

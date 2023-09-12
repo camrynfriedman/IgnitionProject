@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace WebAgentPro.Api.Models
+namespace WebAgentPro.Api.DTOs
 {
     public class DiscountDto
     {

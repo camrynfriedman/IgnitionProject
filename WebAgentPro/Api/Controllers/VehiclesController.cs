@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using WebAgentPro.Api.DTOs;
 using WebAgentPro.Api.Models;
 using WebAgentPro.Api.Services;
 using WebAgentPro.Data;
@@ -110,11 +111,11 @@ namespace WebAgentPro.Api.Controllers
         // POST: api/Vehicles
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Vehicle>> PostVehicle(VehicleDto vehicleDto)
+        public async Task<ActionResult<Vehicle>> PostVehicle(VehicleDto VehicleDto)
         {
             try
             {
-                await _vehicleService.AddVehicle(vehicleDto);
+                await _vehicleService.AddVehicle(VehicleDto);
             }
             catch (Exception e)
             {
@@ -122,7 +123,7 @@ namespace WebAgentPro.Api.Controllers
             }
 
 
-            return CreatedAtAction("GetVehicle", new { id = vehicleDto.VehicleId }, vehicleDto);
+            return CreatedAtAction("GetVehicle", new { id = VehicleDto.VehicleId }, VehicleDto);
         }
 
         // DELETE: api/Vehicles/5

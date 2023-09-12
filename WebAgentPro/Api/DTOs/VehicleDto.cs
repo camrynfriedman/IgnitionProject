@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace WebAgentPro.Api.Models
+namespace WebAgentPro.Api.DTOs
 {
 
     public class VehicleDto
@@ -61,7 +61,6 @@ namespace WebAgentPro.Api.Models
         public decimal QuoteMultiplier { get; set; }
 
         
-
         public int PrimaryDriverId { get; set; }
 
         //Vehicles will no longer have multiple Drivers assigned to it

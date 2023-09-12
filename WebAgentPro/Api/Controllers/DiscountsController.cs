@@ -4,6 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using WebAgentPro.Api.DTOs;
+using WebAgentPro.Api.Mappers;
 using WebAgentPro.Api.Models;
 using WebAgentPro.Api.Services;
 
@@ -70,18 +72,18 @@ namespace WebAgentPro.Api.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
-        public async Task<ActionResult<DiscountDto>> PostDiscount(DiscountDto discountDto)
+        public async Task<ActionResult<DiscountDto>> PostDiscount(DiscountDto DiscountDto)
         {
             try
             {
-                await _discountService.AddDiscount(discountDto);
+                await _discountService.AddDiscount(DiscountDto);
             }
             catch (Exception e)
             {
                 return BadRequest(e.Message);
             }
 
-            return CreatedAtAction("GetDiscount", new { id = discountDto.State }, discountDto);
+            return CreatedAtAction("GetDiscount", new { id = DiscountDto.State }, DiscountDto);
         }
 
         // DELETE: api/Discounts/5

@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using WebAgentPro.Api.DTOs;
+using WebAgentPro.Api.Mappers;
 using WebAgentPro.Api.Models;
 using WebAgentPro.Api.Services;
 using WebAgentPro.Data;
@@ -12,7 +14,7 @@ using WebAgentPro.Data;
 namespace WebAgentPro.Api.Controllers
 {
     /*
- * The controller uses the QuoteDTO rather than Quote 
+ * The controller uses the QuoteDto rather than Quote 
  * and calls methods from the service.
  * */
 

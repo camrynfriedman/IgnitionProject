@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using WebAgentPro.Api.DTOs;
 using WebAgentPro.Api.Mappers;
 using WebAgentPro.Api.Models;
 using WebAgentPro.Api.Repositories;
@@ -29,7 +30,7 @@ namespace WebAgentPro.Api.Services
         public async Task<List<VehicleDto>> GetAllVehicles()
         {
             return (await _vehicleRepo.GetAllVehiclesAsync())
-                .Select(v => map.VehichleToDto(v)).ToList();
+                .Select(v => map.VehicleToDto(v)).ToList();
         }
 
         public async Task<VehicleDto> GetVehicle(int id) {
@@ -38,7 +39,7 @@ namespace WebAgentPro.Api.Services
                 throw new VehicleNotFoundException("Vehicle not found with specified ID");
             }
 
-            return map.VehichleToDto(await _vehicleRepo.GetVehicleAsync(id));
+            return map.VehicleToDto(await _vehicleRepo.GetVehicleAsync(id));
             
         }
 

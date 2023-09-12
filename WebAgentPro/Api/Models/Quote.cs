@@ -96,8 +96,8 @@ namespace WebAgentPro.Api.Models
 
         [Required]
         public decimal QuotePrice { get; set; }
-        
-        
+
+
         // Add relationships
 
         //one to many relationship with drivers

@@ -4,11 +4,13 @@ using System.Linq;
 using System.Threading.Tasks;
 using WebAgentPro.Api.Models;
 using WebAgentPro.Api.Repositories;
+using WebAgentPro.Api.DTOs;
+using WebAgentPro.Api.Mappers;
 
 namespace WebAgentPro.Api.Services
 {
     /*
-     * The service uses the QuoteDTO rather than Quote 
+     * The service uses the QuoteDto rather than Quote 
      * and calls methods from the repository.
      * 
      * 
@@ -34,8 +36,9 @@ namespace WebAgentPro.Api.Services
 
         private readonly IDriverRepository _driverRepo;
 
-        //use mapper
-        private QuoteMapper map;
+        //use driverMapper
+        private QuoteMapper quoteMap;
+        private DriverMapper driverMap;
 
 
         //constructor
@@ -45,7 +48,9 @@ namespace WebAgentPro.Api.Services
             _vehicleRepo = vehicleRepo;
             _driverRepo = driverRepo;
 
-            map = new QuoteMapper();
+            quoteMap = new QuoteMapper();
+            driverMap = new DriverMapper();
+      
         }
         public async Task<List<QuoteDto>> GetAllQuotes()
         {
@@ -56,7 +61,7 @@ namespace WebAgentPro.Api.Services
             {
                 return null;
             }
-            return quotes.Select(q => map.QuoteToDto(q)).ToList();
+            return quotes.Select(q => quoteMap.QuoteToDto(q)).ToList();
         }
 
         public async Task<QuoteDto> GetQuote(int quoteID)
@@ -65,15 +70,15 @@ namespace WebAgentPro.Api.Services
             {
                 return null;
             }
-            //use the map to get the quote
-            QuoteDto returnedQuoteDto = map.QuoteToDto(await _quoteRepo.GetQuote(quoteID));
+            //use the quoteMap to get the quote
+            QuoteDto returnedQuoteDto = quoteMap.QuoteToDto(await _quoteRepo.GetQuote(quoteID));
 
             return returnedQuoteDto;
         }
 
         public async Task EditQuote(QuoteDto q)
         {
-            await _quoteRepo.EditQuote(map.DtoToQuote(q));
+            await _quoteRepo.EditQuote(quoteMap.DtoToQuote(q));
         }
 
         // needs to use vehicle repo and driver repo to create those objects before creating final quote
@@ -84,18 +89,31 @@ namespace WebAgentPro.Api.Services
      * construct quote object using those IDs generated*/
         public async Task AddQuote(QuoteDto q)
         {
-            List<Driver> drivers = new List<Driver>();
-            List<Vehicle> vehicles = new List<Vehicle>();
+            List<DriverDto> driversList = new List<DriverDto>();
+            List<VehicleDto> vehiclesList = new List<VehicleDto>();
+            string driverLicenseNum;
+            DriverDto newDriverDto;
+            
+
+            foreach (DriverDto d in q.Drivers){
+                //create driver
+                await _driverRepo.AddDriver(driverMap.DtoToDriver(d)); //create driver
+                driverLicenseNum = d.DriverLicenseNumber; //get driverID
+                newDriverDto = driverMap.DriverToDto(await _driverRepo.GetDriverByLicense(driverLicenseNum));
+
+                //add driverDto to list
+                driversList.Add(newDriverDto);
+
+            }
+            q.Drivers = driversList;
+            await _quoteRepo.AddQuote(quoteMap.DtoToQuote(q));
+
             //figure out how to know how many drivers and vehicles to add
             //create a list of drivers and vehicles and populate using AddDriver and AddVehicle
             //get the IDs of each driver and add to Quote
             //get the IDs of each vehicle and add to Quote
 
-            if (_quoteRepo.GetQuote(q.QuoteId) != null)
-            {
-                throw new Exception("Quote already exists.");
-            }
-            await _quoteRepo.AddQuote(map.DtoToQuote(q));
+     
         }
 
 
