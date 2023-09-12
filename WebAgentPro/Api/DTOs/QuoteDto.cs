@@ -5,11 +5,11 @@ using System.Threading.Tasks;
 
 namespace WebAgentPro.Api.DTOs
 {
-    public class QuoteDTO
+    public class QuoteDto
     {
-        public int QuoteId { get; set; }
+        public int QuoteID { get; set; }
 
-        public string AgentId { get; set; }
+        public string AgentID { get; set; }
 
         
         public bool IsSubmitted { get; set; }
@@ -32,7 +32,6 @@ namespace WebAgentPro.Api.DTOs
         
         public string AddressLine1 { get; set; }
 
-        // figure out how to make this optional
         public string AddressLine2 { get; set; }
 
         
@@ -69,11 +68,11 @@ namespace WebAgentPro.Api.DTOs
         public string PolicyHolderPhoneNumber { get; set; }
 
 
-        public List<DriverDTO> Drivers { get; set; }
+        public List<DriverDto> Drivers { get; set; }
 
         //one to many relationship with Vehicles
         //implicity foreign keys via VehicleIDs
         
-        public List<VehicleDTO> Vehicles { get; set; }
+        public List<VehicleDto> Vehicles { get; set; }
     }
 }

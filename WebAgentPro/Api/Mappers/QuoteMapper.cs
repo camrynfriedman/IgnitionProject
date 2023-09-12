@@ -11,9 +11,9 @@ namespace WebAgentPro.Api.Mappers
     {
         VehicleMapper vmap = new VehicleMapper();
         DriverMapper dmap = new DriverMapper();
-        public QuoteDTO QuoteToDTO(Quote quote) {
-            List<DriverDTO> driverList = new List<DriverDTO>();
-            List<VehicleDTO> vehicleList = new List<VehicleDTO>();
+        public QuoteDto QuoteToDto(Quote quote) {
+            List<DriverDto> driverList = new List<DriverDto>();
+            List<VehicleDto> vehicleList = new List<VehicleDto>();
 
             foreach (Driver d in quote.Drivers)
             {
@@ -25,10 +25,10 @@ namespace WebAgentPro.Api.Mappers
                 vehicleList.Add(vmap.VehicleToDto(v));
             }
 
-            QuoteDTO returnedQuoteDto = new QuoteDTO
+            QuoteDto returnedQuoteDto = new QuoteDto
             {
-                QuoteId = quote.QuoteId,
-                AgentId = quote.AgentId,
+                QuoteID = quote.QuoteID,
+                AgentID = quote.AgentID,
                 IsSubmitted = quote.IsSubmitted,
                 DeviceType = quote.DeviceType,
                 CreationDate = quote.CreationDate,
@@ -56,25 +56,25 @@ namespace WebAgentPro.Api.Mappers
             return returnedQuoteDto;
         }
 
-        public Quote DTOToQuote(QuoteDTO quote)
+        public Quote DtoToQuote(QuoteDto quote)
         {
             List<Driver> driverList = new List<Driver>();
             List<Vehicle> vehicleList = new List<Vehicle>();
 
-            foreach (DriverDTO d in quote.Drivers)
+            foreach (DriverDto d in quote.Drivers)
             {
                 driverList.Add(dmap.DtoToDriver(d));
             }
 
-            foreach (VehicleDTO v in quote.Vehicles)
+            foreach (VehicleDto v in quote.Vehicles)
             {
                 vehicleList.Add(vmap.DtoToVehicle(v));
             }
 
             Quote returnedQuoteDto = new Quote
             {
-                QuoteId = quote.QuoteId,
-                AgentId = quote.AgentId,
+                QuoteID = quote.QuoteID,
+                AgentID = quote.AgentID,
                 IsSubmitted = quote.IsSubmitted,
                 DeviceType = quote.DeviceType,
                 CreationDate = quote.CreationDate,
@@ -98,8 +98,14 @@ namespace WebAgentPro.Api.Mappers
                 Vehicles = vehicleList,
                 PolicyHolderEmailAddress = quote.PolicyHolderEmailAddress,
                 PolicyHolderPhoneNumber = quote.PolicyHolderPhoneNumber
+
+
+
             };
             return returnedQuoteDto;
         }
     }
 }
+    
+    
+

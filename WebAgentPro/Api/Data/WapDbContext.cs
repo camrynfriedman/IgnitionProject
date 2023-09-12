@@ -11,6 +11,10 @@ namespace WebAgentPro.Data
              : base(options)
         {
         }
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.EnableSensitiveDataLogging();
+        }
 
         public DbSet<Discount> Discounts { get; set; }
         public DbSet<Quote> Quotes { get; set; }

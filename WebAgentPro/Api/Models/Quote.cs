@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -12,11 +13,11 @@ namespace WebAgentPro.Api.Models
     {
         [Key]
         [Required]
-        public int QuoteId { get; set; }
+        public int QuoteID { get; set; }
 
         [Required]
         [EmailAddress]
-        public string AgentId { get; set; }
+        public string AgentID { get; set; }
 
         [Required]
         public bool IsSubmitted { get; set; }
@@ -39,6 +40,16 @@ namespace WebAgentPro.Api.Models
         [Required]
         [MaxLength(100)]
         public string PolicyHolderLName { get; set; }
+        
+        [Required]
+        [MaxLength(100)]
+        [EmailAddress]
+        public string PolicyHolderEmailAddress { get; set; }
+
+        [Required]
+        [MaxLength(10)]
+        [Phone]
+        public string PolicyHolderPhoneNumber { get; set; }
 
         [Required]
         public string AddressLine1 { get; set; }
@@ -72,7 +83,7 @@ namespace WebAgentPro.Api.Models
         [Required]
         [MinLength(6)]
         [MaxLength(9)]
-        public string PreviousCarrier { get; set; }
+        public string? PreviousCarrier { get; set; }
 
         [Required]
         public bool MovingViolationInLast5Years { get; set; }
@@ -85,18 +96,6 @@ namespace WebAgentPro.Api.Models
 
         [Required]
         public decimal QuotePrice { get; set; }
-
-        [Required]
-        [MaxLength(100)]
-        [EmailAddress]
-        public string PolicyHolderEmailAddress { get; set; }
-
-
-
-        [Required]
-        [MaxLength(10)]
-        [Phone]
-        public string PolicyHolderPhoneNumber { get; set; }
 
 
         // Add relationships

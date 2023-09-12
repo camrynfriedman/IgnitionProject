@@ -8,10 +8,10 @@ using WebAgentPro.Api.Models;
 
 namespace WebAgentPro.Api.DTOs
 {
-    public class DriverDTO
+    public class DriverDto
     {
 
-        public int DriverId { get; set; }
+        public int DriverID { get; set; }
 
         public string DriverFName { get; set; }
 
@@ -33,8 +33,8 @@ namespace WebAgentPro.Api.DTOs
         
         public decimal QuoteMultiplier { get; set; }
 
-        public int QuoteId { get; set; }
+        public int QuoteID { get; set; }
 
-        public List<Vehicle> Vehicles { get; set; }
+        //public List<Vehicle> Vehicles { get; set; }
     }
 }

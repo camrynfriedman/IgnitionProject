@@ -8,37 +8,48 @@ using Microsoft.EntityFrameworkCore;
 using WebAgentPro.Api.DTOs;
 using WebAgentPro.Api.Mappers;
 using WebAgentPro.Api.Models;
+using WebAgentPro.Api.Services;
 using WebAgentPro.Data;
 
 namespace WebAgentPro.Api.Controllers
 {
+    /*
+ * The controller uses the QuoteDto rather than Quote 
+ * and calls methods from the service.
+ * */
+
     [Route("api/[controller]")]
     [ApiController]
     public class QuotesController : ControllerBase
     {
-        private readonly WapDbContext _context;
-        private QuoteMapper qmap = new QuoteMapper();
+        private readonly IQuoteService _quoteService;
 
-        public QuotesController(WapDbContext context)
+        public QuotesController(IQuoteService quoteService)
         {
-            _context = context;
+            _quoteService = quoteService;
         }
 
         // GET: api/Quotes
+        // get a list of all quotes
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Quote>>> GetQuotes()
+        public async Task<ActionResult<List<QuoteDto>>> GetQuotes()
         {
-
-            return await _context.Quotes.Include(x => x.Vehicles).Include(x => x.Drivers).ToListAsync();
+            var quotes = await _quoteService.GetAllQuotes();
+            if (quotes == null || !quotes.Any())
+            {
+                return NotFound();
+            }
+            return quotes;
         }
 
         // GET: api/Quotes/5
+        // get an individual quote by id
         [HttpGet("{id}")]
-        public async Task<ActionResult<Quote>> GetQuote(int id)
+        public async Task<ActionResult<QuoteDto>> GetQuote(int id)
         {
-            var quote = await _context.Quotes.FindAsync(id);
+            var quote = await _quoteService.GetQuote(id);
 
-            if (quote == null)
+            if (quote is null)
             {
                 return NotFound();
             }
@@ -47,66 +58,44 @@ namespace WebAgentPro.Api.Controllers
         }
 
         // PUT: api/Quotes/5
+        // Corresponds to EditQuote
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutQuote(int id, Quote quote)
+        public async Task<ActionResult<QuoteDto>> PutQuote(int id, QuoteDto quote)
         {
-            if (id != quote.QuoteId)
+            if (id != quote.QuoteID || quote is null)
             {
                 return BadRequest();
             }
-
-            _context.Entry(quote).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!QuoteExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return NoContent();
+            await _quoteService.EditQuote(quote);
+            return Ok();
         }
 
         // POST: api/Quotes
+        // Corresponds to AddQuote
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<QuoteDTO>> PostQuote(QuoteDTO quote)
+        public async Task<ActionResult<QuoteDto>> PostQuote(QuoteDto quote)
         {
-            _context.Quotes.Add(qmap.DTOToQuote(quote));
-            await _context.SaveChangesAsync();
+            await _quoteService.AddQuote(quote);
 
-            return CreatedAtAction("GetQuote", new { id = quote.QuoteId }, quote);
+            return CreatedAtAction("GetQuote", new { id = quote.QuoteID }, quote);
         }
 
         // DELETE: api/Quotes/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteQuote(int id)
+        public async Task<ActionResult<QuoteDto>> DeleteQuote(int id)
         {
-            var quote = await _context.Quotes.FindAsync(id);
+            var quote = await _quoteService.GetQuote(id);
             if (quote == null)
             {
                 return NotFound();
             }
+           await _quoteService.RemoveQuote(id);
 
-            _context.Quotes.Remove(quote);
-            await _context.SaveChangesAsync();
-
-            return NoContent();
+            return Ok();
         }
 
-        private bool QuoteExists(int id)
-        {
-            return _context.Quotes.Any(e => e.QuoteId == id);
-        }
     }
+
 }

@@ -9,9 +9,9 @@ namespace WebAgentPro.Api.Mappers
 {
     public class DiscountMapper
     {
-        public DiscountDTO DiscountToDto(Discount d) {
+        public DiscountDto DiscountToDto(Discount d) {
 
-            DiscountDTO returnedDiscountDTO = new DiscountDTO()
+            DiscountDto returnedDiscountDto = new DiscountDto()
             {
                 State = d.State,
                 DaytimeRunningLights = d.DaytimeRunningLights,
@@ -31,10 +31,10 @@ namespace WebAgentPro.Api.Mappers
                 YoungDriver = d.YoungDriver,
                 SafeDrivingSchool = d.SafeDrivingSchool
             };
-            return returnedDiscountDTO;
+            return returnedDiscountDto;
         }
 
-        public Discount DtoToDiscount(DiscountDTO d)
+        public Discount DtoToDiscount(DiscountDto d)
         {
             Discount returnedDiscount = new Discount()
             {

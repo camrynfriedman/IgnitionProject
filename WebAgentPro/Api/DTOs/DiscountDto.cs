@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WebAgentPro.Api.DTOs
 {
-    public class DiscountDTO
+    public class DiscountDto
     {
         [Key]
         [MinLength(2)]

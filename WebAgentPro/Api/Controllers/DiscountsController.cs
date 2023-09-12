@@ -27,7 +27,7 @@ namespace WebAgentPro.Api.Controllers
 
         // GET: api/Discounts
         [HttpGet]
-        public async Task<ActionResult<List<DiscountDTO>>> GetDiscount()
+        public async Task<ActionResult<List<DiscountDto>>> GetDiscount()
         {
             /*var returnedDiscounts = await _discountService.GetDiscountsAsync()
                 .Select(d => map.DiscountToDto(d)).ToListAsync();*/
@@ -36,7 +36,7 @@ namespace WebAgentPro.Api.Controllers
 
         // GET: api/Discounts/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<DiscountDTO>> GetDiscount(string id)
+        public async Task<ActionResult<DiscountDto>> GetDiscount(string id)
         {
             try
             {
@@ -53,7 +53,7 @@ namespace WebAgentPro.Api.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutDiscount(string id, DiscountDTO discount)
+        public async Task<IActionResult> PutDiscount(string id, DiscountDto discount)
         {
 
             try
@@ -72,27 +72,27 @@ namespace WebAgentPro.Api.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
-        public async Task<ActionResult<DiscountDTO>> PostDiscount(DiscountDTO DiscountDTO)
+        public async Task<ActionResult<DiscountDto>> PostDiscount(DiscountDto DiscountDto)
         {
             try
             {
-                await _discountService.AddDiscount(DiscountDTO);
+                await _discountService.AddDiscount(DiscountDto);
             }
             catch (Exception e)
             {
                 return BadRequest(e.Message);
             }
 
-            return CreatedAtAction("GetDiscount", new { id = DiscountDTO.State }, DiscountDTO);
+            return CreatedAtAction("GetDiscount", new { id = DiscountDto.State }, DiscountDto);
         }
 
         // DELETE: api/Discounts/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<DiscountDTO>> DeleteDiscount(string id)
+        public async Task<ActionResult<DiscountDto>> DeleteDiscount(string id)
         {
             try
             {
-                DiscountDTO discount = await _discountService.GetDiscountAsync(id);
+                DiscountDto discount = await _discountService.GetDiscountAsync(id);
                 await _discountService.RemoveDiscount(id);
                 return discount;
             }

@@ -86,12 +86,16 @@ namespace WebAgentPro
             #region Repositories                Collection of Repositories
             services.AddTransient<IDiscountRepository, DiscountRepository>();
             services.AddTransient<IVehicleRepository, VehicleRepository>();
+            services.AddTransient<IQuoteRepository, QuoteRepository>();
+            services.AddTransient<IDriverRepository, DriverRepository>();
 
             #endregion
 
             #region Services                Collection of Services
             services.AddTransient<IDiscountService, DiscountService>();
+            services.AddTransient<IQuoteService, QuoteService>();
             services.AddTransient<IVehicleService, VehicleService>();
+
 
             #endregion
 
