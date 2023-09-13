@@ -95,6 +95,9 @@ namespace WebAgentPro.Api.Models
         public bool ForceMultiCarDiscount { get; set; }
 
         [Required]
+        public decimal QuoteMultiplier { get; set; }
+
+        [Required]
         public decimal QuotePrice { get; set; }
 
 
