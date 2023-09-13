@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -61,7 +62,7 @@ namespace WebAgentPro.Api.Models
 
         [Required]
         public decimal QuoteMultiplier { get; set; }
-        
+
         // Add relationships
         //represents primary driver
         [Required]
@@ -75,7 +76,7 @@ namespace WebAgentPro.Api.Models
         [ForeignKey("QuoteID")]
         public int QuoteID { get; set; }
 
-        /*        [Required]
-                public List<Driver> Drivers { get; set; }*/
+        /*[Required]
+        public List<Driver> Drivers { get; set; }*/
     }
 }

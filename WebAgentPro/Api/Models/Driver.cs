@@ -51,8 +51,8 @@ namespace WebAgentPro.Api.Models
         [ForeignKey("QuoteID")]
         public int QuoteID { get; set; }
 
-        //[Required]
-        //public List<Vehicle> Vehicles { get; set; }
-        
+        [Required]
+        public List<Vehicle> Vehicles { get; set; }
+
     }
 }

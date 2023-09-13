@@ -20,5 +20,6 @@ namespace WebAgentPro.Data
         public DbSet<Quote> Quotes { get; set; }
         public DbSet<Driver> Drivers { get; set; }
         public DbSet<Vehicle> Vehicles { get; set; }
+
     }
 }

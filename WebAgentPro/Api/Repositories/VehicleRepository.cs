@@ -36,9 +36,15 @@ namespace WebAgentPro.Api.Repositories
         }
 
         public async Task<Vehicle> AddVehicle(Vehicle v) {
-            EntityEntry<Vehicle> entity = _context.Vehicles.Add(v);
-            await _context.SaveChangesAsync();
-            return entity.Entity;
+            try
+            {
+                EntityEntry<Vehicle> entity = _context.Vehicles.Add(v);
+                await _context.SaveChangesAsync();
+                return entity.Entity;
+            }
+            catch {
+                throw new Exception();
+            }
         }
 
         public async Task EditVehicle(int vID, Vehicle v) {

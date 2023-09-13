@@ -29,7 +29,6 @@ public interface IQuoteRepository
         // delete
         Task RemoveQuote(int quoteID);
 
-  
 
     }
     public class QuoteRepository : IQuoteRepository

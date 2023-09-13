@@ -58,12 +58,38 @@ namespace WebAgentPro.Api.Services
         {
 
             var quotes = (await _quoteRepo.GetAllQuotes());
+            List < QuoteDto > returnedQuotes = new List<QuoteDto>();
 
             if (quotes == null)
             {
                 return null;
             }
+
+            foreach (Quote qu in quotes) {
+                try {
+                    returnedQuotes.Add(quoteMap.QuoteToDto(qu));
+                }
+                catch {
+                    await _quoteRepo.RemoveQuote(qu.QuoteID);
+                }
+            }
+
             return quotes.Select(q => quoteMap.QuoteToDto(q)).ToList();
+
+            /*List<QuoteDto> quoteDtos = quotes.Select(q => quoteMap.QuoteToDto(q)).ToList();
+            foreach (QuoteDto q in quoteDtos) {
+                foreach (DriverDto d in q.Drivers) {
+                    if (d.Vehicles == null)
+                    {
+                        d.Vehicles = new List<VehicleDto>();
+                    }
+                    foreach (VehicleDto v in q.Vehicles) {
+                        if (v.DriverID == d.DriverID) {
+                            d.addVehicleToDriver(v);
+                        }
+                    }
+                }
+            }*/
         }
 
         public async Task<QuoteDto> GetQuote(int quoteID)
@@ -125,7 +151,6 @@ namespace WebAgentPro.Api.Services
                 {
                     Driver dTemp = driverMap.DtoToDriver(d);
                     dTemp.QuoteID = q.QuoteID;
-                    await _driverRepo.AddDriver(dTemp);
                 }
                 else {
                     Driver dTemp = driverMap.DtoToDriver(d);
@@ -160,6 +185,9 @@ namespace WebAgentPro.Api.Services
             Vehicle newVehicle;
 
             //calculation of the Quote Price
+            foreach (DriverDto d in q.Drivers) {
+                d.Vehicles = new List<VehicleDto>();
+            }
             Quote quote = quoteMap.DtoToQuote(q);
             //set quote price after calculation
             quote.QuotePrice = 0;
@@ -173,22 +201,28 @@ namespace WebAgentPro.Api.Services
                 //create driver
                 Driver driver2 = driverMap.DtoToDriver(d);
                 driver2.QuoteID = quote.QuoteID;
+                driver2.Vehicles = new List<Vehicle>();
                 newDriver = await _driverRepo.AddDriver(driver2); //create driver
 
-                //add driver to list
-/*                driversList.Add(newDriver);*/
             }
 
             /*Populate Vehicles List*/
             foreach (VehicleDto v in q.Vehicles)
             {
                 //create vehicle
-                Vehicle vehicle2 = vehicleMap.DtoToVehicle(v);
-                vehicle2.QuoteID = quote.QuoteID;
-                newVehicle = await _vehicleRepo.AddVehicle(vehicle2); 
+                try
+                {
+                    Vehicle vehicle2 = vehicleMap.DtoToVehicle(v);
+                    vehicle2.QuoteID = quote.QuoteID;
+                    newVehicle = await _vehicleRepo.AddVehicle(vehicle2);
 
-                //add vehicle to list
-/*                vehiclesList.Add(newVehicle);*/
+                    //add vehicle to driver list
+                    await _driverRepo.AddVehicle(newVehicle.DriverID, vehicle2);
+                }
+                catch {
+                    await _quoteRepo.RemoveQuote(quote.QuoteID);
+                    throw new Exception("No driver with DriverID for Vehicle is found");
+                }
             }
 
             //return QuoteDTO by id

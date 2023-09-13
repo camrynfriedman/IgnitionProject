@@ -78,7 +78,13 @@ namespace WebAgentPro.Api.Controllers
         [HttpPost]
         public async Task<ActionResult<QuoteDto>> PostQuote(QuoteDto quote)
         {
-            await _quoteService.AddQuote(quote);
+            try
+            {
+                await _quoteService.AddQuote(quote);
+            }
+            catch (Exception e) {
+                return BadRequest(e.Message);
+            }
 
             return CreatedAtAction("GetQuote", new { id = quote.QuoteID }, quote);
         }

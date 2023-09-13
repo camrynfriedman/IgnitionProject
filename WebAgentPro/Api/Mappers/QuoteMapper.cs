@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using WebAgentPro.Api.DTOs;
 using WebAgentPro.Api.Models;
+using WebAgentPro.Api.Repositories;
 
 namespace WebAgentPro.Api.Mappers
 {
@@ -17,7 +18,7 @@ namespace WebAgentPro.Api.Mappers
 
             foreach (Driver d in quote.Drivers)
             {
-                driverList.Add(dmap.DriverToDto(d));
+                    driverList.Add(dmap.DriverToDto(d));
             }
 
             foreach (Vehicle v in quote.Vehicles)

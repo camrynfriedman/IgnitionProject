@@ -32,7 +32,7 @@ public interface IDriverRepository
         // delete
         Task RemoveDriver(int driverID);
 
-  
+        Task AddVehicle(int id, Vehicle v);
 
     }
     public class DriverRepository : IDriverRepository
@@ -88,6 +88,11 @@ public interface IDriverRepository
         public async Task RemoveDriver(int driverID)
         {
             _context.Drivers.Remove(_context.Drivers.Where(d=> d.DriverID == driverID).FirstOrDefault());
+            await _context.SaveChangesAsync();
+        }
+
+        public async Task AddVehicle(int id, Vehicle vehicle) {
+            (await _context.Drivers.FindAsync(id)).Vehicles.Add(vehicle);
             await _context.SaveChangesAsync();
         }
     }

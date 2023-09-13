@@ -9,8 +9,12 @@ namespace WebAgentPro.Api.Mappers
 {
     public class DriverMapper
     {
+        VehicleMapper vMap = new VehicleMapper();
         public DriverDto DriverToDto(Driver d)
         {
+            if (d.Vehicles == null) {
+                d.Vehicles = new List<Vehicle>();
+            }
             DriverDto returnedDriver = new DriverDto
             {
                 DriverID = d.DriverID,
@@ -23,7 +27,7 @@ namespace WebAgentPro.Api.Mappers
                 SafeDrivingSchool = d.SafeDrivingSchool,
                 QuoteMultiplier = d.QuoteMultiplier,
                 QuoteID = d.QuoteID,
-                //Vehicles = d.Vehicles
+                Vehicles = d.Vehicles.Select(v => vMap.VehicleToDto(v)).ToList()
             };
             return returnedDriver;
         }
@@ -42,7 +46,7 @@ namespace WebAgentPro.Api.Mappers
                 SafeDrivingSchool = d.SafeDrivingSchool,
                 QuoteMultiplier = d.QuoteMultiplier,
                 QuoteID = d.QuoteID,
-                //Vehicles = d.Vehicles
+                Vehicles = d.Vehicles.Select(v => vMap.DtoToVehicle(v)).ToList()
             };
             return returnedDriver;
         }

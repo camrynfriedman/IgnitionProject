@@ -35,6 +35,10 @@ namespace WebAgentPro.Api.DTOs
 
         public int QuoteID { get; set; }
 
-        //public List<Vehicle> Vehicles { get; set; }
+        public List<VehicleDto> Vehicles { get; set; }
+
+        public void addVehicleToDriver(VehicleDto v) {
+            this.Vehicles.Add(v);
+        }
     }
 }
