@@ -66,8 +66,8 @@ namespace WebAgentPro.Api.Models
         // Add relationships
         //represents primary driver
         [Required]
-        [ForeignKey("DriverID")]
-        public int DriverID { get; set; }
+        [ForeignKey("DriverSSN")]
+        public int DriverSSN { get; set; }
 
         // Add relationships
         // required foreign key

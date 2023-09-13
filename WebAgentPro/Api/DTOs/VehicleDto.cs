@@ -61,7 +61,7 @@ namespace WebAgentPro.Api.DTOs
         public decimal QuoteMultiplier { get; set; }
 
         
-        public int DriverID { get; set; }
+        public int DriverSSN { get; set; }
 
         public int QuoteID { get; set; }
 

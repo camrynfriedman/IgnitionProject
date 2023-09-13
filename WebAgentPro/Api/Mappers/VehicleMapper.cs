@@ -29,7 +29,7 @@ namespace WebAgentPro.Api.Mappers
                 ReducedUsedDiscount = v.ReducedUsedDiscount,
                 GarageAddressDifferentFromResidence = v.GarageAddressDifferentFromResidence,
                 QuoteMultiplier = v.QuoteMultiplier,
-                DriverID = v.DriverID,
+                DriverSSN = v.DriverSSN,
                 QuoteID = v.QuoteID
                 
             };
@@ -56,7 +56,7 @@ namespace WebAgentPro.Api.Mappers
                 ReducedUsedDiscount = v.ReducedUsedDiscount,
                 GarageAddressDifferentFromResidence = v.GarageAddressDifferentFromResidence,
                 QuoteMultiplier = v.QuoteMultiplier,
-                DriverID = v.DriverID,
+                DriverSSN = v.DriverSSN,
                 QuoteID = v.QuoteID
 /*                Drivers = null,
 */            };

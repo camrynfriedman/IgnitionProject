@@ -151,6 +151,7 @@ namespace WebAgentPro.Api.Services
                 {
                     Driver dTemp = driverMap.DtoToDriver(d);
                     dTemp.QuoteID = q.QuoteID;
+                    await _driverRepo.AddDriver(dTemp);
                 }
                 else {
                     Driver dTemp = driverMap.DtoToDriver(d);
@@ -209,7 +210,7 @@ namespace WebAgentPro.Api.Services
             /*Populate Vehicles List*/
             foreach (VehicleDto v in q.Vehicles)
             {
-                //create vehicle
+                //create vehicle, check if the vehicle has a valid driver in database
                 try
                 {
                     Vehicle vehicle2 = vehicleMap.DtoToVehicle(v);
@@ -217,7 +218,7 @@ namespace WebAgentPro.Api.Services
                     newVehicle = await _vehicleRepo.AddVehicle(vehicle2);
 
                     //add vehicle to driver list
-                    await _driverRepo.AddVehicle(newVehicle.DriverID, vehicle2);
+                    await _driverRepo.AddVehicle(newVehicle.DriverSSN, vehicle2);
                 }
                 catch {
                     await _quoteRepo.RemoveQuote(quote.QuoteID);

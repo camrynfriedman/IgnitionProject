@@ -32,7 +32,11 @@ public interface IDriverRepository
         // delete
         Task RemoveDriver(int driverID);
 
+        Task<bool> DriverExists(string ssn);
+
         Task AddVehicle(int id, Vehicle v);
+
+
 
     }
     public class DriverRepository : IDriverRepository
@@ -91,8 +95,17 @@ public interface IDriverRepository
             await _context.SaveChangesAsync();
         }
 
-        public async Task AddVehicle(int id, Vehicle vehicle) {
-            (await _context.Drivers.FindAsync(id)).Vehicles.Add(vehicle);
+        public async Task<bool> DriverExists(string ssn) {
+            if (_context.Drivers.Where(d => d.DriverSSN == ssn).FirstOrDefault() == null) {
+                return true;
+            }
+            return false;
+        }
+
+        public async Task AddVehicle(int ssn, Vehicle vehicle) {
+            var temp = (_context.Drivers.Where(d => d.DriverSSN == ssn.ToString()).FirstOrDefault());
+            var temp2 = temp.Vehicles;
+            temp.Vehicles.Add(vehicle);
             await _context.SaveChangesAsync();
         }
     }
