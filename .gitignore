@@ -334,3 +334,4 @@ ASALocalRun/
 .angular/
 
 /WebAgentPro/Views/Shared
+/WebAgentPro/Api/Services/QuoteService.cs

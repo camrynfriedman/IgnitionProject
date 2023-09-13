@@ -24,7 +24,7 @@ public interface IDriverRepository
         //Task<Driver> GetDriverByLicense(string driversLicenseNum);
 
         // edit driver
-        Task EditDriver(Driver d);
+        Task EditDriver(int id, Driver d);
 
         // insert
         Task<Driver> AddDriver(Driver d);
@@ -67,9 +67,13 @@ public interface IDriverRepository
         //    return driver;
         //}
 
-        public async Task EditDriver(Driver d)
+        public async Task EditDriver(int id, Driver d)
         {
-            _context.Entry(d).State = EntityState.Modified;
+            _context.Drivers.Remove(await _context.Drivers.FindAsync(id));
+            d.DriverID = id;
+            _context.Drivers.Add(d);
+            /*            _context.Entry(v).State = EntityState.Modified;
+            */
             await _context.SaveChangesAsync();
         }
 
