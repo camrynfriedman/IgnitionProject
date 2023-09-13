@@ -1,74 +1,84 @@
 <!-- Will want to add conditional styling to navbar -->
+<!--mock header-->
 <h3>Customer Information</h3>
 
 <h5>General</h5>
+<!-- styling of form from global css -->
+<div class="customerInfoForm">
 <form [formGroup]="form">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col">
-                <div class="form-group">
+
+    <!--Form for customer information-->
+    <form [formGroup]="form">
+        <!--form title and requirements message-->
+        <h6 id="required"><span style="color: #8C0423">*</span> All fields are Required</h6>
+        <h5 id="general">General</h5>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col">
+                    <div class="form-group">
                     <label for="policyHolderFName">First Name</label>
                     <input id="policyHolderFName"
                            formControlName="policyHolderFName"
-                           type="text"
+                               type="text"
                            class="form-control" />
                     <app-form-error-message [control]="form.get('policyHolderFName')"
                                             errorType="pattern"
                                             errorMessage="First Name is required"></app-form-error-message>
-                </div>
-                <div class="form-group">
+                    </div>
+                    <div class="form-group">
                     <label for="policyHolderLName">Last Name</label>
                     <input id="policyHolderLName"
                            formControlName="policyHolderLName"
-                           type="text"
+                               type="text"
                            class="form-control" />
                     <app-form-error-message [control]="form.get('policyHolderLName')"
                                             errorType="pattern"
                                             errorMessage="Last Name is required"></app-form-error-message>
-                </div>
-                <div class="form-group">
+                    </div>
+                    <div class="form-group">
                     <label for="policyHolderDOB">Date of Birth</label>
                     <input id="policyHolderDOB"
                            formControlName="policyHolderDOB"
-                           type="date"
+                               type="date"
                            class="form-control" />
                     <app-form-error-message [control]="form.get('policyHolderDOB')"
                                             errorType="pattern"
                                             errorMessage="Date of Birth is required"></app-form-error-message>
-                </div>
-                <div class="form-group">
+                    </div>
+                    <div class="form-group">
                     <label for="addressLine1">Street Address</label>
                     <input id="addressLine1"
                            formControlName="addressLine1"
-                           type="text"
                            class="form-control" />
                     <app-form-error-message [control]="form.get('addressLine1')"
                                             errorType="pattern"
                                             errorMessage="Address is required"></app-form-error-message>
-                </div>
-                <div class="form-group">
+                    </div>
+                    <div class="form-group">
                     <label for="addressLine2">Apt or Suite #</label>
                     <input id="addressLine2"
                            formControlName="addressLine2"
-                           type="text"
+                               type="text"
                            class="form-control" />
-                </div>
-                <div class="form-group">
+                    </div>
+                    <div class="form-group">
                     <label for="city">City</label>
                     <input id="city"
                            formControlName="city"
-                           type="text"
+                               type="text"
                            class="form-control" />
                     <app-form-error-message [control]="form.get('city')"
                                             errorType="pattern"
                                             errorMessage="City is required"></app-form-error-message>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col">
-                <div class="form-group">
-                    <label for="state">State</label>
+
+            <div class="row">
+                <div class="col" id="state">
+                    <div class="form-group">
+                        <div class="dropdown">
+                            <label for="state">State</label>
                     <select id="state"
                             formControlName="state"
                             type="text"
@@ -81,6 +91,7 @@
                                             errorMessage="State is required"></app-form-error-message>
                 </div>
             </div>
+</div>
             <div class="col">
                 <div class="form-group">
                     <label for="postalCode">5 Digit Zip Code</label>
@@ -92,11 +103,12 @@
                                             errorType="pattern"
                                             errorMessage="Zip code must be a 5-digit numeric value."></app-form-error-message>
                 </div>
-            </div>
-        </div>
+</div>
+</div>
         <div class="row">
             <div class="col">
-                <div class="form-group">
+                <div class="col" id="zipCode">
+                    <div class="form-group">
                     <label for="policyHolderEmailAddress">Email Address</label>
                     <input id="policyHolderEmailAddress"
                            formControlName="policyHolderEmailAddress"
@@ -110,17 +122,18 @@
                     <label for="policyHolderPhoneNumber">Phone Number</label>
                     <input id="policyHolderPhoneNumber"
                            formControlName="policyHolderPhoneNumber"
-                           type="text"
+                               type="text"
                            class="form-control" />
                     <app-form-error-message [control]="form.get('policyHolderPhoneNumber')"
                                             errorType="pattern"
                                             errorMessage="Phone number is required"></app-form-error-message>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="form-group">
+            <div class="form-group">
             <app-continue-btn [form]="form"
                               (btnClick)="onSubmit()"></app-continue-btn>
+            </div>
         </div>
-    </div>
-</form>
+    </form>
+</div>

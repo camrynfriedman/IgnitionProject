@@ -1,84 +1,85 @@
 <!-- Will want to add conditional styling to navbar -->
 <h3>Vehicles</h3>
 
-<h5>Vehicle Details</h5>
-<form [formGroup]="form" (ngSubmit)="onSubmit()">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col">
-                <label for="antiLockBrakes">Anti Lock Brakes</label>
-            </div>
-            <div class="col">
-                <input id="antiLockBrakes"
-                       formControlName="antiLockBrakes"
-                       type="checkbox"
-                       class="form-control checkbox" />
+<!-- styling of form from global css -->
+<div class="customerInfoForm">
+
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <h6 id="required"><span style="color: #8C0423">*</span> Select all that apply</h6>
+        <h5>Vehicle Details</h5>
+
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col">
+
+                    <div class="form-group form-check">
+                        <label class="form-check-label" for="antiLockBrakes">
+                            Anti Lock Brakes
+                        </label>
+                        <input class="form-check-input" type="checkbox" id="antiLockBrakes">
+                    </div>
+
+                    <div class="gap"></div>
+
+                    <div class="form-group form-check">
+                        <label class="form-check-label" for="passiveRestraints">
+                            Passive Restraints
+                        </label>
+                        <input class="form-check-input" type="checkbox" id="passiveRestrains">
+                    </div>
+
+                    <div class="gap"></div>
+
+                    <div class="form-group form-check">
+                        <label class="form-check-label" for="antiTheft">
+                            Anti-Theft Installed
+                        </label>
+                        <input class="form-check-input" type="checkbox" id="antiTheft">
+                    </div>
+
+                    <div class="gap"></div>
+
+                    <div class="form-group form-check">
+                        <label class="form-check-label" for="reducedUsed">
+                            Reduced Used Discount
+                        </label>
+                        <input class="form-check-input" type="checkbox" id="reduceUsed">
+                    </div>
+
+                    <div class="gap"></div>
+
+                    <div class="form-group form-check">
+                        <label class="form-check-label" for="daytimeLights">
+                            Daytime Running Lights
+                        </label>
+                        <input class="form-check-input" type="checkbox" id="daytimeLights">
+                    </div>
+
+                    <div class="gap"></div>
+
+                    <div class="form-group form-check">
+                        <label class="form-check-label" for="garageAddress">
+                            Garage Address Different
+                        </label>
+                        <input class="form-check-input" type="checkbox" id="garageAddress">
+                    </div>
+
+                    <div class="gap"></div>
+
+
+
+                    <div class="row">
+                        <div class="col">
+                            <app-return-btn text="Vehicle General">
+                            </app-return-btn>
+                        </div>
+                        <div class="col">
+                            <app-continue-btn [form]="form"></app-continue-btn>
+                        </div>
+                    </div>
+
+                </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col">
-                <label for="passiveRestraints">Passive Restraints</label>
-            </div>
-            <div class="col">
-                <input id="passiveRestraints"
-                       formControlName="passiveRestraints"
-                       type="checkbox"
-                       class="form-control checkbox" />
-            </div>
-        </div>
-        <div class="row">
-            <div class="col">
-                <label for="antiTheftInstalled">Anti Theft installed</label>
-            </div>
-            <div class="col">
-                <input id="antiTheftInstalled"
-                       formControlName="antiTheftInstalled"
-                       type="checkbox"
-                       class="form-control checkbox" />
-            </div>
-        </div>
-        <div class="row">
-            <div class="col">
-                <label for="reducedUsedDiscount">Reduced Used Discount</label>
-            </div>
-            <div class="col">
-                <input id="reducedUsedDiscount"
-                       formControlName="reducedUsedDiscount"
-                       type="checkbox"
-                       class="form-control checkbox" />
-            </div>
-        </div>
-        <div class="row">
-            <div class="col">
-                <label for="daytimeRunningLights">Daytime Running Lights</label>
-            </div>
-            <div class="col">
-                <input id="daytimeRunningLights"
-                       formControlName="daytimeRunningLights"
-                       type="checkbox"
-                       class="form-control checkbox" />
-            </div>
-        </div>
-        <div class="row">
-            <div class="col">
-                <label for="garageAddressDifferent">Garage Address Different</label>
-            </div>
-            <div class="col">
-                <input id="garageAddressDifferent"
-                       formControlName="garageAddressDifferent"
-                       type="checkbox"
-                       class="form-control checkbox" />
-            </div>
-        </div>
-        <p>Buttons don't do anything yet</p>
-        <div class="row">
-            <div class="col">
-                <app-return-btn text="Vehicle General">
-                </app-return-btn>
-            </div>
-            <div class="col">
-                <app-continue-btn [form]="form"></app-continue-btn>
-            </div>
-        </div>
+    </form>
     </div>
-</form>
