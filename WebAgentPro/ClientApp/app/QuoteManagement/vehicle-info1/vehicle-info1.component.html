@@ -1,97 +1,118 @@
 <!-- Will want to add conditional styling to navbar -->
 <h3>Vehicles</h3>
 
-<h5>General</h5>
-<form [formGroup]="form" (ngSubmit)="onSubmit()">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col">
-                <div class="form-group">
-                    <label for="primaryDriver">Primary Driver</label>
-                    <!-- Will want to add AJAX call for entered drivers -->
-                    <select id="primaryDriver"
-                            formControlName="primaryDriver"
-                            class="form-control">
-                        <option>Rick Sanchez</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="make">Make</label>
-                    <input id="make"
-                           formControlName="make"
-                           type="text"
-                           class="form-control" required />
-                </div>
-                <div class="form-group">
-                    <label for="model">Model</label>
-                    <input id="model"
-                           formControlName="model"
-                           type="text"
-                           class="form-control" required />
+<!-- styling of form from global css -->
+<div class="customerInfoForm">
+
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <h6 id="required"><span style="color: #8C0423">*</span> All fields are Required</h6>
+        <h5>General</h5>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col">
+                    <div class="form-group">
+                        <label for="primaryDriver">Primary Driver</label>
+                        <!-- Will want to add AJAX call for entered drivers -->
+                        <select id="primaryDriver"
+                                formControlName="primaryDriver"
+                                class="form-control">
+                            <option>Rick Sanchez</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="make">Make</label>
+                        <input id="make"
+                               formControlName="make"
+                               type="text"
+                               class="form-control" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="model">Model</label>
+                        <input id="model"
+                               formControlName="model"
+                               type="text"
+                               class="form-control" required />
+                    </div>
                 </div>
             </div>
+            <div class="row">
+                <div class="col">
+                    <div class="form-group">
+                        <label for="year">Year</label>
+                        <input id="year"
+                               formControlName="year"
+                               type="text"
+                               class="form-control" required />
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-group">
+                        <label for="vin">VIN Number</label>
+                        <input id="vin"
+                               formControlName="vin"
+                               type="text"
+                               class="form-control" required />
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div class="form-group">
+                        <label for="currentValue">Current Value</label>
+                        <input id="currentValue"
+                               formControlName="currentValue"
+                               type="text"
+                               class="form-control" required />
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-group">
+                        <label for="annualMileage">Annual Mileage</label>
+                        <input id="annualMileage"
+                               formControlName="annualMileage"
+                               type="text"
+                               class="form-control" required />
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div class="form-group">
+                        <label for="daysPerWeek">Days driven to work per week</label>
+                        <input id="daysPerWeek"
+                               formControlName="daysPerWeek"
+                               type="text"
+                               class="form-control" required />
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div class="form-group">
+                        <label for="daysPerWeek">Miles Driven to Work</label>
+                        <input id="milesToWork"
+                               formControlName="milesToWork"
+                               type="text"
+                               class="form-control" required />
+                    </div>
+                </div>
+            </div>
+
+            <!--Not sure why <app-return-bt> is not showing text before input-->
+            <div class="form-group">
+                <div class="row">
+                    <div class="col">
+                        <app-return-btn text="Driver Details">
+                        </app-return-btn>
+                    </div>
+                    <div class="col">
+                        <app-continue-btn [form]="form"></app-continue-btn>
+                    </div>
+                </div>
+            </div>
+
         </div>
-        <div class="row">
-            <div class="col">
-                <div class="form-group">
-                    <label for="year">Year</label>
-                    <input id="year"
-                           formControlName="year"
-                           type="text"
-                           class="form-control" required />
-                </div>
-            </div>
-            <div class="col">
-                <div class="form-group">
-                    <label for="vin">VIN Number</label>
-                    <input id="vin"
-                           formControlName="vin"
-                           type="text"
-                           class="form-control" required />
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col">
-                <div class="form-group">
-                    <label for="currentValue">Current Value</label>
-                    <input id="currentValue"
-                           formControlName="currentValue"
-                           type="text"
-                           class="form-control" required />
-                </div>
-            </div>
-            <div class="col">
-                <div class="form-group">
-                    <label for="annualMileage">Annual Mileage</label>
-                    <input id="annualMileage"
-                           formControlName="annualMileage"
-                           type="text"
-                           class="form-control" required />
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col">
-                <div class="form-group">
-                    <label for="daysPerWeek">Days driven to work per week</label>
-                    <input id="daysPerWeek"
-                           formControlName="daysPerWeek"
-                           type="text"
-                           class="form-control" required />
-                </div>
-            </div>
-        </div>
+    </form>
+
     </div>
-    <div class="form-group">
-        <div class="row">
-            <div class="col">
-                <app-return-btn text="Driver Details">
-                </app-return-btn>
-            </div>
-            <div class="col">
-                <app-continue-btn [form]="form"></app-continue-btn>
-            </div>
-        </div>
-    </div>
-</form>
+

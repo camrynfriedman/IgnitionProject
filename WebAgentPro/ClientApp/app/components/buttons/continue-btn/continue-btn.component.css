@@ -1,0 +1,11 @@
+button {
+    width: 100%;
+    font-family: Arial;
+    font-size: 16px;
+    font-weight: 700;
+    height: 50px;
+    background-color: #022179;
+    color: #F7F7F7;
+    opacity:0.4;
+    border-radius:10px;
+}

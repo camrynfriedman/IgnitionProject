@@ -10,8 +10,8 @@ using WebAgentPro.Data;
 namespace WebAgentPro.Migrations
 {
     [DbContext(typeof(WapDbContext))]
-    [Migration("20230906160047_AddedEntities")]
-    partial class AddedEntities
+    [Migration("20230911222601_newmigrations")]
+    partial class newmigrations
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -241,11 +241,13 @@ namespace WebAgentPro.Migrations
 
                     b.Property<string>("DriverFName")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("DriverLName")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("DriverLicenseNumber")
                         .IsRequired()
@@ -291,8 +293,9 @@ namespace WebAgentPro.Migrations
                     b.Property<string>("AddressLine2")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("AgentId")
-                        .HasColumnType("int");
+                    b.Property<string>("AgentId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("City")
                         .IsRequired()
@@ -330,8 +333,8 @@ namespace WebAgentPro.Migrations
 
                     b.Property<string>("PolicyHolderLName")
                         .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("PolicyHolderSsn")
                         .IsRequired()
@@ -424,7 +427,6 @@ namespace WebAgentPro.Migrations
                         .HasColumnType("nvarchar(17)");
 
                     b.Property<int>("Year")
-                        .HasMaxLength(4)
                         .HasColumnType("int");
 
                     b.HasKey("VehicleId");

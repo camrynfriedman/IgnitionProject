@@ -425,7 +425,6 @@ namespace WebAgentPro.Migrations
                         .HasColumnType("nvarchar(17)");
 
                     b.Property<int>("Year")
-                        .HasMaxLength(4)
                         .HasColumnType("int");
 
                     b.HasKey("VehicleId");

@@ -19,8 +19,9 @@ a {
 
 /* This style is applied to every screen*/
 .globalStyle {
-    font-family: Montserrat;
-    min-width:298px;
+    font-family: 'Segoe UI';
+    color:#19213D;
+    min-width: 298px;
 }
 
 /*Centers content*/
@@ -38,7 +39,7 @@ a {
 }
 
 /* styling for email and password form */
-.form-group{
+.form-group#username,.form-group#password,.form-group#btns{
     min-width: 320px;
     min-height: 50px;
     margin: auto;
@@ -93,3 +94,13 @@ a.btn.btn-link {
     background-color:transparent;
     border-color:transparent;
 }
+
+/*Form styling in quote creation */
+.customerInfoForm {
+    background-color: #F7F7F7;
+    min-width: fit-content;
+    max-width:400px;
+    margin-left: auto;
+    margin-right: auto;
+}
+

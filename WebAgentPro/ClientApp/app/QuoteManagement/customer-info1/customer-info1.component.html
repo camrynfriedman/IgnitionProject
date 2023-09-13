@@ -1,77 +1,110 @@
 <!-- Will want to add conditional styling to navbar -->
+<!--mock header-->
 <h3>Customer Information</h3>
 
-<h5>General</h5>
-<form [formGroup]="form" (ngSubmit)="onSubmit()">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col">
-                <div class="form-group">
-                    <label for="firstName">First Name</label>
-                    <input id="firstName"
-                           formControlName="firstName"
-                           type="text"
-                           class="form-control" required />
+<!-- styling of form from global css -->
+<div class="customerInfoForm">
+
+    <!--Form for customer information-->
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <!--form title and requirements message-->
+        <h6 id="required"><span style="color: #8C0423">*</span> All fields are Required</h6>
+        <h5 id="general">General</h5>
+
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col">
+                    <div class="form-group">
+                        <label for="firstName">First Name</label>
+                        <input id="firstName"
+                               formControlName="firstName"
+                               type="text"
+                               class="form-control" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="lastName">Last Name</label>
+                        <input id="lastName"
+                               formControlName="lastName"
+                               type="text"
+                               class="form-control" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="dob">Date of Birth</label>
+                        <input id="dob"
+                               formControlName="dob"
+                               type="date"
+                               class="form-control" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input id="email"
+                               formControlName="email"
+                               type="email"
+                               class="form-control" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="country">Country</label>
+                        <input id="country"
+                               formControlName="country"
+                               type="text"
+                               class="form-control" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="streetAddress">Street Address</label>
+                        <input id="streetAddress"
+                               formControlName="streetAddress"
+                               type="text"
+                               class="form-control" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="aptOrSuite">Apt or Suite #</label>
+                        <input id="aptOrSuite"
+                               formControlName="aptOrSuite"
+                               type="text"
+                               class="form-control" />
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label for="lastName">Last Name</label>
-                    <input id="lastName"
-                           formControlName="lastName"
-                           type="text"
-                           class="form-control" required />
+            </div>
+
+            <div class="row">
+                <div class="col" id="state">
+                    <div class="form-group">
+                        <div class="dropdown">
+                            <label for="state">State</label>
+                            <select id="state"
+                                    class="form-control"
+                                    formControlName="State" required>
+                                <option></option>
+                                <option>CT</option>
+                                <option>MA</option>
+                                <option>ME</option>
+                                <option>NH</option>
+                                <option>NY</option>
+                                <option>PA</option>
+                                <option>SC</option>
+                                <option>VA</option>
+                                <option>VT</option>
+                                <option>WV</option>
+                            </select>
+                        </div>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label for="dob">Date of Birth</label>
-                    <input id="dob"
-                           formControlName="dob"
-                           type="date"
-                           class="form-control" required />
+
+                <div class="col" id="zipCode">
+                    <div class="form-group">
+                        <label for="zipCode">5 Digit Zip Code</label>
+                        <input id="zipCode"
+                               formControlName="zipCode"
+                               type="text"
+                               class="form-control" required />
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label for="country">Country</label>
-                    <input id="country"
-                           formControlName="country"
-                           type="text"
-                           class="form-control" required />
-                </div>
-                <div class="form-group">
-                    <label for="streetAddress">Street Address</label>
-                    <input id="streetAddress"
-                           formControlName="streetAddress"
-                           type="text"
-                           class="form-control" required />
-                </div>
-                <div class="form-group">
-                    <label for="aptOrSuite">Apt or Suite #</label>
-                    <input id="aptOrSuite"
-                           formControlName="aptOrSuite"
-                           type="text"
-                           class="form-control" required />
-                </div>
+            </div>
+            <div class="form-group">
+                <app-continue-btn [form]="form"></app-continue-btn>
             </div>
         </div>
-        <div class="row">
-            <div class="col">
-                <div class="form-group">
-                    <label for="state">State</label>
-                    <input id="state"
-                           formControlName="state"
-                           type="text"
-                           class="form-control" required />
-                </div>
-            </div>
-            <div class="col">
-                <div class="form-group">
-                    <label for="zipCode">5 Digit Zip Code</label>
-                    <input id="zipCode"
-                           formControlName="zipCode"
-                           type="text"
-                           class="form-control" required />
-                </div>
-            </div>
-        </div>
-        <div class="form-group">
-            <app-continue-btn [form]="form"></app-continue-btn>
-        </div>  
-    </div>
-</form>
+
+    </form>
+
+</div>
