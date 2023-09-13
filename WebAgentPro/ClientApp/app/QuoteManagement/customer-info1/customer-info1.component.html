@@ -2,13 +2,11 @@
 <!--mock header-->
 <h3>Customer Information</h3>
 
-<h5>General</h5>
 <!-- styling of form from global css -->
 <div class="customerInfoForm">
     <!--Form for customer information-->
     <form [formGroup]="form">
         <!--form title and requirements message-->
-        <h6 id="required"><span style="color: #8C0423">*</span> All fields are Required</h6>
         <h5 id="general">General</h5>
         <div class="container-fluid">
             <div class="row">
@@ -105,7 +103,7 @@
             </div>
             <div class="row">
                 <div class="col">
-                    <div class="col" id="zipCode">
+                   
                         <div class="form-group">
                             <label for="policyHolderEmailAddress">Email Address</label>
                             <input id="policyHolderEmailAddress"
@@ -126,7 +124,7 @@
                                                     errorType="pattern"
                                                     errorMessage="Phone number is required"></app-form-error-message>
                         </div>
-                    </div>
+                  
                 </div>
             </div>
                 <div class="form-group">
