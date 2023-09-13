@@ -161,17 +161,24 @@ namespace WebAgentPro.Api.Services
             }
             foreach (VehicleDto d in q.Vehicles)
             {
-                if (d.VehicleID == 0)
+                try
                 {
                     Vehicle dTemp = vehicleMap.DtoToVehicle(d);
-                    dTemp.QuoteID = q.QuoteID;
-                    await _vehicleRepo.AddVehicle(dTemp);
+                    if (d.VehicleID == 0)
+                    {
+                        dTemp.QuoteID = q.QuoteID;
+                        await _vehicleRepo.AddVehicle(dTemp);
+                    }
+                    else
+                    {
+                        dTemp.QuoteID = q.QuoteID;
+                        await _vehicleRepo.EditVehicle(dTemp.VehicleID, dTemp);
+                    }
+                    await _driverRepo.AddVehicle(d.DriverSSN, dTemp);
                 }
-                else
-                {
-                    Vehicle dTemp = vehicleMap.DtoToVehicle(d);
-                    dTemp.QuoteID = q.QuoteID;
-                    await _vehicleRepo.EditVehicle(dTemp.VehicleID, dTemp);
+                catch {
+                    await _quoteRepo.RemoveQuote(quote.QuoteID);
+                    throw new Exception("No driver with DriverID for Vehicle is found");
                 }
             }
         }

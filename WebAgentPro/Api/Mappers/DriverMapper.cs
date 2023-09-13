@@ -34,6 +34,10 @@ namespace WebAgentPro.Api.Mappers
 
         public Driver DtoToDriver(DriverDto d)
         {
+            if (d.Vehicles == null)
+            {
+                d.Vehicles = new List<VehicleDto>();
+            }
             Driver returnedDriver = new Driver
             {
                 DriverID = d.DriverID,
