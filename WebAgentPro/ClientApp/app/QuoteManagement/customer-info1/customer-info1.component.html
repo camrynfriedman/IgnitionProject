@@ -5,8 +5,6 @@
 <h5>General</h5>
 <!-- styling of form from global css -->
 <div class="customerInfoForm">
-<form [formGroup]="form">
-
     <!--Form for customer information-->
     <form [formGroup]="form">
         <!--form title and requirements message-->
@@ -16,60 +14,60 @@
             <div class="row">
                 <div class="col">
                     <div class="form-group">
-                    <label for="policyHolderFName">First Name</label>
-                    <input id="policyHolderFName"
-                           formControlName="policyHolderFName"
+                        <label for="policyHolderFName">First Name</label>
+                        <input id="policyHolderFName"
+                               formControlName="policyHolderFName"
                                type="text"
-                           class="form-control" />
-                    <app-form-error-message [control]="form.get('policyHolderFName')"
-                                            errorType="pattern"
-                                            errorMessage="First Name is required"></app-form-error-message>
+                               class="form-control" />
+                        <app-form-error-message [control]="form.get('policyHolderFName')"
+                                                errorType="pattern"
+                                                errorMessage="First Name is required"></app-form-error-message>
                     </div>
                     <div class="form-group">
-                    <label for="policyHolderLName">Last Name</label>
-                    <input id="policyHolderLName"
-                           formControlName="policyHolderLName"
+                        <label for="policyHolderLName">Last Name</label>
+                        <input id="policyHolderLName"
+                               formControlName="policyHolderLName"
                                type="text"
-                           class="form-control" />
-                    <app-form-error-message [control]="form.get('policyHolderLName')"
-                                            errorType="pattern"
-                                            errorMessage="Last Name is required"></app-form-error-message>
+                               class="form-control" />
+                        <app-form-error-message [control]="form.get('policyHolderLName')"
+                                                errorType="pattern"
+                                                errorMessage="Last Name is required"></app-form-error-message>
                     </div>
                     <div class="form-group">
-                    <label for="policyHolderDOB">Date of Birth</label>
-                    <input id="policyHolderDOB"
-                           formControlName="policyHolderDOB"
+                        <label for="policyHolderDOB">Date of Birth</label>
+                        <input id="policyHolderDOB"
+                               formControlName="policyHolderDOB"
                                type="date"
-                           class="form-control" />
-                    <app-form-error-message [control]="form.get('policyHolderDOB')"
-                                            errorType="pattern"
-                                            errorMessage="Date of Birth is required"></app-form-error-message>
+                               class="form-control" />
+                        <app-form-error-message [control]="form.get('policyHolderDOB')"
+                                                errorType="pattern"
+                                                errorMessage="Date of Birth is required"></app-form-error-message>
                     </div>
                     <div class="form-group">
-                    <label for="addressLine1">Street Address</label>
-                    <input id="addressLine1"
-                           formControlName="addressLine1"
-                           class="form-control" />
-                    <app-form-error-message [control]="form.get('addressLine1')"
-                                            errorType="pattern"
-                                            errorMessage="Address is required"></app-form-error-message>
+                        <label for="addressLine1">Street Address</label>
+                        <input id="addressLine1"
+                               formControlName="addressLine1"
+                               class="form-control" />
+                        <app-form-error-message [control]="form.get('addressLine1')"
+                                                errorType="pattern"
+                                                errorMessage="Address is required"></app-form-error-message>
                     </div>
                     <div class="form-group">
-                    <label for="addressLine2">Apt or Suite #</label>
-                    <input id="addressLine2"
-                           formControlName="addressLine2"
+                        <label for="addressLine2">Apt or Suite #</label>
+                        <input id="addressLine2"
+                               formControlName="addressLine2"
                                type="text"
-                           class="form-control" />
+                               class="form-control" />
                     </div>
                     <div class="form-group">
-                    <label for="city">City</label>
-                    <input id="city"
-                           formControlName="city"
+                        <label for="city">City</label>
+                        <input id="city"
+                               formControlName="city"
                                type="text"
-                           class="form-control" />
-                    <app-form-error-message [control]="form.get('city')"
-                                            errorType="pattern"
-                                            errorMessage="City is required"></app-form-error-message>
+                               class="form-control" />
+                        <app-form-error-message [control]="form.get('city')"
+                                                errorType="pattern"
+                                                errorMessage="City is required"></app-form-error-message>
                     </div>
                 </div>
             </div>
@@ -79,61 +77,62 @@
                     <div class="form-group">
                         <div class="dropdown">
                             <label for="state">State</label>
-                    <select id="state"
-                            formControlName="state"
-                            type="text"
-                            class="custom-select">
-                        <option></option>
-                        <option *ngFor="let s of allStates" value="{{s}}">{{s}}</option>
-                    </select>
-                    <app-form-error-message [control]="form.get('state')"
-                                            errorType="pattern"
-                                            errorMessage="State is required"></app-form-error-message>
+                            <select id="state"
+                                    formControlName="state"
+                                    type="text"
+                                    class="custom-select">
+                                <option></option>
+                                <option *ngFor="let s of allStates" value="{{s}}">{{s}}</option>
+                            </select>
+                            <app-form-error-message [control]="form.get('state')"
+                                                    errorType="pattern"
+                                                    errorMessage="State is required"></app-form-error-message>
+                        </div>
+                    </div>
                 </div>
-            </div>
-</div>
-            <div class="col">
-                <div class="form-group">
-                    <label for="postalCode">5 Digit Zip Code</label>
-                    <input id="postalCode"
-                           formControlName="postalCode"
-                           type="text"
-                           class="form-control" />
-                    <app-form-error-message [control]="form.get('postalCode')"
-                                            errorType="pattern"
-                                            errorMessage="Zip code must be a 5-digit numeric value."></app-form-error-message>
-                </div>
-</div>
-</div>
-        <div class="row">
-            <div class="col">
-                <div class="col" id="zipCode">
+                <div class="col">
                     <div class="form-group">
-                    <label for="policyHolderEmailAddress">Email Address</label>
-                    <input id="policyHolderEmailAddress"
-                           formControlName="policyHolderEmailAddress"
-                           type="text"
-                           class="form-control" />
-                    <app-form-error-message [control]="form.get('policyHolderEmailAddress')"
-                                            errorType="pattern"
-                                            errorMessage="Email is required"></app-form-error-message>
-                </div>
-                <div class="form-group">
-                    <label for="policyHolderPhoneNumber">Phone Number</label>
-                    <input id="policyHolderPhoneNumber"
-                           formControlName="policyHolderPhoneNumber"
+                        <label for="postalCode">5 Digit Zip Code</label>
+                        <input id="postalCode"
+                               formControlName="postalCode"
                                type="text"
-                           class="form-control" />
-                    <app-form-error-message [control]="form.get('policyHolderPhoneNumber')"
-                                            errorType="pattern"
-                                            errorMessage="Phone number is required"></app-form-error-message>
+                               class="form-control" />
+                        <app-form-error-message [control]="form.get('postalCode')"
+                                                errorType="pattern"
+                                                errorMessage="Zip code must be a 5-digit numeric value."></app-form-error-message>
                     </div>
                 </div>
             </div>
-            <div class="form-group">
-            <app-continue-btn [form]="form"
-                              (btnClick)="onSubmit()"></app-continue-btn>
+            <div class="row">
+                <div class="col">
+                    <div class="col" id="zipCode">
+                        <div class="form-group">
+                            <label for="policyHolderEmailAddress">Email Address</label>
+                            <input id="policyHolderEmailAddress"
+                                   formControlName="policyHolderEmailAddress"
+                                   type="text"
+                                   class="form-control" />
+                            <app-form-error-message [control]="form.get('policyHolderEmailAddress')"
+                                                    errorType="pattern"
+                                                    errorMessage="Email is required"></app-form-error-message>
+                        </div>
+                        <div class="form-group">
+                            <label for="policyHolderPhoneNumber">Phone Number</label>
+                            <input id="policyHolderPhoneNumber"
+                                   formControlName="policyHolderPhoneNumber"
+                                   type="text"
+                                   class="form-control" />
+                            <app-form-error-message [control]="form.get('policyHolderPhoneNumber')"
+                                                    errorType="pattern"
+                                                    errorMessage="Phone number is required"></app-form-error-message>
+                        </div>
+                    </div>
+                </div>
             </div>
+                <div class="form-group">
+                    <app-continue-btn [form]="form"
+                                      (btnClick)="onSubmit()"></app-continue-btn>
+                </div>
         </div>
     </form>
 </div>
