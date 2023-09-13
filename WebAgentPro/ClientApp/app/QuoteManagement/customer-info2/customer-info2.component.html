@@ -1,83 +1,79 @@
 <!-- Will want to add conditional styling to navbar -->
+
+<!-- Mock header -->
 <h3>Customer Information</h3>
 
-<h5>Customer Details</h5>
-<form [formGroup]="form" (ngSubmit)="onSubmit()">
-    <div class="container-fluid">
-                <div class="row">
-                    <div class="col">
-                        <label for="previousCarrierL">Previous Carrier Lizard</label>
-                    </div>
-                    <div class="col">
-                        <input id="previousCarrierL"
-                               formControlName="previousCarrierL"
-                               type="checkbox"
-                               class="form-control checkbox" />
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col">
-                        <label for="previousCarrierP">Previous Carrier Pervasive</label>
-                    </div>
-                    <div class="col">
-                        <input id="previousCarrierP"
-                               formControlName="previousCarrierP"
-                               type="checkbox"
-                               class="form-control checkbox" />
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col">
-                        <label for="recentMovingViolations">Recent Moving Violations</label>
-                    </div>
-                    <div class="col">
-                        <input id="recentMovingViolations"
-                               formControlName="recentMovingViolations"
-                               type="checkbox"
-                               class="form-control checkbox" />
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col">
-                        <label for="recentClaims">Recent Claims</label>
-                    </div>
-                    <div class="col">
-                        <input id="recentClaims"
-                               formControlName="recentClaims"
-                               type="checkbox"
-                               class="form-control checkbox" />
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col">
-                        <label for="multipleCars">Multiple Cars</label>
-                    </div>
-                    <div class="col">
-                        <input id="multipleCars"
-                               formControlName="multipleCars"
-                               type="checkbox"
-                               class="form-control checkbox" />
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col">
-                        <label for="lowDrivingExperience">Low Driving Experience</label>
-                    </div>
-                    <div class="col">
-                        <input id="lowDrivingExperience"
-                               formControlName="lowDrivingExperience"
-                               type="checkbox"
-                               class="form-control checkbox" />
-                    </div>
-                </div>
+<!-- styling of form from global css -->
+<div class="customerInfoForm">
+  
+    <!--Form for customer details-->
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <!--form title and requirements message-->
+        <h6 id="select"><span style="color:#8C0423">*</span> Select all that apply</h6>
+        <h5 id="customerDetails">Customer Details</h5>
+        <!--Drop down for previous carrier-->
+        <div class="container-fluid">
             <div class="row">
                 <div class="col">
-                    <app-return-btn text="Back to General">
-                    </app-return-btn>
-                </div>
-                <div class="col">
-                    <app-continue-btn [form]="form"></app-continue-btn>
+                    <div class="form-group">
+                        <div class="dropdown">
+                            <label for="prvCarrier">Customer's Previous Carrier</label>
+                            <br /> <select id="prvCarrier">
+                                <option>None</option>
+                                <option>Lizard</option>
+                                <option>Pervasive</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="gap"></div>
+
+                    <!-- Check boxes for discounts -->
+                    <div class="form-group form-check">
+                        <label class="form-check-label" for="violations">
+                            Recent Moving Violations
+                        </label>
+                        <input class="form-check-input" type="checkbox" id="violations">
+                    </div>
+
+                    <div class="gap"></div>
+
+                    <div class="form-group form-check">
+                        <label class="form-check-label" for="claims">
+                            Recent Claims
+                        </label>
+                        <input class="form-check-input" type="checkbox" id="claims">
+                    </div>
+
+                    <div class="gap"></div>
+
+                    <div class="form-group form-check">
+                        <label class="form-check-label" for="multiCar">
+                            Multiple Cars
+                        </label>
+                        <input class="form-check-input" type="checkbox" id="multiCar">
+                    </div>
+
+                    <div class="gap"></div>
+
+                    <div class="form-group form-check">
+                        <label class="form-check-label" for="experience">
+                            Low Driving Experience
+                        </label>
+                        <input class="form-check-input" type="checkbox" id="experience">
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class="col">
+                            <app-return-btn text="Back to General">
+                            </app-return-btn>
+                        </div>
+                        <div class="col">
+                            <app-continue-btn [form]="form"></app-continue-btn>
+                        </div>
+                    </div>
                 </div>
             </div>
-    </div>
-</form>
+        </div>
+    </form>
+</div>

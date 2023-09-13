@@ -1,96 +1,146 @@
 <!-- Will want to add conditional styling to navbar -->
+<!--Mock header-->
 <h3>Drivers</h3>
-
+<!-- Insert progress bubble thing -->
 <!-- Insert component for listing recently saved drivers -->
+<!-- styling of form from global css -->
+<div class="customerInfoForm">
 
-<h5>Driver Details</h5>
-<form [formGroup]="form" (ngSubmit)="onSubmit()">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col">
-                <div class="form-group">
-                    <label for="firstName">First Name</label>
-                    <input id="firstName"
-                           formControlName="firstName"
-                           type="text"
-                           class="form-control" required />
-                </div>
-                <div class="form-group">
-                    <label for="lastName">Last Name</label>
-                    <input id="lastName"
-                           formControlName="lastName"
-                           type="text"
-                           class="form-control" required />
-                </div>
-                <div class="form-group">
-                    <label for="dob">Date of Birth</label>
-                    <input id="dob"
-                           formControlName="dob"
-                           type="date"
-                           class="form-control" required />
-                </div>
-                <div class="form-group">
-                    <label for="ssn">SSN</label>
-                    <input id="ssn"
-                           formControlName="ssn"
-                           type="password"
-                           class="form-control" required />
-                </div>
-                <div class="form-group">
-                    <label for="driverLicenseNumber">Driver License Number</label>
-                    <input id="driverLicenseNumber"
-                           formControlName="driverLicenseNumber"
-                           type="text"
-                           class="form-control" required />
-                </div>
-                <div class="form-group">
-                    <label for="driverLicenseState">Driver License State</label>
-                    <!-- Will want to add AJAX call for available states -->
-                    <select id="driverLicenseState"
-                           formControlName="driverLicenseState"
-                           class="form-control">
-                        <option>Washington</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <div class="row">
-                        <div class="col">
-                            <label for="youngDriver">Is this a young driver?</label>
-                        </div>
-                        <div class="col">
-                            <input id="youngDriver"
-                                   formControlName="youngDriver"
-                                   type="checkbox"
-                                   class="form-control" required />
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="row">
-                        <div class="col">
-                            <label for="safeDrivingSchool">Safe Driving School?</label>
-                        </div>
-                        <div class="col">
-                            <input id="safeDrivingSchool"
-                                   formControlName="safeDrivingSchool"
-                                   type="checkbox"
-                                   class="form-control" required />
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-        <div class="form-group">
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <!--form title and requirements message-->
+        <h6 id="required"><span style="color: #8C0423">*</span> All fields are Required</h6>
+        <h5>Driver Details</h5>
+
+        <div class="container-fluid">
             <div class="row">
                 <div class="col">
-                    <app-return-btn text="Customer Details">
-                    </app-return-btn>
-                </div>
-                <div class="col">
-                    <app-continue-btn [form]="form"></app-continue-btn>
+                    <div class="form-group">
+                        <label for="firstName">First Name</label>
+                        <input id="firstName"
+                               formControlName="firstName"
+                               type="text"
+                               class="form-control" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="lastName">Last Name</label>
+                        <input id="lastName"
+                               formControlName="lastName"
+                               type="text"
+                               class="form-control" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="dob">Date of Birth</label>
+                        <input id="dob"
+                               formControlName="dob"
+                               type="date"
+                               class="form-control" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="ssn">SSN</label>
+                        <input id="ssn"
+                               formControlName="ssn"
+                               type="password"
+                               class="form-control" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="driverLicenseNumber">Driver License Number</label>
+                        <input id="driverLicenseNumber"
+                               formControlName="driverLicenseNumber"
+                               type="text"
+                               class="form-control" required />
+                    </div>
+                    <div class="form-group">
+                        <label for="driverLicenseState">Driver License State</label>
+                        <select id="driverLicenseState"
+                                formControlName="driverLicenseState"
+                                class="form-control">
+                            <option value="AL">Alabama</option>
+                            <option value="AK">Alaska</option>
+                            <option value="AZ">Arizona</option>
+                            <option value="AR">Arkansas</option>
+                            <option value="CA">California</option>
+                            <option value="CO">Colorado</option>
+                            <option value="CT">Connecticut</option>
+                            <option value="DE">Delaware</option>
+                            <option value="DC">District Of Columbia</option>
+                            <option value="FL">Florida</option>
+                            <option value="GA">Georgia</option>
+                            <option value="HI">Hawaii</option>
+                            <option value="ID">Idaho</option>
+                            <option value="IL">Illinois</option>
+                            <option value="IN">Indiana</option>
+                            <option value="IA">Iowa</option>
+                            <option value="KS">Kansas</option>
+                            <option value="KY">Kentucky</option>
+                            <option value="LA">Louisiana</option>
+                            <option value="ME">Maine</option>
+                            <option value="MD">Maryland</option>
+                            <option value="MA">Massachusetts</option>
+                            <option value="MI">Michigan</option>
+                            <option value="MN">Minnesota</option>
+                            <option value="MS">Mississippi</option>
+                            <option value="MO">Missouri</option>
+                            <option value="MT">Montana</option>
+                            <option value="NE">Nebraska</option>
+                            <option value="NV">Nevada</option>
+                            <option value="NH">New Hampshire</option>
+                            <option value="NJ">New Jersey</option>
+                            <option value="NM">New Mexico</option>
+                            <option value="NY">New York</option>
+                            <option value="NC">North Carolina</option>
+                            <option value="ND">North Dakota</option>
+                            <option value="OH">Ohio</option>
+                            <option value="OK">Oklahoma</option>
+                            <option value="OR">Oregon</option>
+                            <option value="PA">Pennsylvania</option>
+                            <option value="RI">Rhode Island</option>
+                            <option value="SC">South Carolina</option>
+                            <option value="SD">South Dakota</option>
+                            <option value="TN">Tennessee</option>
+                            <option value="TX">Texas</option>
+                            <option value="UT">Utah</option>
+                            <option value="VT">Vermont</option>
+                            <option value="VA">Virginia</option>
+                            <option value="WA">Washington</option>
+                            <option value="WV">West Virginia</option>
+                            <option value="WI">Wisconsin</option>
+                            <option value="WY">Wyoming</option>
+                        </select>
+                    </div>
+                    <br />
+
+                    <div class="form-group form-check">
+                        <label class="form-check-label" for="youngDriver">
+                            Is this a young driver?
+                        </label>
+                        <input class="form-check-input" type="checkbox" id="youngDriver">
+                    </div>
+
+                    <div class="gap"></div>
+
+                    <div class="form-group form-check">
+                        <label class="form-check-label" for="safeDrivingSchool">
+                            Safe Driving School?
+                        </label>
+                        <input class="form-check-input" type="checkbox" id="safeDrivingSchool">
+                    </div>
+                    <br />
+
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col">
+                                <app-return-btn text="< Customer Details">
+                                </app-return-btn>
+                            </div>
+                            <div class="col">
+                                <app-continue-btn [form]="form"></app-continue-btn>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>
-</form>
-<!-- Insert progress bubble thing -->
+
+    </form>
+</div>
