@@ -1,19 +1,42 @@
 <!-- nav -->
-<nav class="navbar navbar-expand navbar-dark bg-dark" 
+<nav class="navbar navbar-expand navbar-light bg-light"
      *ngIf="currentUser">
-    <span class="navbar-nav">
-        <a class="nav-item nav-link" 
-           routerLink="/quotes"
-           *ngIf="!displayQuoteNav()">Quotes</a>
-        <a class="nav-item nav-link" 
-           routerLink="/discounts" 
-           *ngIf="isManager && !displayQuoteNav()">Discounts</a>
-        <a class="nav-item nav-link" 
-           routerLink="/users" 
-           *ngIf="isManager && !displayQuoteNav()">Users</a>
+    <!-- Nav bar dropdown menu -->
+    <ul class="navbar-nav">
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+            </a>
+
+            <div class="dropdown-menu">
+
+                <a class="dropdown-item nav-link"
+                   routerLink="/quotes1"
+                   *ngIf="!displayQuoteNav()">Create new Quote</a>
+
+                <a class="dropdown-item nav-link"
+                   routerLink="/discounts"
+                   *ngIf="isManager && !displayQuoteNav()">Discounts</a>
+
+                <a class="dropdown-item nav-link"
+                   routerLink="/users"
+                   *ngIf="isManager && !displayQuoteNav()">Users</a>
+
         <app-back-btn *ngIf="displayQuoteNav()"></app-back-btn>
-        <a class="nav-item nav-link" 
-           (click)="logout()">Logout</a>
-    </span>
+
+                <a class="dropdown-item nav-link"
+                   (click)="logout()">Logout</a>
+            </div>
+        </li>
+        <li class="navName">
+            <p>Dashboard</p>
+        </li>
+    </ul>
+
+
+    <!-- displays logo on nav bar -->
+    <a class="navbar-brand" href="#">
+        <img src="./assets/images/SVG/AIALogo.svg" alt="AIA Logo">
+    </a>
     <span class="w-100 text-right text-white-50">{{this.currentUser.userName}}</span>
+    <app-progress-bar></app-progress-bar>
 </nav>

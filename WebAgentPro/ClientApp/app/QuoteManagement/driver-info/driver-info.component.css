@@ -1,0 +1,53 @@
+/*Form styling*/
+form {
+    flex-wrap: wrap;
+    display: flex;
+    width: auto;
+    flex-direction: column;
+    align-items: stretch;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/*blue background mock header*/
+h3 {
+    text-align: center;
+    font-family: Ariel;
+    font-weight: 700;
+    color: #F7F7F7;
+    background-color: #022179;
+    padding: 40px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+h5{
+    padding-left: 15px;
+}
+
+h6{
+    font-size: small;
+    margin-left: auto;
+    margin-right: 15px;
+}
+/*Check box labels*/
+.form-check-label {
+    font-size: 14px;
+}
+.form-check{
+    padding:0;
+}
+
+/*Check box styling*/
+.form-check-input {
+    width: 24px;
+    height: 24px;
+    position: revert; /*important to offset bootstrap position*/
+    float: right;
+    border-radius: 8px;
+}
+
+/*adding space between items*/
+.gap {
+    height: 45px;
+}

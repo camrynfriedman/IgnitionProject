@@ -1,0 +1,19 @@
+img{
+    max-width:95px;
+    position:absolute;
+    top:-18px;
+    right:0;
+}
+
+p{
+    text-align:center;
+}
+
+navName{
+    text-align:center;
+}
+
+/*
+.navbar-dark .navbar-nav .active > .nav-link, .navbar-dark .navbar-nav .nav-link.active, .navbar-dark .navbar-nav .nav-link.show, .navbar-dark .navbar-nav .show > .nav-link {
+    color: #414555;
+}*/
