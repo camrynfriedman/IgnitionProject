@@ -20,7 +20,7 @@ const appRoutes: Routes = [
     { path: 'login', component: LoginComponent },
     { path: 'users', component: UsersComponent, canActivate: [AuthGuard], data: { roles: [Roles.Manager] } },
     { path: 'discounts', component: DiscountsComponent, canActivate: [AuthGuard], data: { roles: [Roles.Manager] } },
-    { path: 'quotes', component: CustomerInfo1Component },
+    { path: 'quotes1', component: CustomerInfo1Component },
     { path: 'quotes2', component: CustomerInfo2Component },
     { path: 'quotes3', component: DriverInfoComponent },
     { path: 'quotes4', component: VehicleInfo1Component },
