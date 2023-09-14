@@ -12,6 +12,7 @@ import { CustomerInfo2Component } from './quotemanagement/customer-info2/custome
 import { DriverInfoComponent } from './quotemanagement/driver-info/driver-info.component';
 import { VehicleInfo1Component } from './quotemanagement/vehicle-info1/vehicle-info1.component';
 import { VehicleInfo2Component } from './quotemanagement/vehicle-info2/vehicle-info2.component';
+import { AgentDashboardComponent } from './agent-dashboard/agent-dashboard.component';
 
 import { RoutenotfoundComponent } from './_security/routenotfound/routenotfound.component';
 
@@ -25,6 +26,7 @@ const appRoutes: Routes = [
     { path: 'quotes3', component: DriverInfoComponent },
     { path: 'quotes4', component: VehicleInfo1Component },
     { path: 'quotes5', component: VehicleInfo2Component },
+    { path: 'agentDashboard', component: AgentDashboardComponent },
 
     // parameterized route so you can tell the component what action you want to take on which state's discounts
     { path: 'discount/:action/:state', component: DiscountEditComponent, canActivate: [AuthGuard], data: { roles: [Roles.Manager] } },
