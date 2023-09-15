@@ -23,7 +23,7 @@ namespace WebAgentPro.Api.Services
         Task<QuoteDto> GetQuote(int quoteID);
         Task EditQuote(QuoteDto q);
         Task<QuoteDto> AddQuote(QuoteDto q);
-        Task RemoveQuote(int quoteID);
+        //Task RemoveQuote(int quoteID);
     }
 
     public class QuoteService : IQuoteService
@@ -36,6 +36,8 @@ namespace WebAgentPro.Api.Services
 
         private readonly IDriverRepository _driverRepo;
 
+        private readonly IDiscountRepository _discountRepo;
+
         //use driverMapper
         private QuoteMapper quoteMap;
         private DriverMapper driverMap;
@@ -43,16 +45,17 @@ namespace WebAgentPro.Api.Services
 
 
         //constructor
-        public QuoteService(IQuoteRepository quoteRepo, IVehicleRepository vehicleRepo, IDriverRepository driverRepo)
+        public QuoteService(IQuoteRepository quoteRepo, IVehicleRepository vehicleRepo, IDriverRepository driverRepo, IDiscountRepository discountRepo)
         {
             _quoteRepo = quoteRepo;
             _vehicleRepo = vehicleRepo;
             _driverRepo = driverRepo;
+            _discountRepo = discountRepo;
 
             quoteMap = new QuoteMapper();
             driverMap = new DriverMapper();
             vehicleMap = new VehicleMapper();
-      
+
         }
         public async Task<List<QuoteDto>> GetAllQuotes()
         {
@@ -93,12 +96,15 @@ namespace WebAgentPro.Api.Services
             foreach (DriverDto d in oldQuote.Drivers)
             {
                 bool flag = false;
-                foreach (DriverDto d2 in q.Drivers) {
-                    if (d.DriverID == d2.DriverID) {
+                foreach (DriverDto d2 in q.Drivers)
+                {
+                    if (d.DriverID == d2.DriverID)
+                    {
                         flag = true;
                     }
                 }
-                if (flag == false) {
+                if (flag == false)
+                {
                     await _driverRepo.RemoveDriver(d.DriverID);
                 }
             }
@@ -120,14 +126,16 @@ namespace WebAgentPro.Api.Services
 
             //adding drivers and vehicles to quote
             //Check if the QuoteDTO -- vehicles or drivers are a add or update
-            foreach (DriverDto d in q.Drivers) {
+            foreach (DriverDto d in q.Drivers)
+            {
                 if (d.DriverID == 0)
                 {
                     Driver dTemp = driverMap.DtoToDriver(d);
                     dTemp.QuoteID = q.QuoteID;
                     await _driverRepo.AddDriver(dTemp);
                 }
-                else {
+                else
+                {
                     Driver dTemp = driverMap.DtoToDriver(d);
                     dTemp.QuoteID = q.QuoteID;
                     await _driverRepo.EditDriver(dTemp.DriverID, dTemp);
@@ -159,16 +167,15 @@ namespace WebAgentPro.Api.Services
             Driver newDriver;
             Vehicle newVehicle;
 
-            //calculation of the Quote Price
             Quote quote = quoteMap.DtoToQuote(q);
-            //set quote price after calculation
             quote.QuotePrice = 0;
             quote.Drivers = null;
             quote.Vehicles = null;
             quote = await _quoteRepo.AddQuote(quote);
 
             /*Populate Drivers List*/
-            foreach (DriverDto d in q.Drivers){
+            foreach (DriverDto d in q.Drivers)
+            {
 
                 //create driver
                 Driver driver2 = driverMap.DtoToDriver(d);
@@ -176,7 +183,7 @@ namespace WebAgentPro.Api.Services
                 newDriver = await _driverRepo.AddDriver(driver2); //create driver
 
                 //add driver to list
-/*                driversList.Add(newDriver);*/
+                /*                driversList.Add(newDriver);*/
             }
 
             /*Populate Vehicles List*/
@@ -185,18 +192,32 @@ namespace WebAgentPro.Api.Services
                 //create vehicle
                 Vehicle vehicle2 = vehicleMap.DtoToVehicle(v);
                 vehicle2.QuoteID = quote.QuoteID;
-                newVehicle = await _vehicleRepo.AddVehicle(vehicle2); 
+                newVehicle = await _vehicleRepo.AddVehicle(vehicle2);
 
                 //add vehicle to list
-/*                vehiclesList.Add(newVehicle);*/
+                /*                vehiclesList.Add(newVehicle);*/
             }
 
+            /*Price Calculation*/
+            string state = quote.State;
+            //check if state is in the list
+            //Task<List<string>> existingStates = _discountRepo.GetExistingStates();
+
+            //Do price calculation here by grabbing discount from discountRepo
+            Discount discount = await _discountRepo.GetDiscount(state);
+            //create quoteCalc object
+            QuoteCalculator calc = new QuoteCalculator();
+            decimal calculatedPrice = calc.CalculatePrice(quote, discount);
+            quote.QuotePrice = calculatedPrice;
+            
             //return QuoteDTO by id
             return await GetQuote(quote.QuoteID);
-            
+
         }
 
-
+        /*
+         * The below code is not functional.
+         * 
         public async Task RemoveQuote(int quoteID)
         {
             if (_quoteRepo.GetQuote(quoteID) == null)
@@ -205,5 +226,6 @@ namespace WebAgentPro.Api.Services
             }
             await _quoteRepo.RemoveQuote(quoteID);
         }
+        */
     }
 }

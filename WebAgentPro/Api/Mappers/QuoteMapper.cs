@@ -51,7 +51,8 @@ namespace WebAgentPro.Api.Mappers
                 Drivers = driverList,
                 Vehicles = vehicleList,
                 PolicyHolderEmailAddress = quote.PolicyHolderEmailAddress,
-                PolicyHolderPhoneNumber = quote.PolicyHolderPhoneNumber
+                PolicyHolderPhoneNumber = quote.PolicyHolderPhoneNumber,
+                QuoteMultiplier = quote.QuoteMultiplier
             };
             return returnedQuoteDto;
         }
@@ -97,10 +98,8 @@ namespace WebAgentPro.Api.Mappers
                 Drivers = driverList,
                 Vehicles = vehicleList,
                 PolicyHolderEmailAddress = quote.PolicyHolderEmailAddress,
-                PolicyHolderPhoneNumber = quote.PolicyHolderPhoneNumber
-
-
-
+                PolicyHolderPhoneNumber = quote.PolicyHolderPhoneNumber,
+                QuoteMultiplier = quote.QuoteMultiplier
             };
             return returnedQuoteDto;
         }

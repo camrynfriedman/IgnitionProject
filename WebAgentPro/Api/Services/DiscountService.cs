@@ -18,7 +18,7 @@ namespace WebAgentPro.Api.Services
         Task AddDiscount(DiscountDto d);
         Task RemoveDiscount(string state);
         Task<List<string>> GetAllStates();
-        Task<List<String>> GetInactiveStates();
+        Task<List<string>> GetInactiveStates();
 
 
     }
@@ -83,12 +83,12 @@ namespace WebAgentPro.Api.Services
         }
 
         // Used to populate the state dropdowns in the frontend
-        public async Task<List<String>> GetAllStates()
+        public async Task<List<string>> GetAllStates()
         {
                 return allStates.ToList();
         }
 
-        public async Task<List<String>> GetInactiveStates() {
+        public async Task<List<string>> GetInactiveStates() {
             var inactiveStates = allStates.Except(await _discountRepo.GetExistingStates());
             return inactiveStates.ToList();
         }

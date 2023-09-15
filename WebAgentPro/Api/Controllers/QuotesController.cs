@@ -83,19 +83,20 @@ namespace WebAgentPro.Api.Controllers
             return CreatedAtAction("GetQuote", new { id = quote.QuoteID }, quote);
         }
 
-        // DELETE: api/Quotes/5
-        [HttpDelete("{id}")]
-        public async Task<ActionResult<QuoteDto>> DeleteQuote(int id)
-        {
-            var quote = await _quoteService.GetQuote(id);
-            if (quote == null)
-            {
-                return NotFound();
-            }
-           await _quoteService.RemoveQuote(id);
 
-            return Ok();
-        }
+        // DELETE: api/Quotes/5
+        //[HttpDelete("{id}")]
+        //public async Task<ActionResult<QuoteDto>> DeleteQuote(int id)
+        //{
+        //    var quote = await _quoteService.GetQuote(id);
+        //    if (quote == null)
+        //    {
+        //        return NotFound();
+        //    }
+        //   await _quoteService.RemoveQuote(id);
+
+        //    return Ok();
+        //}
 
     }
 

@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WebAgentPro.Data;
 
 namespace WebAgentPro.Migrations
 {
     [DbContext(typeof(WapDbContext))]
-    partial class WapDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230913210110_NewMigration913")]
+    partial class NewMigration913
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

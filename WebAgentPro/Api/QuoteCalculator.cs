@@ -8,7 +8,9 @@ namespace WebAgentPro.Api
     public class QuoteCalculator
     {
         //constructor
-        public QuoteCalculator() { }
+        public QuoteCalculator() {
+ 
+        }
 
         /*
          * Person multipliers get applied to the person and to vehicle person is assigned to
@@ -29,15 +31,13 @@ namespace WebAgentPro.Api
             var driverSubtotalCost = 0m;
             var policyCost = 0m;
 
-            var totalQuoteMultiplier = 1;
-
             // Deal with drivers
             foreach (var driver in q.Drivers)
             {
                 var driverCost = GetBaseDriverCost();
                 driver.QuoteMultiplier = 1; //ensure multiplier is initialized to proper value
-                if (driver.SafeDrivingSchool) driver.QuoteMultiplier *= discount.SafeDrivingSchool;
-                if (driver.DriverDOB > DateTime.Now.AddYears(-23)) driver.QuoteMultiplier *= (1.0m+discount.YoungDriver); //add 1 to multiplier to account for positive percentages 
+                if (driver.SafeDrivingSchool) driver.QuoteMultiplier *= FixDiscount(discount.SafeDrivingSchool); ;
+                if (driver.DriverDOB > DateTime.Now.AddYears(-23)) driver.QuoteMultiplier *= FixDiscount(discount.YoungDriver);
                 driverCost *= driver.QuoteMultiplier; //apply multiplier to driver cost
                 driverSubtotalCost += driverCost; //add subtotal for individual driver to total driver cost
             }
@@ -47,15 +47,15 @@ namespace WebAgentPro.Api
             {
                 var vehicleCost = GetBaseVehicleCost(vehicle.CurrentValue);
                 vehicle.QuoteMultiplier = 1;
-                if (vehicle.AnnualMileage < 6000) vehicle.QuoteMultiplier *= .98m;
-                if (vehicle.AntilockBrakes) vehicle.QuoteMultiplier *= .98m;
-                if (vehicle.AntiTheft) vehicle.QuoteMultiplier *= .97m;
-                if (vehicle.DaysDrivenPerWeek > 4) vehicle.QuoteMultiplier *= 1.02m;
-                if (vehicle.MilesDrivenToWork < 25) vehicle.QuoteMultiplier *= .98m;
-                if (vehicle.DaytimeRunningLights) vehicle.QuoteMultiplier *= .99m;
-                if (vehicle.GarageAddressDifferentFromResidence) vehicle.QuoteMultiplier *= 1.03m;
-                if (vehicle.PassiveRestraints) vehicle.QuoteMultiplier *= .97m;
-                if (vehicle.ReducedUsedDiscount) vehicle.QuoteMultiplier *= .94m;
+                if (vehicle.AnnualMileage < 6000) vehicle.QuoteMultiplier *= FixDiscount(discount.LowAnnualMileage);
+                if (vehicle.AntilockBrakes) vehicle.QuoteMultiplier *= FixDiscount(discount.AntilockBrakes);
+                if (vehicle.AntiTheft) vehicle.QuoteMultiplier *= FixDiscount(discount.AntitheftInstalled);
+                if (vehicle.DaysDrivenPerWeek > 4) vehicle.QuoteMultiplier *= FixDiscount(discount.HighDaysDrivenPerWeek);
+                if (vehicle.MilesDrivenToWork < 25) vehicle.QuoteMultiplier *= FixDiscount(discount.LowMilesDrivenToWork);
+                if (vehicle.DaytimeRunningLights) vehicle.QuoteMultiplier *= FixDiscount(discount.DaytimeRunningLights);
+                if (vehicle.GarageAddressDifferentFromResidence) vehicle.QuoteMultiplier *= FixDiscount(discount.GarageAddressDifferent);
+                if (vehicle.PassiveRestraints) vehicle.QuoteMultiplier *= FixDiscount(discount.PassiveRestraints); ;
+                if (vehicle.ReducedUsedDiscount) vehicle.QuoteMultiplier *= FixDiscount(discount.ReduceUse);
                 var primaryOperator = q.Drivers.Find(d => d.DriverID == vehicle.DriverID);
                 if (primaryOperator != null) vehicle.QuoteMultiplier *= primaryOperator.QuoteMultiplier;
                 vehicleCost *= vehicle.QuoteMultiplier; //apply multiplier to vehicle cost
@@ -64,12 +64,12 @@ namespace WebAgentPro.Api
             policyCost = GetBasePolicyCost();
             q.QuoteMultiplier = 1;
             policyCost += driverSubtotalCost + vehicleSubtotalCost;
-            if (q.ClaimInLast5Years) q.QuoteMultiplier *= 1.2m;
-            if (q.ForceMultiCarDiscount || q.Vehicles.Count > 1) q.QuoteMultiplier *= .95m;
-            if (q.LessThan3YearsDriving) q.QuoteMultiplier *= 1.15m;
-            if (q.MovingViolationInLast5Years) q.QuoteMultiplier *= 1.20m;
-            if (q.PreviousCarrier == "Lizard Insurance") q.QuoteMultiplier *= 1.05m;
-            if (q.PreviousCarrier == "Pervasive Insurance") q.QuoteMultiplier *= .97m;
+            if (q.ClaimInLast5Years) q.QuoteMultiplier *= FixDiscount(discount.RecentClaims);
+            if (q.ForceMultiCarDiscount || q.Vehicles.Count > 1) q.QuoteMultiplier *= FixDiscount(discount.MultiCar);
+            if (q.LessThan3YearsDriving) q.QuoteMultiplier *= FixDiscount(discount.LowDrivingExperience);
+            if (q.MovingViolationInLast5Years) q.QuoteMultiplier *= FixDiscount(discount.RecentMovingViolations);
+            if (q.PreviousCarrier == "Lizard Insurance") q.QuoteMultiplier *= FixDiscount(discount.PreviousCarrierLizard);
+            if (q.PreviousCarrier == "Pervasive Insurance") q.QuoteMultiplier *= FixDiscount(discount.PreviousCarrierPervasive);
             policyCost *= q.QuoteMultiplier;
 
             return policyCost;
@@ -77,19 +77,27 @@ namespace WebAgentPro.Api
         }
 
 
-        private decimal GetBasePolicyCost()
+        private static decimal GetBasePolicyCost()
         {
             return 100m;
         }
 
-        private decimal GetBaseVehicleCost(decimal currentValue)
+        private static decimal GetBaseVehicleCost(decimal currentValue)
         {
             return currentValue * .03m; //currentValue * 3%
         }
 
-        private decimal GetBaseDriverCost()
+        private static decimal GetBaseDriverCost()
         {
             return 200m;
+        }
+
+        private decimal FixDiscount(decimal discountPercentage)
+        {
+            decimal fixedDiscount;
+            if (discountPercentage < 0) { fixedDiscount = 1.0m - Math.Abs(discountPercentage);}
+            else { fixedDiscount = 1.0m + Math.Abs(discountPercentage); }
+            return fixedDiscount;
         }
     }
 }
