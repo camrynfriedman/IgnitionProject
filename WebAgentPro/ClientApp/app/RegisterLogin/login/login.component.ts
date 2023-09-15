@@ -17,8 +17,9 @@ export class LoginComponent implements OnInit {
         console.log(this.creds)
     }
 
+
     ngOnInit() {
-        this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+        this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/agentDashboard';
     }
 
     submitForm() {

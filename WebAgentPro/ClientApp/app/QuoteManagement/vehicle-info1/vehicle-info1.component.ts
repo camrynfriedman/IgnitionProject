@@ -50,9 +50,10 @@ export class VehicleInfo1Component implements OnInit {
     }
 
     onSubmit() {
-        if (this.form.valid) {
-            // Do stuff, idk yet
+       if (this.router.url.endsWith('/quotes4')) {
+            this.router.navigate(['/quotes5'])
         }
+        
     }
 
         // Need to move to service class when time allows

@@ -1,7 +1,7 @@
 <!-- Will want to add conditional styling to navbar -->
 <!--mock header-->
 <h3>Customer Information</h3>
-
+<app-progress-bar></app-progress-bar>
 <!-- styling of form from global css -->
 <div class="customerInfoForm">
     <!--Form for customer information-->
@@ -129,7 +129,8 @@
             </div>
                 <div class="form-group">
                     <app-continue-btn [form]="form"
-                                      (btnClick)="onSubmit()"></app-continue-btn>
+                                      (btnClick)="onSubmit()"
+                                      text="Next"></app-continue-btn>
                 </div>
         </div>
     </form>
