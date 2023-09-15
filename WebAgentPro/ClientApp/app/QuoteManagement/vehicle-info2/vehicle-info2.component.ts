@@ -43,10 +43,15 @@ export class VehicleInfo2Component implements OnInit {
     }
 
     onSubmit() {
-        if (this.form.valid) {
-            // Do stuff, idk yet
+        alert("Success!\nQuote created.");
+        if (confirm) {
+            this.router.navigate(['/agentDashboard'])
         }
+            // Do stuff, idk yet
+        
     }
+
+ 
 
     // Need to move to service class when time allows
     // #region API calls

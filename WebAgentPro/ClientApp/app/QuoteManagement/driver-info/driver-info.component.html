@@ -1,13 +1,16 @@
 <!-- Will want to add conditional styling to navbar -->
+
 <!--Mock header-->
 <h3>Drivers</h3>
-<!-- Insert progress bubble thing -->
+<app-progress-bar></app-progress-bar>
+
 <!-- Insert component for listing recently saved drivers -->
+
 <!-- styling of form from global css -->
 <div class="customerInfoForm">
 
     <form [formGroup]="form" (ngSubmit)="onSubmit()">
-        <!--form title and requirements message-->
+        <!--form title-->
         <h5>Driver Details</h5>
 
         <div class="container-fluid">
@@ -128,11 +131,12 @@
                     <div class="form-group">
                         <div class="row">
                             <div class="col">
-                                <app-return-btn text="< Customer Details">
+                                <app-return-btn text="Customer Details">
                                 </app-return-btn>
                             </div>
                             <div class="col">
-                                <app-continue-btn [form]="form"></app-continue-btn>
+                                <app-continue-btn [form]="form"
+                                                   text="Next"></app-continue-btn>
                             </div>
                         </div>
                     </div>

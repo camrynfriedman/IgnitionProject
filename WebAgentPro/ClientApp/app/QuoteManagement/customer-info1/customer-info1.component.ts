@@ -62,6 +62,11 @@ export class CustomerInfo1Component implements OnInit {
         if (this.form.valid) {
             this.bindQuote(this.form)
             this.postQuote(this.quote)
+
+            if (this.router.url.endsWith('/quotes1')) {
+                this.router.navigate(['/quotes2'])
+            }
+            
             /*
             switch (this.action) {
                 case "add":
@@ -73,6 +78,7 @@ export class CustomerInfo1Component implements OnInit {
             }
              */
         }
+     
     }
 
     bindQuote(form: FormGroup) {

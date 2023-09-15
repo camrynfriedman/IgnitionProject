@@ -51,9 +51,13 @@ export class CustomerInfo2Component implements OnInit {
     }
 
     onSubmit() {
-        if (this.form.valid) {
-            // Do stuff, idk yet
-        }
+
+            if (this.router.url.endsWith('/quotes2')) {
+                this.router.navigate(['/quotes3'])
+            }
+            
+      
+        
     }
 
     // Need to move to service class when time allows

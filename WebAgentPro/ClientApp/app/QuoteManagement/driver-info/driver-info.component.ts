@@ -47,9 +47,11 @@ export class DriverInfoComponent implements OnInit {
     }
 
     onSubmit() {
-        if (this.form.valid) {
-            // Do stuff, idk yet
-        }
+        if (this.router.url.endsWith('/quotes3')) {
+                this.router.navigate(['/quotes4'])
+            }
+
+        
     }
 
     // Need to move to service class when time allows

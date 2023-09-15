@@ -24,9 +24,19 @@ export class HeaderComponent {
     }
 
 
-    displayQuoteNav(): boolean {
-        return this.router.url.endsWith('/quotes');
+    displayAgentDash() {
+        this.router.navigate(['/agentDashboard'])
+        
     }
+
+    displayQuoteNav(): boolean {
+        return this.router.url.includes('/quotes');
+    }
+
+    displayDashboardLabel(): boolean {
+        return this.router.url.endsWith('/agentDashboard')
+    }
+
 
     logout() {
         this.accountService.logout();
